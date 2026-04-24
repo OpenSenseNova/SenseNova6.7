@@ -1,6 +1,8 @@
 # ⚡ SenseNova 6.7 Flash
 
-<img src="assets/logo.webp" alt="SenseNova Logo" height="60">
+<p align="center">
+  <img src="assets/logo.webp" alt="SenseNova Logo" height="120">
+</p>
 
 > 原生多模态的大模型，更懂办公，更省 token
 
@@ -26,6 +28,14 @@
 
 ---
 
+## 📊 性能评测
+
+<p align="center">
+  <img src="assets/benchmark.webp" alt="Benchmark Results" width="100%">
+</p>
+
+---
+
 ## 🔥 场景 Showcase
 
 ### 🏢 一体化智能办公闭环
@@ -34,7 +44,9 @@
 
 **数据洞察 → 行业研究 → 内容交付**
 
-<!-- TODO: 插入行研场景演示图/GIF -->
+<p align="center">
+  <img src="assets/office_workflow.webp" alt="Integrated Office Workflow" width="80%">
+</p>
 
 ### 📋 覆盖核心办公场景
 
@@ -205,6 +217,10 @@ openclaw onboard
 | 更强 | 完成跨步骤、跨模态、跨页面的信息处理与内容生成 |
 | 更稳 | 面向 Office 场景优化，结果贴近真实工作流 |
 | 更完整 | 从"理解任务"到"生成最终产物"形成闭环 |
+
+<p align="center">
+  <img src="assets/token_plan.webp" alt="Token Plan" width="100%">
+</p>
 
 > 最新 SenseNova 6.7 Flash 模型与全系 cowork-skill 均已加入**小浣熊 Pro 套餐**，提供企业级安全防护与开箱即用的丝滑体验。<!-- TODO: 插入小浣熊产品页链接 -->
 
