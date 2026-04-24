@@ -238,4 +238,3 @@ openclaw onboard
 
 - 官网：[https://platform.sensenova.cn/](https://platform.sensenova.cn/)
 - API 文档：[docs/API.md](docs/API.md)
-- 技术报告：<!-- TODO -->
