@@ -181,9 +181,15 @@ nanobot agent   # 启动 Agent 对话
 
 ---
 
-### 🦞 OpenClaw
+### 🛠️ Hermes Agent 与 OpenClaw
 
-[OpenClaw](https://openclaw.ai/) 是一个本地运行的个人 AI 助理框架，可自主处理邮件、日历、浏览器自动化等真实办公任务，支持接入自定义模型。
+**Hermes Agent** 与 **OpenClaw** 是面向真实办公任务的本地 Agent 框架。推荐使用官方一键安装包 [SenseTime-FVG/agent_pack](https://github.com/SenseTime-FVG/agent_pack) 完成部署，安装器会在过程中收集 LLM 凭证并自动写入配置文件（`~/.hermes/config.yaml` 与 `~/.openclaw/openclaw.json`）。前往 [Releases 页面](https://github.com/SenseTime-FVG/agent_pack/releases) 下载对应平台安装器（Windows `.exe` / macOS `.pkg` / Linux 脚本）即可开箱即用。
+
+完整安装流程、参数说明、常见问题及高级配置请参考 [飞书文档](https://p283t9u4d9.feishu.cn/wiki/JMkCwxpnti9Xelkt05JcehlKnCb?from=from_copylink)。
+
+#### 🦞 OpenClaw 官方安装（进阶）
+
+如需直接使用 [OpenClaw](https://openclaw.ai/) 官方渠道安装（不通过 agent_pack），可按以下方式部署。OpenClaw 是一个本地运行的个人 AI 助理框架，可自主处理邮件、日历、浏览器自动化等真实办公任务，支持接入自定义模型。
 
 ```bash
 # macOS / Linux
@@ -230,6 +236,6 @@ openclaw onboard
 
 ## 📚 相关链接
 
-- 官网：<!-- TODO -->
-- API 文档：<!-- TODO -->
+- 官网：[https://platform.sensenova.cn/](https://platform.sensenova.cn/)
+- API 文档：[docs/API.md](docs/API.md)
 - 技术报告：<!-- TODO -->
