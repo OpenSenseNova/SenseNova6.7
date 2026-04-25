@@ -50,16 +50,46 @@
   <img src="assets/office_workflow.webp" alt="Integrated Office Workflow" width="80%">
 </p>
 
-### 📋 覆盖核心办公场景
+Agent 在真实办公任务中跑通 "读 → 想 → 做 → 交付" 的全流程，下面是三个典型案例与对应产出物。
 
-| 场景 | 能力 |
-|------|------|
-| 数据分析 | 读取表格、提炼结论、生成图表 |
-| PPT 生成 | 结构化内容 → 可交付幻灯片 |
-| 深度调研 | 多步信息整合 → 完整研究报告 |
-| 信息图生成 | 排版丰富的像素级信息图表 |
+#### 📊 数据分析 ｜ 存储芯片报价数据清洗与价格趋势分析
 
-<!-- TODO: 插入各场景演示图/GIF -->
+> 💬 **Query**：请读取 `汇总.csv`，对近期的存储芯片报价数据进行清洗和分析。
+
+**🧠 Agent 结论**
+
+近期存储价格整体呈上行趋势，其中部分 DRAM 与 NAND 产品涨幅最明显；上涨节奏上，2 月下旬开始出现拐点，3 月后进入加速阶段；不同品类之间分化明显，服务器相关产品表现强于消费类产品，说明本轮上涨并非全面同步，而是由重点品类率先带动。
+
+📄 [*内存价格数据分析.pdf*](assets/内存价格数据分析.pdf)
+
+---
+
+#### 🔬 深度调研 ｜ 2026 年内存与闪存价格波动主因调研
+
+> 💬 **Query**：基于数据分析结果，调研 2026 年以来内存和闪存价格波动的主要原因。
+
+**🧠 Agent 结论**
+
+本轮价格上涨主要由供给收缩、AI 服务器需求增强以及部分厂商主动控产共同推动；短期看存在情绪和备货带来的波动放大，但中期更像是供需重新平衡下的结构性修复；后续若高端需求持续、原厂延续谨慎供给策略，价格仍有继续上行或高位震荡的可能。
+
+📄 [*内存价格调研.pdf*](assets/内存价格调研.pdf) · Research · Report
+
+---
+
+#### 🎨 PPT 制作 ｜ 15–20 页存储器价格波动分析报告
+
+> 💬 **Query**：生成一份 15–20 页的中文 PPT，主题为 "2026 年存储器价格波动分析与市场趋势判断"。
+
+**🧠 Agent 结论**
+
+最终汇报将形成一条清晰主线：先用数据证明 "价格确实在涨、而且涨幅集中在关键品类"，再用外部研究解释 "为什么涨、背后驱动是什么"，最后给出趋势判断与行动建议，例如重点关注高景气品类、提前锁定采购节奏、持续跟踪原厂策略和下游需求变化。
+
+📄 [*半导体存储市场暴涨分析*](assets/半导体存储市场暴涨分析) · PPT · Showcase
+
+> 💡 **提示**：以上示例能力**必须由 Agent 框架与 Skills 共同提供** —— 仅通过 API 直连模型无法复现完整工作流。
+>
+> - **推荐方式**：使用我们提供的 [Agent Pack](https://github.com/SenseTime-FVG/agent_pack) 一键安装 Hermes Agent / OpenClaw，安装包**已内置全套 Skills**，开箱即用（详见下方 [🤖 在开源 Agent 框架中使用](#-在开源-agent-框架中使用) 章节）。
+> - **自行接入**：如使用其他 Agent 框架，可前往 [OpenSenseNova/SenseNova-Skills](https://github.com/OpenSenseNova/SenseNova-Skills) 单独获取 Skills 并自行安装。
 
 ---
 
@@ -74,30 +104,7 @@
    export SENSENOVA_API_KEY="your_api_key_here"
    ```
 
-### 基础调用
-
-```bash
-pip install openai
-```
-
-**Python（OpenAI SDK）**
-
-```python
-import os
-from openai import OpenAI
-
-client = OpenAI(
-    api_key=os.environ["SENSENOVA_API_KEY"],
-    base_url="https://token.sensenova.cn/v1",
-)
-
-completion = client.chat.completions.create(
-    model="sensenova-6.7-flash-lite",
-    max_tokens=2000,
-    messages=[{"role": "user", "content": "你好，简单介绍一下你自己"}],
-)
-print(completion.choices[0].message.content)
-```
+### ⚡ 发起第一次调用
 
 **curl**
 
@@ -112,106 +119,188 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
   }'
 ```
 
-### 多模态（图片输入）
-
-```python
-completion = client.chat.completions.create(
-    model="sensenova-6.7-flash-lite",
-    max_tokens=2000,
-    messages=[{
-        "role": "user",
-        "content": [
-            {"type": "text", "text": "图中是什么？"},
-            {"type": "image_url", "image_url": {"url": "https://example.com/photo.jpg"}},
-        ],
-    }],
-)
-print(completion.choices[0].message.content)
-```
-
-### 流式输出
-
-```python
-stream = client.chat.completions.create(
-    model="sensenova-6.7-flash-lite",
-    max_tokens=2000,
-    stream=True,
-    messages=[{"role": "user", "content": "写一首关于春天的诗"}],
-)
-for chunk in stream:
-    if chunk.choices and chunk.choices[0].delta.content:
-        print(chunk.choices[0].delta.content, end="", flush=True)
-```
-
 ---
 
 ## 🤖 在开源 Agent 框架中使用
 
 SenseNova 6.7 Flash-Lite 兼容 OpenAI API，可无缝接入主流开源 Agent 框架。
 
-### 🤖 NanoBot
-
-[NanoBot](https://github.com/HKUDS/nanobot) 是一个轻量级本地 AI Agent 框架，支持通过配置文件切换任意 OpenAI 兼容的模型接口。
-
-```bash
-pip install nanobot-ai
-nanobot onboard
-```
-
-在 `~/.nanobot/config.json` 中配置 SenseNova 6.7 Flash-Lite：
-
-```json
-{
-  "providers": {
-    "sensenova": {
-      "apiKey": "YOUR_API_KEY",
-      "baseURL": "https://token.sensenova.cn/v1"
-    }
-  },
-  "agents": {
-    "defaults": {
-      "provider": "sensenova",
-      "model": "sensenova-6.7-flash-lite"
-    }
-  }
-}
-```
-
-```bash
-nanobot agent   # 启动 Agent 对话
-```
-
----
-
 ### 🛠️ Hermes Agent 与 OpenClaw
 
 **Hermes Agent** 与 **OpenClaw** 是面向真实办公任务的本地 Agent 框架。推荐使用官方一键安装包 [SenseTime-FVG/agent_pack](https://github.com/SenseTime-FVG/agent_pack) 完成部署，安装器会在过程中收集 LLM 凭证并自动写入配置文件（`~/.hermes/config.yaml` 与 `~/.openclaw/openclaw.json`）。前往 [Releases 页面](https://github.com/SenseTime-FVG/agent_pack/releases) 下载对应平台安装器（Windows `.exe` / macOS `.pkg` / Linux 脚本）即可开箱即用。
 
-完整安装流程、参数说明、常见问题及高级配置请参考 [飞书文档](https://p283t9u4d9.feishu.cn/wiki/JMkCwxpnti9Xelkt05JcehlKnCb?from=from_copylink)。
 
-#### 🦞 OpenClaw 官方安装（进阶）
+#### [🪟 Windows 详细安装和使用步骤 →](docs/install-windows.md)
 
-如需直接使用 [OpenClaw](https://openclaw.ai/) 官方渠道安装（不通过 agent_pack），可按以下方式部署。OpenClaw 是一个本地运行的个人 AI 助理框架，可自主处理邮件、日历、浏览器自动化等真实办公任务，支持接入自定义模型。
+#### [🍎 macOS 详细安装和使用步骤 →](docs/install-macos.md)
 
-```bash
-# macOS / Linux
-curl -fsSL https://openclaw.ai/install.sh | bash
 
-# 或通过 npm
-npm i -g openclaw
-```
+### 🚀 开始使用
 
-启动引导配置，选择"自定义 OpenAI 兼容接口"并填入 SenseNova 的 endpoint 与 API Key：
+#### Hermes Agent（命令行 AI 助手）
+
+装完之后会直接打开 Hermes 对话终端；如果没有，打开任意终端（Windows 上用 `wsl`，macOS / Linux 用系统终端），直接输入：
 
 ```bash
-openclaw onboard
-# 在交互式配置中选择 Custom OpenAI-compatible API
-# Base URL: https://token.sensenova.cn/v1
-# API Key:  your_api_key_here
-# Model:    sensenova-6.7-flash-lite
+hermes
 ```
 
-完成配置后即可通过 OpenClaw 的技能系统调用 SenseNova 6.7 Flash-Lite 执行办公任务。
+就进入聊天界面了。你可以问它：
+
+- "帮我写一个 Python 脚本，把当前目录下所有 `.jpg` 文件重命名成 `photo-1.jpg`、`photo-2.jpg` ..."
+- "这段代码为什么报错？`<粘贴代码>`"
+- "帮我查一下 React 18 的最新改动"
+
+想退出，输入 `/exit` 或按 `Ctrl + C`。
+
+#### OpenClaw（网页 UI）
+
+安装完成后，OpenClaw 的网关（gateway）会在后台自动启动，浏览器会自动打开控制台页面，地址大概长这样：
+
+```
+http://localhost:18789/#token=xxxxx
+```
+
+如果浏览器没自动弹出，可在终端里跑：
+
+```bash
+openclaw dashboard
+```
+
+在网页上可以：
+- 查看所有 AI 对话历史
+- 管理 API Key
+- 配置不同的模型
+- 看各种指标和日志
+
+### ❓ 常见问题
+
+#### Q1：安装过程中窗口突然关了 / 卡住了？
+
+别慌，每个平台都留了完整日志：
+
+- **Windows**：`C:\Users\<你的用户名>\AppData\Local\AgentPack\logs\`
+- **macOS**：`/private/tmp/agent-pack-postinstall.log`
+- **Linux**：终端里有 `Full log:` 后面带路径
+
+把日志发给我们，95% 能定位到问题。
+
+---
+
+#### Q2：Windows 装完后输入 `hermes` 提示 "命令未找到"？
+
+重开一个 PowerShell 窗口再试。安装器给系统 PATH 加了条目，但旧窗口不会自动刷新，开新的就好。
+
+---
+
+#### Q3：国内网络很慢 / 连不上 GitHub？
+
+安装器会自动检测国内网络并切换到国内镜像（ghproxy、TUNA、npmmirror、阿里云 PyPI），不用手动配置。如果自动检测没成功，在运行安装器之前手动设置环境变量：
+
+- **Windows PowerShell**：
+
+  ```powershell
+  $env:AGENTPACK_CN = "1"
+  ```
+
+  再双击安装器。
+
+- **macOS / Linux 终端**：
+
+  ```bash
+  export AGENTPACK_CN=1
+  ```
+
+  再跑安装器。
+
+---
+
+#### Q4：想换 API Key / 换模型怎么办？
+
+- **Hermes**：编辑 `~/.hermes/.env`（Windows 上是 `\\wsl$\Ubuntu\home\<用户名>\.hermes\.env`），修改其中的 `OPENROUTER_API_KEY=...`
+- **OpenClaw**：在终端运行：
+
+  ```bash
+  openclaw config set agents.defaults.model openrouter/<新的模型名>
+  ```
+
+或者干脆再跑一次安装器 —— 它是幂等的，重新装一遍会覆盖旧配置，不会搞坏别的。
+
+---
+
+#### Q5：想彻底卸载？
+
+- **Windows**：控制面板 → 程序 → 找到 "Agent Pack" → 卸载
+- **macOS / Linux**：
+
+  ```bash
+  rm -rf ~/.agent-pack ~/.hermes ~/.openclaw
+  # 如果想保留会话历史，把这三个目录先备份一下再删
+  ```
+
+---
+
+#### Q6：OpenClaw 网页打不开 / 端口被占了？
+
+OpenClaw 默认用端口 `18789`。如果被其他程序占了，网关会自动选另一个端口 —— 看 OpenClaw 启动时打印的 `Then open:` 后面那个地址，别硬记 `18789`。
+
+手动停 / 启网关：
+
+```bash
+openclaw gateway stop
+openclaw gateway
+```
+
+---
+
+#### Q7：我没 API Key 能先试试吗？
+
+可以，安装时 API Key 那一栏留空就行。装完后再去注册 / 申请，然后编辑 `~/.hermes/.env`（或 `~/.openclaw/.env`）补上即可。
+#### 📮 反馈与支持
+
+遇到问题或希望提交建议，可通过以下渠道与我们联系：
+
+- **GitHub Issues**：[SenseTime-FVG/agent_pack](https://github.com/SenseTime-FVG/agent_pack/issues) —— 用于报告 Bug 与提交功能建议
+- **Hermes 官方文档**：<https://github.com/NousResearch/hermes-agent>
+- **OpenClaw 官方文档**：<https://docs.openclaw.ai>
+
+为便于我们快速定位问题，提交 Issue 时请附上以下信息：
+
+1. **操作系统版本**：例如 Windows 11、macOS 14、Ubuntu 22.04
+2. **复现步骤**：在哪一步出现问题
+3. **完整日志内容**：日志路径参见上方[常见问题 Q1](#-常见问题)
+
+---
+
+#### 🛠️ 进阶配置
+
+> 以下内容仅供进阶用户参考，常规使用无需关心。
+
+**配置文件位置**
+
+| 工具 | 主配置文件 | 环境变量文件 |
+| --- | --- | --- |
+| Hermes | `~/.hermes/config.yaml` | `~/.hermes/.env` |
+| OpenClaw | `~/.openclaw/openclaw.json` | `~/.openclaw/.env` |
+
+**多模型供应商切换**
+
+两个工具均支持在配置文件中同时配置 OpenRouter、OpenAI、Anthropic 等多个模型供应商，运行时可按需切换。
+
+**预置技能（Bundled Skills）**
+
+安装包已内置数十个开箱即用的技能模块，涵盖文档处理、数据分析、网页爬取、飞书集成等场景，工具启动时自动加载，无需额外配置。
+
+---
+如有任何问题，欢迎前往 [GitHub Issues](https://github.com/SenseTime-FVG/agent_pack/issues) 与我们交流。
+
+
+
+#### 🦞 通过 OpenClaw 官方渠道安装
+
+如需通过 [OpenClaw](https://openclaw.ai/) 官方渠道（不经 agent_pack）独立部署，请参考 [OpenClaw 官方教程](https://openclaw.ai/)。在其引导配置中选择 **OpenAI 兼容接口**，填入 SenseNova 的 Base URL、API Key 与模型名即可接入。
+
+> 📝 **尚未申请 SenseNova API Key？** 请前往 [sensenova官网](https://console.sensecore.cn) 完成注册与实名认证，并在 **管理中心 → API-Key 管理** 中创建 Key。详细步骤参见上方 [🚀 快速开始 → API Key 申请](#api-key-申请) 章节。
 
 ---
 
