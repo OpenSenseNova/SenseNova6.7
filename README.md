@@ -135,9 +135,9 @@ SenseNova 6.7 Flash-Lite 兼容 OpenAI API，可无缝接入主流开源 Agent �
 #### [🍎 macOS 详细安装和使用步骤 →](docs/install-macos.md)
 
 
-#### 🚀 开始使用
+### 🚀 开始使用
 
-##### Hermes Agent（命令行 AI 助手）
+#### Hermes Agent（命令行 AI 助手）
 
 装完之后会直接打开 Hermes 对话终端；如果没有，打开任意终端（Windows 上用 `wsl`，macOS / Linux 用系统终端），直接输入：
 
@@ -153,7 +153,7 @@ hermes
 
 想退出，输入 `/exit` 或按 `Ctrl + C`。
 
-##### OpenClaw（网页 UI）
+#### OpenClaw（网页 UI）
 
 安装完成后，OpenClaw 的网关（gateway）会在后台自动启动，浏览器会自动打开控制台页面，地址大概长这样：
 
@@ -173,9 +173,9 @@ openclaw dashboard
 - 配置不同的模型
 - 看各种指标和日志
 
-#### ❓ 常见问题
+### ❓ 常见问题
 
-**Q1：安装过程中窗口突然关了 / 卡住了？**
+#### Q1：安装过程中窗口突然关了 / 卡住了？
 
 别慌，每个平台都留了完整日志：
 
@@ -187,13 +187,13 @@ openclaw dashboard
 
 ---
 
-**Q2：Windows 装完后输入 `hermes` 提示 "命令未找到"？**
+#### Q2：Windows 装完后输入 `hermes` 提示 "命令未找到"？
 
 重开一个 PowerShell 窗口再试。安装器给系统 PATH 加了条目，但旧窗口不会自动刷新，开新的就好。
 
 ---
 
-**Q3：国内网络很慢 / 连不上 GitHub？**
+#### Q3：国内网络很慢 / 连不上 GitHub？
 
 安装器会自动检测国内网络并切换到国内镜像（ghproxy、TUNA、npmmirror、阿里云 PyPI），不用手动配置。如果自动检测没成功，在运行安装器之前手动设置环境变量：
 
@@ -215,7 +215,7 @@ openclaw dashboard
 
 ---
 
-**Q4：想换 API Key / 换模型怎么办？**
+#### Q4：想换 API Key / 换模型怎么办？
 
 - **Hermes**：编辑 `~/.hermes/.env`（Windows 上是 `\\wsl$\Ubuntu\home\<用户名>\.hermes\.env`），修改其中的 `OPENROUTER_API_KEY=...`
 - **OpenClaw**：在终端运行：
@@ -228,7 +228,7 @@ openclaw dashboard
 
 ---
 
-**Q5：想彻底卸载？**
+#### Q5：想彻底卸载？
 
 - **Windows**：控制面板 → 程序 → 找到 "Agent Pack" → 卸载
 - **macOS / Linux**：
@@ -240,7 +240,7 @@ openclaw dashboard
 
 ---
 
-**Q6：OpenClaw 网页打不开 / 端口被占了？**
+#### Q6：OpenClaw 网页打不开 / 端口被占了？
 
 OpenClaw 默认用端口 `18789`。如果被其他程序占了，网关会自动选另一个端口 —— 看 OpenClaw 启动时打印的 `Then open:` 后面那个地址，别硬记 `18789`。
 
@@ -253,7 +253,7 @@ openclaw gateway
 
 ---
 
-**Q7：我没 API Key 能先试试吗？**
+#### Q7：我没 API Key 能先试试吗？
 
 可以，安装时 API Key 那一栏留空就行。装完后再去注册 / 申请，然后编辑 `~/.hermes/.env`（或 `~/.openclaw/.env`）补上即可。
 #### 📮 反馈与支持
