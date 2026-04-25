@@ -173,89 +173,8 @@ openclaw dashboard
 - 配置不同的模型
 - 看各种指标和日志
 
-### ❓ 常见问题
+### [❓ 常见问题 →](docs/faq.md)
 
-#### Q1：安装过程中窗口突然关了 / 卡住了？
-
-别慌，每个平台都留了完整日志：
-
-- **Windows**：`C:\Users\<你的用户名>\AppData\Local\AgentPack\logs\`
-- **macOS**：`/private/tmp/agent-pack-postinstall.log`
-- **Linux**：终端里有 `Full log:` 后面带路径
-
-把日志发给我们，95% 能定位到问题。
-
----
-
-#### Q2：Windows 装完后输入 `hermes` 提示 "命令未找到"？
-
-重开一个 PowerShell 窗口再试。安装器给系统 PATH 加了条目，但旧窗口不会自动刷新，开新的就好。
-
----
-
-#### Q3：国内网络很慢 / 连不上 GitHub？
-
-安装器会自动检测国内网络并切换到国内镜像（ghproxy、TUNA、npmmirror、阿里云 PyPI），不用手动配置。如果自动检测没成功，在运行安装器之前手动设置环境变量：
-
-- **Windows PowerShell**：
-
-  ```powershell
-  $env:AGENTPACK_CN = "1"
-  ```
-
-  再双击安装器。
-
-- **macOS / Linux 终端**：
-
-  ```bash
-  export AGENTPACK_CN=1
-  ```
-
-  再跑安装器。
-
----
-
-#### Q4：想换 API Key / 换模型怎么办？
-
-- **Hermes**：编辑 `~/.hermes/.env`（Windows 上是 `\\wsl$\Ubuntu\home\<用户名>\.hermes\.env`），修改其中的 `OPENROUTER_API_KEY=...`
-- **OpenClaw**：在终端运行：
-
-  ```bash
-  openclaw config set agents.defaults.model openrouter/<新的模型名>
-  ```
-
-或者干脆再跑一次安装器 —— 它是幂等的，重新装一遍会覆盖旧配置，不会搞坏别的。
-
----
-
-#### Q5：想彻底卸载？
-
-- **Windows**：控制面板 → 程序 → 找到 "Agent Pack" → 卸载
-- **macOS / Linux**：
-
-  ```bash
-  rm -rf ~/.agent-pack ~/.hermes ~/.openclaw
-  # 如果想保留会话历史，把这三个目录先备份一下再删
-  ```
-
----
-
-#### Q6：OpenClaw 网页打不开 / 端口被占了？
-
-OpenClaw 默认用端口 `18789`。如果被其他程序占了，网关会自动选另一个端口 —— 看 OpenClaw 启动时打印的 `Then open:` 后面那个地址，别硬记 `18789`。
-
-手动停 / 启网关：
-
-```bash
-openclaw gateway stop
-openclaw gateway
-```
-
----
-
-#### Q7：我没 API Key 能先试试吗？
-
-可以，安装时 API Key 那一栏留空就行。装完后再去注册 / 申请，然后编辑 `~/.hermes/.env`（或 `~/.openclaw/.env`）补上即可。
 #### 📮 反馈与支持
 
 遇到问题或希望提交建议，可通过以下渠道与我们联系：
@@ -268,39 +187,11 @@ openclaw gateway
 
 1. **操作系统版本**：例如 Windows 11、macOS 14、Ubuntu 22.04
 2. **复现步骤**：在哪一步出现问题
-3. **完整日志内容**：日志路径参见上方[常见问题 Q1](#-常见问题)
+3. **完整日志内容**：日志路径参见 [FAQ](docs/faq.md) 中 Q1
 
 ---
 
-#### 🛠️ 进阶配置
-
-> 以下内容仅供进阶用户参考，常规使用无需关心。
-
-**配置文件位置**
-
-| 工具 | 主配置文件 | 环境变量文件 |
-| --- | --- | --- |
-| Hermes | `~/.hermes/config.yaml` | `~/.hermes/.env` |
-| OpenClaw | `~/.openclaw/openclaw.json` | `~/.openclaw/.env` |
-
-**多模型供应商切换**
-
-两个工具均支持在配置文件中同时配置 OpenRouter、OpenAI、Anthropic 等多个模型供应商，运行时可按需切换。
-
-**预置技能（Bundled Skills）**
-
-安装包已内置数十个开箱即用的技能模块，涵盖文档处理、数据分析、网页爬取、飞书集成等场景，工具启动时自动加载，无需额外配置。
-
----
-如有任何问题，欢迎前往 [GitHub Issues](https://github.com/SenseTime-FVG/agent_pack/issues) 与我们交流。
-
-
-
-#### 🦞 通过 OpenClaw 官方渠道安装
-
-如需通过 [OpenClaw](https://openclaw.ai/) 官方渠道（不经 agent_pack）独立部署，请参考 [OpenClaw 官方教程](https://openclaw.ai/)。在其引导配置中选择 **OpenAI 兼容接口**，填入 SenseNova 的 Base URL、API Key 与模型名即可接入。
-
-> 📝 **尚未申请 SenseNova API Key？** 请前往 [sensenova官网](https://console.sensecore.cn) 完成注册与实名认证，并在 **管理中心 → API-Key 管理** 中创建 Key。详细步骤参见上方 [🚀 快速开始 → API Key 申请](#api-key-申请) 章节。
+### [🎓 进阶指南 →](docs/advanced.md)
 
 ---
 
