@@ -80,7 +80,7 @@ https://console.sensecore.cn/cn-sh-01/aistudio/plaza
   bash <(curl -fsSL https://raw.githubusercontent.com/SenseTime-FVG/agent_pack/main/linux/install.sh)
   ```
 
-安装过程中根据提示填写 API Key（见本文第 1 节）及模型名称（如 `SenseNova-V6.7-Flash`）。
+安装过程中根据提示填写 API Key（见本文第 1 节）及模型名称（如 `sensenova-6.7-flash-lite`）。
 
 ### 2.3 配置文件位置
 
@@ -101,7 +101,7 @@ https://p283t9u4d9.feishu.cn/wiki/JMkCwxpnti9Xelkt05JcehlKnCb?from=from_copylink
 
 ## 3. 模型说明
 
-**SenseNova-V6.7-Flash** 是商汤日日新原生多模态的最新模型，胜任数据分析、深度调研、复杂图片理解、PPT 生成等复杂办公任务。现已推出 Token Plan，更快、更好、更省。
+**SenseNova 6.7 Flash-Lite** 是商汤日日新原生多模态的最新模型，胜任数据分析、深度调研、复杂图片理解、PPT 生成等复杂办公任务。现已推出 Token Plan，更快、更好、更省。
 
 - **原生多模智能体**：为智能体赋予原生视觉能力，让你的 Agent 与你共享"视界"。
 - **更懂企业办公需求**：轻松支撑长链路、多步骤的复杂办公任务，数据分析、PPT、深度调研、信息图统统不在话下。
@@ -118,7 +118,7 @@ curl --location 'https://token.sensenova.cn/v1/chat/completions' \
   --header 'Content-Type: application/json' \
   --header 'Authorization: Bearer <YOUR_API_KEY>' \
   --data '{
-    "model": "SenseNova-V6.7-Flash",
+    "model": "sensenova-6.7-flash-lite",
     "max_tokens": 2000,
     "messages": [
       {"role": "user", "content": "你好，简单介绍一下你自己"}
@@ -142,7 +142,7 @@ resp = requests.post(
         "Content-Type": "application/json",
     },
     json={
-        "model": "SenseNova-V6.7-Flash",
+        "model": "sensenova-6.7-flash-lite",
         "max_tokens": 2000,                     # 最大输出 tokens（含 reasoning）
         "messages": [
             {"role": "user", "content": "你好，简单介绍一下你自己"},
@@ -161,7 +161,7 @@ print(data["choices"][0]["message"])
 {
   "id": "da48c12a-...",
   "request_id": "da48c12a-...",
-  "model": "SenseNova-V6.7-Flash",
+  "model": "sensenova-6.7-flash-lite",
   "object": "chat.completion",
   "created": 1776952631,
   "choices": [{
@@ -207,7 +207,7 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
   -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer <YOUR_API_KEY>' \
   -d '{
-    "model": "SenseNova-V6.7-Flash",
+    "model": "sensenova-6.7-flash-lite",
     "max_tokens": 2000,
     "temperature": 1.0,
     "top_p": 0.95,
@@ -223,7 +223,7 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
 
 ```python
 resp = requests.post(URL, headers=headers, timeout=60, json={
-    "model": "SenseNova-V6.7-Flash",
+    "model": "sensenova-6.7-flash-lite",
     "max_tokens": 2000,
     "temperature": 1.0,
     "top_p": 0.95,
@@ -249,7 +249,7 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
   -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer <YOUR_API_KEY>' \
   -d '{
-    "model": "SenseNova-V6.7-Flash",
+    "model": "sensenova-6.7-flash-lite",
     "max_tokens": 2000,
     "messages": [
       {"role": "system",    "content": "你是一个简洁的助手，回答不超过 20 个字。"},
@@ -271,7 +271,7 @@ history = [
 def chat(user_msg: str) -> str:
     history.append({"role": "user", "content": user_msg})
     resp = requests.post(URL, headers=headers, timeout=60, json={
-        "model": "SenseNova-V6.7-Flash",
+        "model": "sensenova-6.7-flash-lite",
         "max_tokens": 2000,
         "messages": history,
     })
@@ -293,7 +293,7 @@ print(chat("那德国呢？"))       # -> 柏林。
 
 ## 7. 图片（多模态）输入
 
-SenseNova-V6.7-Flash 支持 OpenAI Vision 兼容格式的图片输入，提供 URL 与 Base64 两种传入方式。
+SenseNova 6.7 Flash-Lite 支持 OpenAI Vision 兼容格式的图片输入，提供 URL 与 Base64 两种传入方式。
 
 ### 7.1 通过 URL（curl）
 
@@ -302,7 +302,7 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
   -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer <YOUR_API_KEY>' \
   -d '{
-    "model": "SenseNova-V6.7-Flash",
+    "model": "sensenova-6.7-flash-lite",
     "max_tokens": 2000,
     "messages": [{
       "role": "user",
@@ -322,7 +322,7 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
 
 ```python
 resp = requests.post(URL, headers=headers, timeout=120, json={
-    "model": "SenseNova-V6.7-Flash",
+    "model": "sensenova-6.7-flash-lite",
     "max_tokens": 2000,
     "messages": [{
         "role": "user",
@@ -347,7 +347,7 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
   -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer <YOUR_API_KEY>' \
   -d '{
-    "model": "SenseNova-V6.7-Flash",
+    "model": "sensenova-6.7-flash-lite",
     "max_tokens": 2000,
     "messages": [{
       "role": "user",
@@ -375,7 +375,7 @@ def to_data_url(path: str) -> str:
     return f"data:{mime};base64,{b64}"
 
 resp = requests.post(URL, headers=headers, timeout=120, json={
-    "model": "SenseNova-V6.7-Flash",
+    "model": "sensenova-6.7-flash-lite",
     "max_tokens": 2000,
     "messages": [{
         "role": "user",
@@ -396,7 +396,7 @@ print(resp.json()["choices"][0]["message"]["content"])
 
 ```python
 resp = requests.post(URL, headers=headers, timeout=120, json={
-    "model": "SenseNova-V6.7-Flash",
+    "model": "sensenova-6.7-flash-lite",
     "max_tokens": 2000,
     "messages": [{
         "role": "user",
@@ -428,7 +428,7 @@ curl -N 'https://token.sensenova.cn/v1/chat/completions' \
   -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer <YOUR_API_KEY>' \
   -d '{
-    "model": "SenseNova-V6.7-Flash",
+    "model": "sensenova-6.7-flash-lite",
     "stream": true,
     "max_tokens": 2000,
     "messages": [{"role": "user", "content": "写一首关于春天的诗"}]
@@ -454,7 +454,7 @@ import json
 import requests
 
 with requests.post(URL, headers=headers, stream=True, timeout=120, json={
-    "model": "SenseNova-V6.7-Flash",
+    "model": "sensenova-6.7-flash-lite",
     "stream": True,
     "max_tokens": 2000,
     "messages": [{"role": "user", "content": "写一首关于春天的诗"}],
@@ -504,7 +504,7 @@ client = OpenAI(
 )
 
 completion = client.chat.completions.create(
-    model="SenseNova-V6.7-Flash",
+    model="sensenova-6.7-flash-lite",
     max_tokens=2000,
     temperature=0.7,
     messages=[{"role": "user", "content": "你好"}],
@@ -516,7 +516,7 @@ print(completion.choices[0].message.content)
 
 ```python
 stream = client.chat.completions.create(
-    model="SenseNova-V6.7-Flash",
+    model="sensenova-6.7-flash-lite",
     max_tokens=2000,
     stream=True,
     messages=[{"role": "user", "content": "写一首诗"}],

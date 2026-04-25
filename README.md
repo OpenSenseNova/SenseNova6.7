@@ -1,4 +1,4 @@
-# ⚡ SenseNova 6.7 Flash
+# ⚡ SenseNova 6.7 Flash-Lite
 
 <p align="center">
   <img src="assets/logo.webp" alt="SenseNova Logo" height="120">
@@ -6,7 +6,7 @@
 
 > 原生多模态的大模型，更懂办公，更省 token
 
-**SenseNova 6.7 Flash** 是商汤日日新推出的面向真实工作流的轻量多模态智能体模型。采用原生多模态架构，兼顾效果与成本，能够稳定支撑数据分析、PPT 生成、深度调研报告生成、信息图生成等复杂长链路办公任务。
+**SenseNova 6.7 Flash-Lite** 是商汤日日新推出的面向真实工作流的轻量多模态智能体模型。采用原生多模态架构，兼顾效果与成本，能够稳定支撑数据分析、PPT 生成、深度调研报告生成、信息图生成等复杂长链路办公任务。
 
 ---
 
@@ -90,7 +90,7 @@ client = OpenAI(
 )
 
 completion = client.chat.completions.create(
-    model="SenseNova-V6.7-Flash",
+    model="sensenova-6.7-flash-lite",
     max_tokens=2000,
     messages=[{"role": "user", "content": "你好，简单介绍一下你自己"}],
 )
@@ -104,7 +104,7 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
   -H "Authorization: Bearer $SENSENOVA_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "SenseNova-V6.7-Flash",
+    "model": "sensenova-6.7-flash-lite",
     "max_tokens": 2000,
     "messages": [{"role": "user", "content": "你好，简单介绍一下你自己"}]
   }'
@@ -114,7 +114,7 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
 
 ```python
 completion = client.chat.completions.create(
-    model="SenseNova-V6.7-Flash",
+    model="sensenova-6.7-flash-lite",
     max_tokens=2000,
     messages=[{
         "role": "user",
@@ -131,7 +131,7 @@ print(completion.choices[0].message.content)
 
 ```python
 stream = client.chat.completions.create(
-    model="SenseNova-V6.7-Flash",
+    model="sensenova-6.7-flash-lite",
     max_tokens=2000,
     stream=True,
     messages=[{"role": "user", "content": "写一首关于春天的诗"}],
@@ -145,7 +145,7 @@ for chunk in stream:
 
 ## 🤖 在开源 Agent 框架中使用
 
-SenseNova 6.7 Flash 兼容 OpenAI API，可无缝接入主流开源 Agent 框架。
+SenseNova 6.7 Flash-Lite 兼容 OpenAI API，可无缝接入主流开源 Agent 框架。
 
 ### 🤖 NanoBot
 
@@ -156,7 +156,7 @@ pip install nanobot-ai
 nanobot onboard
 ```
 
-在 `~/.nanobot/config.json` 中配置 SenseNova 6.7 Flash：
+在 `~/.nanobot/config.json` 中配置 SenseNova 6.7 Flash-Lite：
 
 ```json
 {
@@ -169,7 +169,7 @@ nanobot onboard
   "agents": {
     "defaults": {
       "provider": "sensenova",
-      "model": "SenseNova-V6.7-Flash"
+      "model": "sensenova-6.7-flash-lite"
     }
   }
 }
@@ -206,10 +206,10 @@ openclaw onboard
 # 在交互式配置中选择 Custom OpenAI-compatible API
 # Base URL: https://token.sensenova.cn/v1
 # API Key:  your_api_key_here
-# Model:    SenseNova-V6.7-Flash
+# Model:    sensenova-6.7-flash-lite
 ```
 
-完成配置后即可通过 OpenClaw 的技能系统调用 SenseNova 6.7 Flash 执行办公任务。
+完成配置后即可通过 OpenClaw 的技能系统调用 SenseNova 6.7 Flash-Lite 执行办公任务。
 
 ---
 
@@ -228,7 +228,7 @@ openclaw onboard
   <img src="assets/token_plan.webp" alt="Token Plan" width="100%">
 </p>
 
-> 最新 SenseNova 6.7 Flash 模型与全系 cowork-skill 均已加入**小浣熊 Pro 套餐**，提供企业级安全防护与开箱即用的丝滑体验。<!-- TODO: 插入小浣熊产品页链接 -->
+> 最新 SenseNova 6.7 Flash-Lite 模型与全系 cowork-skill 均已加入**小浣熊 Pro 套餐**，提供企业级安全防护与开箱即用的丝滑体验。<!-- TODO: 插入小浣熊产品页链接 -->
 
 <!-- TODO: 插入 Token Plan 购买/了解更多链接 -->
 
