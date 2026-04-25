@@ -52,27 +52,44 @@
 
 Agent 在真实办公任务中跑通 "读 → 想 → 做 → 交付" 的全流程，下面是三个典型案例与对应产出物。
 
-#### 📊 数据分析 ｜ 10 份月度 Excel → 一份完整绩效分析报告
+#### 📊 数据分析 ｜ 存储芯片报价数据清洗与价格趋势分析
 
-基于风电事业部 10 份月度 Excel、932 条绩效记录，Agent 自动统一表结构，完成月度趋势、等级分布、岗位对比与员工个人表现等多维分析，并自主处理字体缺失、绘图报错、变量丢失等问题。用户反馈异常图表后，Agent 回溯到数据索引层定位 MultiIndex 错误并交付最终版本，跑通 "整合 → 分析 → 生成 → 回溯 → 校验" 完整闭环。
+> 💬 **Query**：请读取 `汇总.csv`，对近期的存储芯片报价数据进行清洗和分析。
 
-📄 *员工绩效分析报告.docx*
+**🧠 Agent 结论**
 
----
+近期存储价格整体呈上行趋势，其中部分 DRAM 与 NAND 产品涨幅最明显；上涨节奏上，2 月下旬开始出现拐点，3 月后进入加速阶段；不同品类之间分化明显，服务器相关产品表现强于消费类产品，说明本轮上涨并非全面同步，而是由重点品类率先带动。
 
-#### 🔬 深度调研 ｜ 一次性产出投行级产业研究报告
-
-11 章覆盖市场规模、政策、全球竞争、商业化、融资、技术、成本、供应链、路线图（2026–2028）与投资建议。重点覆盖智元、宇树、优必选、银河通用等 7 家国内玩家，国际对标 Boston Dynamics、Tesla；数据具体到亿元 / 百分比 / 同比，文末附产品参数速查表。定位投行级报告，数据驱动，不做科普。
-
-📄 *2026 中国具身智能产业研究报告* · Research · Report
+📄 [*内存价格数据分析.pdf*](assets/内存价格数据分析.pdf)
 
 ---
 
-#### 🎨 PPT 制作 ｜ 8 页科技展览级 PPT：《生成式 AI 革命》
+#### 🔬 深度调研 ｜ 2026 年内存与闪存价格波动主因调研
 
-8 页 PPTX 围绕文本 / 图像 / 视频 / 代码生成、办公自动化、商业应用与未来趋势展开。每页聚焦一个核心主题，独立版式，吸引眼球的标题 + 简洁正文 + 1~2 张配图 + 关键数据或图表。整体色彩丰富、视觉强烈、设计高级，像科技展览与高端杂志；图片来源于搜索，不调用生图工具；HTML size 控制在 1600×900。
+> 💬 **Query**：基于数据分析结果，调研 2026 年以来内存和闪存价格波动的主要原因。
 
-📄 *生成式 AI 革命.pptx* · PPT · Showcase
+**🧠 Agent 结论**
+
+本轮价格上涨主要由供给收缩、AI 服务器需求增强以及部分厂商主动控产共同推动；短期看存在情绪和备货带来的波动放大，但中期更像是供需重新平衡下的结构性修复；后续若高端需求持续、原厂延续谨慎供给策略，价格仍有继续上行或高位震荡的可能。
+
+📄 [*内存价格调研.pdf*](assets/内存价格调研.pdf) · Research · Report
+
+---
+
+#### 🎨 PPT 制作 ｜ 15–20 页存储器价格波动分析报告
+
+> 💬 **Query**：生成一份 15–20 页的中文 PPT，主题为 "2026 年存储器价格波动分析与市场趋势判断"。
+
+**🧠 Agent 结论**
+
+最终汇报将形成一条清晰主线：先用数据证明 "价格确实在涨、而且涨幅集中在关键品类"，再用外部研究解释 "为什么涨、背后驱动是什么"，最后给出趋势判断与行动建议，例如重点关注高景气品类、提前锁定采购节奏、持续跟踪原厂策略和下游需求变化。
+
+📄 [*半导体存储市场暴涨分析*](assets/半导体存储市场暴涨分析) · PPT · Showcase
+
+> 💡 **提示**：以上示例能力**必须由 Agent 框架与 Skills 共同提供** —— 仅通过 API 直连模型无法复现完整工作流。
+>
+> - **推荐方式**：使用我们提供的 [Agent Pack](https://github.com/SenseTime-FVG/agent_pack) 一键安装 Hermes Agent / OpenClaw，安装包**已内置全套 Skills**，开箱即用（详见下方 [🤖 在开源 Agent 框架中使用](#-在开源-agent-框架中使用) 章节）。
+> - **自行接入**：如使用其他 Agent 框架，可前往 [OpenSenseNova/SenseNova-Skills](https://github.com/OpenSenseNova/SenseNova-Skills) 单独获取 Skills 并自行安装。
 
 ---
 
@@ -112,92 +129,10 @@ SenseNova 6.7 Flash-Lite 兼容 OpenAI API，可无缝接入主流开源 Agent �
 
 **Hermes Agent** 与 **OpenClaw** 是面向真实办公任务的本地 Agent 框架。推荐使用官方一键安装包 [SenseTime-FVG/agent_pack](https://github.com/SenseTime-FVG/agent_pack) 完成部署，安装器会在过程中收集 LLM 凭证并自动写入配置文件（`~/.hermes/config.yaml` 与 `~/.openclaw/openclaw.json`）。前往 [Releases 页面](https://github.com/SenseTime-FVG/agent_pack/releases) 下载对应平台安装器（Windows `.exe` / macOS `.pkg` / Linux 脚本）即可开箱即用。
 
-完整安装流程、参数说明、常见问题及高级配置请参考 [飞书文档](https://p283t9u4d9.feishu.cn/wiki/JMkCwxpnti9Xelkt05JcehlKnCb?from=from_copylink)。
 
-#### 🪟 Windows 详细安装和使用步骤
+#### [🪟 Windows 详细安装和使用步骤 →](docs/install-windows.md)
 
-##### 先装 WSL2（只需要一次）
-
-WSL2 是微软给 Windows 自带的一个 "Linux 容器"，Agent Pack 底层需要它。
-
-1. 按下 `Win` 键，输入 `cmd`
-2. 在搜索结果上右键，选 **"以管理员身份运行"**（这一步很重要）
-3. 在打开的黑色窗口里粘贴：
-
-   ```powershell
-   wsl --install
-   ```
-
-4. 按回车，等它装完（几分钟）
-
-   👉 这一步会自动完成：
-   - 启用 WSL 功能
-   - 安装虚拟机平台
-   - 安装 Linux 内核
-   - 默认安装 Ubuntu
-
-5. 重启电脑
-6. 重启后 Windows 会自动弹出一个窗口让你设 Ubuntu 的用户名和密码 —— 可以不用设置
-
-##### 安装 Agent Pack
-
-1. 下载安装包：[AgentPack-1.0.10-windows-x64.exe](https://github.com/SenseTime-FVG/agent_pack/releases/download/v1.0.10/AgentPack-1.0.10-windows-x64.exe)
-2. 双击打开安装程序
-3. 选择安装 **Hermes** 或 **OpenClaw**（一次只选一个）
-
-   <p align="center">
-     <img src="assets/install_page.PNG" alt="选择安装产品" width="70%">
-   </p>
-
-4. 填入语言模型配置
-
-   > ⚠️ `verify` 可能由于系统缺少组件导致失败，没有关系，可继续下一步。
-
-   <p align="center">
-     <img src="assets/install2.PNG" alt="填入语言模型配置" width="70%">
-   </p>
-
-5. 点击 **下一步** 之后进入安装
-
-##### 启动安装
-
-1. 自动弹出 `cmd` 界面，开始执行安装脚本
-
-   <p align="center">
-     <img src="assets/install3.PNG" alt="自动弹出 cmd 执行安装脚本" width="70%">
-   </p>
-
-2. 安装完成
-
-   <p align="center">
-     <img src="assets/install4.png" alt="安装完成" width="70%">
-   </p>
-
-#### 🍎 macOS 详细安装和使用步骤
-
-##### 先装两个前置工具（只需要一次）
-
-1. 按 `⌘ Command` + `空格`，输入 **终端**，回车打开终端
-2. 粘贴这条命令，回车：
-
-   ```bash
-   xcode-select --install
-   ```
-
-3. 接着粘贴这条命令（装 Homebrew，是 macOS 的软件管理器）：
-
-   ```bash
-   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-   ```
-
-4. 装完后，Apple Silicon（M1/M2/M3）机器还要再跑一次：
-
-   ```bash
-   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-   eval "$(/opt/homebrew/bin/brew shellenv)"
-   ```
-
-   > Intel Mac 跳过这一步。
+#### [🍎 macOS 详细安装和使用步骤 →](docs/install-macos.md)
 
 
 #### 🚀 开始使用
