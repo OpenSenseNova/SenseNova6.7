@@ -300,6 +300,8 @@ openclaw gateway
 
 如需通过 [OpenClaw](https://openclaw.ai/) 官方渠道（不经 agent_pack）独立部署，请参考 [OpenClaw 官方教程](https://openclaw.ai/)。在其引导配置中选择 **OpenAI 兼容接口**，填入 SenseNova 的 Base URL、API Key 与模型名即可接入。
 
+> 📝 **尚未申请 SenseNova API Key？** 请前往 [sensenova官网](https://console.sensecore.cn) 完成注册与实名认证，并在 **管理中心 → API-Key 管理** 中创建 Key。详细步骤参见上方 [🚀 快速开始 → API Key 申请](#api-key-申请) 章节。
+
 ---
 
 ## 💎 Token Plan
