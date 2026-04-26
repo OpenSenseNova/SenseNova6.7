@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SenseNova 6.7 Flash-Lite · Showcase</title>
+<style>
+  :root {
+    --bg: #f8f9fb;
+    --card: #ffffff;
+    --text: #1f2330;
+    --muted: #5b6478;
+    --border: #e2e6ee;
+    --accent: #d23030;
+    --accent-soft: #fdecec;
+    --code-bg: #f1f3f7;
+    --max-w: 1100px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  header {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 56px 24px 28px;
+  }
+  header h1 {
+    font-size: 36px;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+  }
+  header .tagline {
+    color: var(--muted);
+    font-size: 16px;
+    margin: 0 0 16px;
+  }
+  .repro-note {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 4px;
+    color: #4a1f1f;
+    font-size: 14px;
+  }
+  .repro-note a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .repro-note a:hover { text-decoration: underline; }
+
+  nav.toc {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 12px 24px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  nav.toc a {
+    background: var(--card);
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    transition: all 0.15s;
+  }
+  nav.toc a:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  main { max-width: var(--max-w); margin: 0 auto; padding: 0 24px 80px; }
+
+  .case {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 28px;
+    box-shadow: 0 1px 2px rgba(20, 30, 50, 0.03);
+  }
+  .case h2 {
+    margin: 0 0 6px;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+  }
+  .case .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 24px;
+  }
+  .case h3 {
+    font-size: 18px;
+    margin: 28px 0 12px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border);
+  }
+  .case h3:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+
+  .label {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .prompt {
+    background: var(--code-bg);
+    border-left: 3px solid #94a3b8;
+    padding: 12px 16px;
+    border-radius: 4px;
+    color: #2d3548;
+    font-size: 14px;
+    margin: 0 0 16px;
+  }
+  .summary {
+    color: #2d3548;
+    margin: 0 0 18px;
+  }
+  .summary strong { color: var(--accent); }
+
+  .frame-wrap {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    margin-bottom: 12px;
+  }
+  .frame-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 720px;
+    border: 0;
+  }
+  .frame-wrap.ppt iframe { height: 760px; }
+  .frame-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    font-size: 13px;
+  }
+  .frame-actions a {
+    color: var(--accent);
+    text-decoration: none;
+    padding: 4px 10px;
+    border: 1px solid var(--accent-soft);
+    border-radius: 6px;
+    background: var(--accent-soft);
+    transition: all 0.15s;
+  }
+  .frame-actions a:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  footer {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 24px;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 720px) {
+    header { padding: 32px 16px 16px; }
+    header h1 { font-size: 28px; }
+    main { padding: 0 12px 60px; }
+    .case { padding: 20px; border-radius: 10px; }
+    .frame-wrap iframe { height: 520px; }
+    .frame-wrap.ppt iframe { height: 560px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎬 SenseNova 6.7 Flash-Lite · Showcase</h1>
+  <p class="tagline">真实办公任务的端到端示例 — 数据分析 / 深度调研 / PPT 制作</p>
+  <div class="repro-note">
+    复现以上样例需配合 OpenClaw / Hermes Agent 框架并启用
+    <a href="https://github.com/OpenSenseNova/SenseNova-Skills/" target="_blank" rel="noopener">SenseNova-Skills</a>。
+  </div>
+</header>
+
+<nav class="toc">
+  <a href="#semiconductor">🏢 半导体存储市场</a>
+  <a href="#wind-energy">👥 风电员工绩效</a>
+  <a href="#embodied-ai">🤖 具身智能调研</a>
+  <a href="#property-fee">🏘️ 物业费定价体系</a>
+</nav>
+
+<main>
+
+  <!-- ============ Semiconductor ============ -->
+  <section class="case" id="semiconductor">
+    <h2>🏢 半导体存储市场分析</h2>
+    <p class="subtitle">数据分析 + 深度调研 + PPT 制作 · 全流程闭环示例</p>
+
+    <h3>1. 数据分析</h3>
+    <div class="label">Prompt</div>
+    <div class="prompt">请读取「芯片价格汇总.csv」，对近期的存储芯片报价数据进行清洗和分析。</div>
+    <div class="label">结论</div>
+    <p class="summary">近期存储价格整体呈上行趋势，部分 DRAM 与 NAND 产品涨幅最明显；2 月下旬开始出现拐点，3 月后进入加速阶段；服务器相关产品表现强于消费类，本轮上涨由重点品类率先带动。</p>
+    <div class="frame-wrap">
+      <iframe src="showcase/semiconductor-analysis.html" title="半导体存储市场价格汇总分析" loading="lazy"></iframe>
+    </div>
+    <div class="frame-actions">
+      <a href="showcase/semiconductor-analysis.html" target="_blank" rel="noopener">在新标签页打开 ↗</a>
+    </div>
+
+    <h3>2. 深度调研</h3>
+    <div class="label">Prompt</div>
+    <div class="prompt">基于数据分析结果，调研 2026 年以来内存和闪存价格波动的主要原因。</div>
+    <div class="label">结论</div>
+    <p class="summary">本轮价格上涨主要由供给收缩、AI 服务器需求增强以及部分厂商主动控产共同推动；短期看存在情绪和备货带来的波动放大，中期更像是供需重新平衡下的结构性修复；后续若高端需求持续、原厂延续谨慎供给策略，价格仍有继续上行或高位震荡的可能。</p>
+    <div class="frame-wrap">
+      <iframe src="showcase/semiconductor-research.html" title="半导体存储价格暴涨原因深度调研" loading="lazy"></iframe>
+    </div>
+    <div class="frame-actions">
+      <a href="showcase/semiconductor-research.html" target="_blank" rel="noopener">在新标签页打开 ↗</a>
+    </div>
+
+    <h3>3. PPT 制作</h3>
+    <div class="label">Prompt</div>
+    <div class="prompt">根据数据分析结果，做一个 PPT 来展示报告内容，要求用到报告中的所有图片，并且数据和结论要和报告一致，页数控制在 16 页，用标准模式。整体风格要是高端杂志报告风，颜色以红色金色为主，明亮色背景，要突出重点。</div>
+    <div class="label">结论</div>
+    <p class="summary">最终汇报形成清晰主线 —— 先用数据证明"价格确实在涨、涨幅集中在关键品类"，再用外部研究解释"为什么涨、背后驱动是什么"，最后给出趋势判断与行动建议（关注高景气品类、提前锁定采购节奏、持续跟踪原厂策略与下游需求）。</p>
+    <div class="frame-wrap ppt">
+      <iframe src="showcase/semiconductor-ppt/" title="半导体存储市场研究报告 16 页 PPT" loading="lazy"></iframe>
+    </div>
+    <div class="frame-actions">
+      <a href="showcase/semiconductor-ppt/" target="_blank" rel="noopener">在新标签页打开（全屏更佳）↗</a>
+    </div>
+  </section>
+
+  <!-- ============ Wind Energy ============ -->
+  <section class="case" id="wind-energy">
+    <h2>👥 风电事业部员工绩效分析</h2>
+    <p class="subtitle">数据分析 · 多月度绩效汇总与可视化报告</p>
+
+    <div class="label">Prompt</div>
+    <div class="prompt">请读取风电事业部 10 个月度绩效考核表（2024 年 12 月至 2025 年 9 月），生成一份报告，覆盖绩效总体情况、月度趋势、岗位对比、个人表现以及结论与改进建议；要求每部分都有深度分析，并使用图表更美观地展示数据。</div>
+    <div class="label">结论</div>
+    <p class="summary">模型完成 10 个月的绩效数据汇总与分析，输出整体情况、月度趋势、岗位对比、TOP/BOTTOM 员工识别及面向管理者的改进建议，最终以图文结合的报告形式呈现。</p>
+    <div class="frame-wrap">
+      <iframe src="showcase/wind-energy-performance.html" title="风电事业部 2024-2025 年度员工绩效分析" loading="lazy"></iframe>
+    </div>
+    <div class="frame-actions">
+      <a href="showcase/wind-energy-performance.html" target="_blank" rel="noopener">在新标签页打开 ↗</a>
+    </div>
+  </section>
+
+  <!-- ============ Embodied AI ============ -->
+  <section class="case" id="embodied-ai">
+    <h2>🤖 具身智能行业调研</h2>
+    <p class="subtitle">深度调研 · 行业现状梳理与趋势判断</p>
+
+    <div class="label">Prompt</div>
+    <div class="prompt">帮我对具身智能行业做个调研，生成一份专业的行业调研报告。</div>
+    <div class="label">结论</div>
+    <p class="summary">模型基于公开信息完成具身智能行业的现状梳理，覆盖技术路线、代表玩家、产业链、典型应用场景与未来趋势判断，最终输出一份结构完整的行业调研报告。</p>
+    <div class="frame-wrap">
+      <iframe src="showcase/embodied-ai-research.html" title="具身智能行业现状调研" loading="lazy"></iframe>
+    </div>
+    <div class="frame-actions">
+      <a href="showcase/embodied-ai-research.html" target="_blank" rel="noopener">在新标签页打开 ↗</a>
+    </div>
+  </section>
+
+  <!-- ============ Property Fee ============ -->
+  <section class="case" id="property-fee">
+    <h2>🏘️ 物业费定价体系</h2>
+    <p class="subtitle">PPT 制作 · 26 页温馨柔和风格汇报</p>
+
+    <div class="label">Prompt</div>
+    <div class="prompt">制作一个关于物业费定价体系的 PPT，共 26 页，配色使用黑白配色，要求温馨柔和风格，物业管理人员用，物业委员会看。</div>
+    <div class="label">结论</div>
+    <p class="summary">模型按温馨柔和的视觉风格交付一份 26 页 PPT，覆盖物业服务定价的整体框架、计费模型、收费明细与沟通方案，便于物业管理人员向业委会汇报。</p>
+    <div class="frame-wrap ppt">
+      <iframe src="showcase/property-fee-ppt/" title="物业费定价体系 26 页 PPT" loading="lazy"></iframe>
+    </div>
+    <div class="frame-actions">
+      <a href="showcase/property-fee-ppt/" target="_blank" rel="noopener">在新标签页打开（全屏更佳）↗</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  原始 HTML / zip / pptx 等完整产物未随仓库分发，如需获取请联系产品团队 ·
+  <a href="https://github.com/OpenSenseNova/SenseNova6.7" target="_blank" rel="noopener">GitHub Repo</a>
+</footer>
+
+</body>
+</html>
