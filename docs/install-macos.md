@@ -1,22 +1,22 @@
-# 🍎 macOS 安装指南 — Hermes Agent / OpenClaw
+# 🍎 macOS Install Guide — Hermes Agent / OpenClaw
 
-🌐 [English](install-macos_EN.md) | **中文**
+🌐 **English** | [中文](install-macos_CN.md)
 
-本文档介绍在 macOS 上通过 [Agent Pack](https://github.com/SenseTime-FVG/agent_pack) 安装 **Hermes Agent** 与 **OpenClaw** 的完整步骤。
+This guide walks through installing **Hermes Agent** and **OpenClaw** on macOS via [Agent Pack](https://github.com/SenseTime-FVG/agent_pack).
 
 ---
 
-## 1. 前置工具安装
+## 1. Install prerequisites
 
-> 只需进行一次。
+> Only needs to be done once.
 
-1. 在 App 中搜索 `terminal` 或 **终端**，打开终端。
+1. In Spotlight or Launchpad, search for `terminal` and open **Terminal**.
 
    <p align="center">
-     <img src="../assets/macos1.png" alt="打开终端" width="70%">
+     <img src="../assets/macos1.png" alt="Open Terminal" width="70%">
    </p>
 
-2. 打开终端之后，依次复制粘贴并执行以下命令：
+2. In the terminal, copy-paste and run each of the following commands in turn:
 
    ```bash
    xcode-select --install
@@ -26,96 +26,96 @@
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
 
-   根据提示操作，按下回车键继续。
+   Follow the prompts and press Return to continue.
 
    <p align="center">
-     <img src="../assets/macos2.png" alt="执行 xcode-select 与 Homebrew 安装命令" width="70%">
+     <img src="../assets/macos2.png" alt="Run xcode-select and the Homebrew install command" width="70%">
    </p>
 
-3. 安装完成：接下来进入 **安装 Agent Pack** 阶段。
+3. When this finishes, move on to the **Install Agent Pack** stage.
 
    <p align="center">
-     <img src="../assets/macos3.png" alt="前置工具安装完成" width="70%">
+     <img src="../assets/macos3.png" alt="Prerequisites installed" width="70%">
    </p>
 
 ---
 
-## 2. 安装 Agent Pack
+## 2. Install Agent Pack
 
-1. 下载安装器：[AgentPack-1.0.10-macos-universal.pkg](https://github.com/SenseTime-FVG/agent_pack/releases/download/v1.0.10/AgentPack-1.0.10-macos-universal.pkg)，打开进行安装。
+1. Download the installer: [AgentPack-1.0.10-macos-universal.pkg](https://github.com/SenseTime-FVG/agent_pack/releases/download/v1.0.10/AgentPack-1.0.10-macos-universal.pkg) and open it.
 
-   > ⚠️ **如果提示安全隐私问题**：前往 **系统设置 → 隐私与安全性 → 安全性**，会看到对应应用的 "**打开 / 仍要打开**" 按钮。该按钮通常只会在你刚尝试打开后的约 1 小时内出现。输入登录密码后即可放行，之后它会被记为例外。
+   > ⚠️ **If you hit a privacy / security warning**: go to **System Settings → Privacy & Security → Security**, where you'll see an "**Open / Open Anyway**" button for the app. The button typically only appears for about an hour after your first attempt to open the app. Enter your login password to allow it; from then on it'll be remembered as an exception.
 
-2. 进入安装界面。
-
-   <p align="center">
-     <img src="../assets/macos4.png" alt="进入安装界面" width="70%">
-   </p>
-
-   每一步都点击 **继续**，中间可能会需要输入用户密码。
-
-3. 进入安装步骤的时候会提示需要安装的 Agent，**建议一次只选择一个**，示例选择使用 **OpenClaw**。
+2. Open the installer.
 
    <p align="center">
-     <img src="../assets/macos5.png" alt="选择安装的 Agent" width="70%">
+     <img src="../assets/macos4.png" alt="Installer opens" width="70%">
    </p>
 
-4. 之后提示选择 LLM 供应商：选择 **Custom Endpoint**，然后填入：
+   Click **Continue** through each step. You may be prompted for your user password along the way.
+
+3. The installer asks which agents to install. **We recommend selecting just one at a time.** This example uses **OpenClaw**.
+
+   <p align="center">
+     <img src="../assets/macos5.png" alt="Select agent to install" width="70%">
+   </p>
+
+4. When prompted to choose an LLM provider, pick **Custom Endpoint** and enter:
 
    ```
    https://token.sensenova.cn/v1
    ```
 
    <p align="center">
-     <img src="../assets/macos6.png" alt="选择 Custom Endpoint 并填入 Base URL" width="70%">
+     <img src="../assets/macos6.png" alt="Pick Custom Endpoint and enter the Base URL" width="70%">
    </p>
 
-5. 填入模型 ID：`sensenova-6.7-flash-lite`
+5. Enter the model ID: `sensenova-6.7-flash-lite`
 
    <p align="center">
-     <img src="../assets/macos7.png" alt="填入模型 ID" width="70%">
+     <img src="../assets/macos7.png" alt="Enter the model ID" width="70%">
    </p>
 
-6. 填入 API Key：`sk-*********`
+6. Enter the API key: `sk-*********`
 
    <p align="center">
-     <img src="../assets/macos8.png" alt="填入 API Key" width="70%">
+     <img src="../assets/macos8.png" alt="Enter the API key" width="70%">
    </p>
 
-7. 验证配置（失败也没有关系，有可能是系统缺少验证组件导致）。
+7. Verify the configuration. (A failed verification is fine — it can happen when the system is missing verification components.)
 
    <p align="center">
-     <img src="../assets/macos9.png" alt="验证配置" width="48%">
+     <img src="../assets/macos9.png" alt="Verify configuration" width="48%">
      &nbsp;&nbsp;
-     <img src="../assets/macos10.png" alt="验证结果" width="48%">
+     <img src="../assets/macos10.png" alt="Verification result" width="48%">
    </p>
 
-8. 点击 **开始安装**。
+8. Click **Start Install**.
 
    <p align="center">
-     <img src="../assets/macos11.png" alt="开始安装" width="70%">
+     <img src="../assets/macos11.png" alt="Start install" width="70%">
    </p>
 
-9. 允许 **控制终端**。
+9. Allow **Terminal control**.
 
    <p align="center">
-     <img src="../assets/macos12.png" alt="允许控制终端" width="70%">
+     <img src="../assets/macos12.png" alt="Allow Terminal control" width="70%">
    </p>
 
-10. 之后会弹出终端，等待安装完成即可。
+10. A Terminal window pops up — wait for the install to complete.
 
     <p align="center">
-      <img src="../assets/macos13.png" alt="终端执行安装脚本" width="70%">
+      <img src="../assets/macos13.png" alt="Terminal runs the install script" width="70%">
     </p>
 
-11. 之后会自动弹出 OpenClaw 的 dashboard 页面。
+11. The OpenClaw dashboard opens automatically.
 
     <p align="center">
-      <img src="../assets/macos14.png" alt="OpenClaw dashboard 页面" width="70%">
+      <img src="../assets/macos14.png" alt="OpenClaw dashboard" width="70%">
     </p>
 
 ---
 
-## 下一步
+## Next steps
 
-安装完成后，请返回主 README 查看 [开始使用](../README.md#-开始使用)、[常见问题](../README.md#-常见问题) 与 [反馈与支持](../README.md#-反馈与支持) 章节。
+Once installation finishes, head back to the main README to see the [Getting Started](../README.md#-getting-started), [FAQ](../README.md#-faq-), and [Feedback & Support](../README.md#-feedback--support) sections.

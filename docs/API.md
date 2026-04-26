@@ -1,117 +1,117 @@
-# SenseNova 大模型 API 接入文档
+# SenseNova LLM API Integration Guide
 
-🌐 [English](API_EN.md) | **中文**
+🌐 **English** | [中文](API_CN.md)
 
-本文档介绍如何接入商汤大装置（SenseCore）SenseNova 大模型 API。
-
----
-
-## 目录
-
-- [1. 注册账号与获取 API Key](#1-注册账号与获取-api-key)
-- [2. Hermes Agent 与 OpenClaw 配置](#2-hermes-agent-与-openclaw-配置)
-- [3. 模型说明](#3-模型说明)
-- [4. 基础调用](#4-基础调用)
-- [5. 推荐采样参数](#5-推荐采样参数)
-- [6. 多轮对话](#6-多轮对话)
-- [7. 图片（多模态）输入](#7-图片多模态输入)
-- [8. 流式输出](#8-流式输出)
-- [9. 使用 OpenAI SDK 调用](#9-使用-openai-sdk-调用)
-- [10. 错误码](#10-错误码)
+This document explains how to integrate the SenseNova LLM API on SenseTime's SenseCore platform.
 
 ---
 
-## 1. 注册账号与获取 API Key
+## Table of Contents
 
-### 1.1 注册账号
+- [1. Sign up and obtain an API Key](#1-sign-up-and-obtain-an-api-key)
+- [2. Hermes Agent and OpenClaw configuration](#2-hermes-agent-and-openclaw-configuration)
+- [3. Models](#3-models)
+- [4. Basic invocation](#4-basic-invocation)
+- [5. Recommended sampling parameters](#5-recommended-sampling-parameters)
+- [6. Multi-turn dialogue](#6-multi-turn-dialogue)
+- [7. Image (multimodal) input](#7-image-multimodal-input)
+- [8. Streaming output](#8-streaming-output)
+- [9. Calling via the OpenAI SDK](#9-calling-via-the-openai-sdk)
+- [10. Error codes](#10-error-codes)
 
-访问大装置官网完成注册及实名认证：
+---
+
+## 1. Sign up and obtain an API Key
+
+### 1.1 Sign up
+
+Visit the SenseCore portal and complete registration plus identity verification:
 
 ```
 https://console.sensecore.cn
 ```
 
-### 1.2 进入 AI Studio
+### 1.2 Enter AI Studio
 
-登录后访问 AI Studio 广场页，可浏览 SenseNova 系列模型：
+Once logged in, browse SenseNova-family models in the AI Studio plaza:
 
 ```
 https://console.sensecore.cn/cn-sh-01/aistudio/plaza
 ```
 
-### 1.3 创建 API Key
+### 1.3 Create an API Key
 
-控制台左侧导航：**管理中心 → API-Key 管理 → 创建 API-Key**
+In the console sidebar: **Management Center → API Key Management → Create API Key**.
 
-创建成功后请**立即复制并妥善保管**，API Key 仅在创建时完整显示一次。如发生泄漏请立即在同一页面删除或禁用并重建。
+After creation, **copy and store the key immediately** — the full value is shown only once. If a key leaks, delete or disable it on the same page and create a new one.
 
-后续示例中所有 `<YOUR_API_KEY>` 均替换为你创建的 Key。
+In the examples below, replace every `<YOUR_API_KEY>` with the key you created.
 
 ---
 
-## 2. Hermes Agent 与 OpenClaw 配置
+## 2. Hermes Agent and OpenClaw configuration
 
-使用官方一键安装包 [SenseTime-FVG/agent_pack](https://github.com/SenseTime-FVG/agent_pack) 可完成 **Hermes Agent** 与 **OpenClaw** 的部署。安装器会在安装过程中收集 LLM 凭证，并自动写入各产品的配置文件。
+The official one-click installer at [SenseTime-FVG/agent_pack](https://github.com/SenseTime-FVG/agent_pack) deploys both **Hermes Agent** and **OpenClaw**. The installer collects LLM credentials during setup and writes them to each product's config file.
 
-### 2.1 环境准备
+### 2.1 Prerequisites
 
-- **Windows**：需先安装 WSL2 与 Linux 发行版。以管理员身份在 PowerShell 执行：
+- **Windows**: install WSL2 and a Linux distribution first. In an admin PowerShell:
 
   ```powershell
   wsl --install
   ```
 
-- **macOS**：需 Xcode Command Line Tools 与 Homebrew：
+- **macOS**: Xcode Command Line Tools and Homebrew:
 
   ```bash
   xcode-select --install
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   ```
 
-- **Linux**：系统自带 bash、curl、sudo 即可，无需额外准备。
+- **Linux**: the system bash, curl and sudo are sufficient — no extra prep needed.
 
-### 2.2 安装
+### 2.2 Install
 
-前往 [Releases 页面](https://github.com/SenseTime-FVG/agent_pack/releases) 下载对应平台的安装器：
+Grab the installer for your platform from the [Releases page](https://github.com/SenseTime-FVG/agent_pack/releases):
 
-- **Windows**：下载 `.exe` 文件，双击运行
-- **macOS**：下载 `.pkg` 文件，双击运行
-- **Linux**：执行一键安装脚本
+- **Windows**: download the `.exe` and double-click to run.
+- **macOS**: download the `.pkg` and double-click to run.
+- **Linux**: run the one-line installer:
 
   ```bash
   bash <(curl -fsSL https://raw.githubusercontent.com/SenseTime-FVG/agent_pack/main/linux/install.sh)
   ```
 
-安装过程中根据提示填写 API Key（见本文第 1 节）及模型名称（如 `sensenova-6.7-flash-lite`）。
+When prompted, supply the API Key (Section 1) and a model name (e.g. `sensenova-6.7-flash-lite`).
 
-### 2.3 配置文件位置
+### 2.3 Config file locations
 
-安装完成后，各产品的配置文件默认写入：
+After install, each product's config files default to:
 
-- **Hermes**：`~/.hermes/config.yaml`
-- **OpenClaw**：`~/.openclaw/openclaw.json`
+- **Hermes**: `~/.hermes/config.yaml`
+- **OpenClaw**: `~/.openclaw/openclaw.json`
 
-如需后续修改模型或 API Key，可直接编辑对应文件并重启相应 Agent。
+To change the model or API key later, edit the appropriate file and restart the corresponding agent.
 
-### 2.4 详细说明
+### 2.4 Detailed reference
 
-完整的安装流程、参数说明、常见问题及高级配置请参考飞书文档：
+For the full installation flow, parameter reference, FAQs, and advanced configuration, see the Feishu doc:
 
 https://p283t9u4d9.feishu.cn/wiki/JMkCwxpnti9Xelkt05JcehlKnCb?from=from_copylink
 
 ---
 
-## 3. 模型说明
+## 3. Models
 
-**SenseNova 6.7 Flash-Lite** 是商汤日日新原生多模态的最新模型，胜任数据分析、深度调研、复杂图片理解、PPT 生成等复杂办公任务。现已推出 Token Plan，更快、更好、更省。
+**SenseNova 6.7 Flash-Lite** is SenseTime's latest natively multimodal model — capable of complex office tasks such as data analysis, deep research, sophisticated image understanding, and PPT generation. Token Plan is now available: faster, better, cheaper.
 
-- **原生多模智能体**：为智能体赋予原生视觉能力，让你的 Agent 与你共享"视界"。
-- **更懂企业办公需求**：轻松支撑长链路、多步骤的复杂办公任务，数据分析、PPT、深度调研、信息图统统不在话下。
-- **Token 消耗立省 60%**：相较于纯文本智能体，在信息搜索等场景下，Token 节约 60%。
+- **Native multimodal agent**: gives your agent native vision, so it shares your "field of view".
+- **Tuned for enterprise office work**: comfortably handles long-horizon, multi-step office tasks — data analysis, PPTs, deep research, and infographics.
+- **~60% token savings**: in scenarios such as information search, token consumption is roughly 60% lower than text-only agents.
 
 ---
 
-## 4. 基础调用
+## 4. Basic invocation
 
 ### 4.1 curl
 
@@ -123,7 +123,7 @@ curl --location 'https://token.sensenova.cn/v1/chat/completions' \
     "model": "sensenova-6.7-flash-lite",
     "max_tokens": 2000,
     "messages": [
-      {"role": "user", "content": "你好，简单介绍一下你自己"}
+      {"role": "user", "content": "Hi, please briefly introduce yourself."}
     ]
   }'
 ```
@@ -140,14 +140,14 @@ URL = "https://token.sensenova.cn/v1/chat/completions"
 resp = requests.post(
     URL,
     headers={
-        "Authorization": f"Bearer {API_KEY}",   # Bearer Token 鉴权
+        "Authorization": f"Bearer {API_KEY}",   # Bearer token auth
         "Content-Type": "application/json",
     },
     json={
         "model": "sensenova-6.7-flash-lite",
-        "max_tokens": 2000,                     # 最大输出 tokens（含 reasoning）
+        "max_tokens": 2000,                     # Max output tokens (incl. reasoning)
         "messages": [
-            {"role": "user", "content": "你好，简单介绍一下你自己"},
+            {"role": "user", "content": "Hi, please briefly introduce yourself."},
         ],
     },
     timeout=60,
@@ -157,7 +157,7 @@ data = resp.json()
 print(data["choices"][0]["message"])
 ```
 
-### 4.3 典型响应结构
+### 4.3 Typical response shape
 
 ```json
 {
@@ -170,7 +170,7 @@ print(data["choices"][0]["message"])
     "index": 0,
     "message": {
       "role": "assistant",
-      "content": "你好！我是 SenseNova...",
+      "content": "Hi! I'm SenseNova...",
       "reasoning": "Thinking Process: ..."
     },
     "finish_reason": "stop"
@@ -184,25 +184,25 @@ print(data["choices"][0]["message"])
 }
 ```
 
-- `finish_reason`：`stop` 正常结束 / `length` 达到 `max_tokens` 限制
-- `message.content`：最终回答正文
-- `message.reasoning`：推理模型的思考过程
-- `total_tokens = prompt_tokens + completion_tokens`，上限由模型上下文窗口决定，无请求参数可直接限制
+- `finish_reason`: `stop` for normal completion, `length` if `max_tokens` is hit.
+- `message.content`: the final answer.
+- `message.reasoning`: the chain of thought from a reasoning model.
+- `total_tokens = prompt_tokens + completion_tokens`. The upper bound is the model's context window — there is no request parameter to cap it directly.
 
 ---
 
-## 5. 推荐采样参数
+## 5. Recommended sampling parameters
 
-建议根据模式和任务类型选择以下采样参数组合：
+We suggest the following parameter combinations by mode and task type:
 
-| 模式 | 任务类型 | `temperature` | `top_p` | `top_k` | `min_p` | `presence_penalty` | `repetition_penalty` |
+| Mode | Task type | `temperature` | `top_p` | `top_k` | `min_p` | `presence_penalty` | `repetition_penalty` |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 思考模式 | 通用任务 | 1.0 | 0.95 | 20 | 0.0 | 1.5 | 1.0 |
-| 思考模式 | 精确编码（如 WebDev） | 0.6 | 0.95 | 20 | 0.0 | 0.0 | 1.0 |
-| 指令（非思考）模式 | 通用任务 | 0.7 | 0.8 | 20 | 0.0 | 1.5 | 1.0 |
-| 指令（非思考）模式 | 推理任务 | 1.0 | 1.0 | 40 | 0.0 | 2.0 | 1.0 |
+| Thinking mode | General | 1.0 | 0.95 | 20 | 0.0 | 1.5 | 1.0 |
+| Thinking mode | Precise coding (e.g. WebDev) | 0.6 | 0.95 | 20 | 0.0 | 0.0 | 1.0 |
+| Instruct (non-thinking) mode | General | 0.7 | 0.8 | 20 | 0.0 | 1.5 | 1.0 |
+| Instruct (non-thinking) mode | Reasoning | 1.0 | 1.0 | 40 | 0.0 | 2.0 | 1.0 |
 
-以"通用任务 + 思考模式"为例：
+Example — "general task + thinking mode":
 
 ```bash
 curl 'https://token.sensenova.cn/v1/chat/completions' \
@@ -218,7 +218,7 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
     "presence_penalty": 1.5,
     "repetition_penalty": 1.0,
     "messages": [
-      {"role": "user", "content": "写一首关于春天的诗"}
+      {"role": "user", "content": "Write a poem about spring."}
     ]
   }'
 ```
@@ -234,7 +234,7 @@ resp = requests.post(URL, headers=headers, timeout=60, json={
     "presence_penalty": 1.5,
     "repetition_penalty": 1.0,
     "messages": [
-        {"role": "user", "content": "写一首关于春天的诗"},
+        {"role": "user", "content": "Write a poem about spring."},
     ],
 })
 print(resp.json()["choices"][0]["message"]["content"])
@@ -242,7 +242,7 @@ print(resp.json()["choices"][0]["message"]["content"])
 
 ---
 
-## 6. 多轮对话
+## 6. Multi-turn dialogue
 
 ### 6.1 curl
 
@@ -254,10 +254,10 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
     "model": "sensenova-6.7-flash-lite",
     "max_tokens": 2000,
     "messages": [
-      {"role": "system",    "content": "你是一个简洁的助手，回答不超过 20 个字。"},
-      {"role": "user",      "content": "法国的首都是？"},
-      {"role": "assistant", "content": "巴黎。"},
-      {"role": "user",      "content": "那德国呢？"}
+      {"role": "system",    "content": "You are a concise assistant. Reply in 20 words or fewer."},
+      {"role": "user",      "content": "What is the capital of France?"},
+      {"role": "assistant", "content": "Paris."},
+      {"role": "user",      "content": "And Germany?"}
     ]
   }'
 ```
@@ -265,9 +265,9 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
 ### 6.2 Python
 
 ```python
-# 维护对话历史：按时间顺序依次 append
+# Maintain dialogue history: append in chronological order.
 history = [
-    {"role": "system", "content": "你是一个简洁的助手，回答不超过 20 个字。"},
+    {"role": "system", "content": "You are a concise assistant. Reply in 20 words or fewer."},
 ]
 
 def chat(user_msg: str) -> str:
@@ -278,26 +278,26 @@ def chat(user_msg: str) -> str:
         "messages": history,
     })
     reply = resp.json()["choices"][0]["message"].get("content", "")
-    # 回传历史时只保留 content，不要把 reasoning 放进去
+    # When echoing history back, only keep `content` — never include `reasoning`.
     history.append({"role": "assistant", "content": reply})
     return reply
 
-print(chat("法国的首都是？"))   # -> 巴黎。
-print(chat("那德国呢？"))       # -> 柏林。
+print(chat("What is the capital of France?"))   # -> Paris.
+print(chat("And Germany?"))                     # -> Berlin.
 ```
 
-**注意**：
-- `role` 支持 `system`、`user`、`assistant`。
-- 回传上一轮回复时**只包含 `content`**，无需回传 `reasoning`。
-- 多轮会显著增加 `prompt_tokens` 消耗，建议对过长历史做摘要或截断。
+**Notes**:
+- `role` may be `system`, `user`, or `assistant`.
+- When echoing the previous reply, **include only `content`** — do not echo back `reasoning`.
+- Multi-turn significantly increases `prompt_tokens`. For long histories, summarize or truncate.
 
 ---
 
-## 7. 图片（多模态）输入
+## 7. Image (multimodal) input
 
-SenseNova 6.7 Flash-Lite 支持 OpenAI Vision 兼容格式的图片输入，提供 URL 与 Base64 两种传入方式。
+SenseNova 6.7 Flash-Lite accepts images in the OpenAI Vision-compatible format, supporting both URL and Base64.
 
-### 7.1 通过 URL（curl）
+### 7.1 Via URL (curl)
 
 ```bash
 curl 'https://token.sensenova.cn/v1/chat/completions' \
@@ -309,7 +309,7 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
     "messages": [{
       "role": "user",
       "content": [
-        {"type": "text",  "text": "图中是什么？"},
+        {"type": "text",  "text": "What is in the image?"},
         {"type": "image_url", "image_url": {
           "url": "https://example.com/photo.jpg"
         }}
@@ -318,9 +318,9 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
   }'
 ```
 
-> 服务端会主动下载该 URL，请确保图片可匿名公开访问。无法访问时返回 `image down failed` 错误，此时请改用 Base64 或上传到可访问的对象存储。
+> The server downloads the URL — the image must be anonymously accessible. If unreachable, you'll get an `image down failed` error; switch to Base64 or upload to an accessible object store.
 
-### 7.2 通过 URL（Python）
+### 7.2 Via URL (Python)
 
 ```python
 resp = requests.post(URL, headers=headers, timeout=120, json={
@@ -329,7 +329,7 @@ resp = requests.post(URL, headers=headers, timeout=120, json={
     "messages": [{
         "role": "user",
         "content": [
-            {"type": "text",  "text": "图中是什么？"},
+            {"type": "text",  "text": "What is in the image?"},
             {"type": "image_url", "image_url": {
                 "url": "https://example.com/photo.jpg",
             }},
@@ -339,10 +339,10 @@ resp = requests.post(URL, headers=headers, timeout=120, json={
 print(resp.json()["choices"][0]["message"]["content"])
 ```
 
-### 7.3 通过 Base64（curl）
+### 7.3 Via Base64 (curl)
 
 ```bash
-# 先生成 Data URL（Linux/macOS）
+# Build a Data URL (Linux/macOS).
 B64=$(base64 -w 0 photo.png 2>/dev/null || base64 -i photo.png)
 
 curl 'https://token.sensenova.cn/v1/chat/completions' \
@@ -354,7 +354,7 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
     "messages": [{
       "role": "user",
       "content": [
-        {"type": "text", "text": "描述这张图片"},
+        {"type": "text", "text": "Describe this image."},
         {"type": "image_url", "image_url": {
           "url": "data:image/png;base64,'"${B64}"'"
         }}
@@ -363,7 +363,7 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
   }'
 ```
 
-### 7.4 通过 Base64（Python）
+### 7.4 Via Base64 (Python)
 
 ```python
 import base64
@@ -382,7 +382,7 @@ resp = requests.post(URL, headers=headers, timeout=120, json={
     "messages": [{
         "role": "user",
         "content": [
-            {"type": "text",  "text": "描述这张图片"},
+            {"type": "text",  "text": "Describe this image."},
             {"type": "image_url", "image_url": {
                 "url": to_data_url("./photo.png"),
             }},
@@ -392,9 +392,9 @@ resp = requests.post(URL, headers=headers, timeout=120, json={
 print(resp.json()["choices"][0]["message"]["content"])
 ```
 
-### 7.5 多图输入（Python）
+### 7.5 Multi-image input (Python)
 
-在同一条消息的 `content` 数组中追加多个 `image_url` 对象即可：
+Append additional `image_url` objects within the same message's `content` array:
 
 ```python
 resp = requests.post(URL, headers=headers, timeout=120, json={
@@ -403,7 +403,7 @@ resp = requests.post(URL, headers=headers, timeout=120, json={
     "messages": [{
         "role": "user",
         "content": [
-            {"type": "text",      "text": "对比以下两张图的异同"},
+            {"type": "text",      "text": "Compare the differences between the two images."},
             {"type": "image_url", "image_url": {"url": "https://example.com/a.jpg"}},
             {"type": "image_url", "image_url": {"url": "https://example.com/b.jpg"}},
         ],
@@ -411,17 +411,17 @@ resp = requests.post(URL, headers=headers, timeout=120, json={
 })
 ```
 
-**图片使用建议**：
+**Image guidelines**:
 
-- 支持常见图片格式（PNG、JPEG 等）
-- 上传前建议压缩至长边不超过 2048 像素，节省 tokens 与延迟
-- 大图优先使用 URL 方式；Base64 会显著增大请求体
+- Common formats are supported (PNG, JPEG, …).
+- Compress to a long edge of at most 2048 px before upload to save tokens and latency.
+- Prefer URL for large images; Base64 inflates the request body considerably.
 
 ---
 
-## 8. 流式输出
+## 8. Streaming output
 
-将 `stream` 设为 `true`，服务端以 Server-Sent Events（SSE）推送增量结果。
+Set `stream` to `true` and the server pushes incremental results via Server-Sent Events (SSE).
 
 ### 8.1 curl
 
@@ -433,16 +433,16 @@ curl -N 'https://token.sensenova.cn/v1/chat/completions' \
     "model": "sensenova-6.7-flash-lite",
     "stream": true,
     "max_tokens": 2000,
-    "messages": [{"role": "user", "content": "写一首关于春天的诗"}]
+    "messages": [{"role": "user", "content": "Write a poem about spring."}]
   }'
 ```
 
-事件流格式（节选）：
+Event-stream excerpt:
 
 ```
 data: {"choices":[{"delta":{"reasoning":"Thinking"},"finish_reason":""}], ...}
-data: {"choices":[{"delta":{"content":"春"},"finish_reason":""}], ...}
-data: {"choices":[{"delta":{"content":"风"},"finish_reason":""}], ...}
+data: {"choices":[{"delta":{"content":"Spring"},"finish_reason":""}], ...}
+data: {"choices":[{"delta":{"content":" wind"},"finish_reason":""}], ...}
 ...
 data: {"choices":[{"delta":{},"finish_reason":"stop"}], ...}
 data: {"choices":[], "usage":{"prompt_tokens":38,"completion_tokens":441,"total_tokens":479}}
@@ -459,42 +459,42 @@ with requests.post(URL, headers=headers, stream=True, timeout=120, json={
     "model": "sensenova-6.7-flash-lite",
     "stream": True,
     "max_tokens": 2000,
-    "messages": [{"role": "user", "content": "写一首关于春天的诗"}],
+    "messages": [{"role": "user", "content": "Write a poem about spring."}],
 }) as r:
     for line in r.iter_lines(decode_unicode=True):
         if not line or not line.startswith("data:"):
             continue
         payload = line[5:].strip()
-        if payload == "[DONE]":          # 流式结束标识
+        if payload == "[DONE]":          # End-of-stream marker
             break
 
         chunk = json.loads(payload)
 
-        # 结束前会推送一条仅含 usage 的事件（choices 为空数组）
+        # Before finishing, the server pushes a usage-only event (choices is empty).
         if not chunk.get("choices"):
             print("\n[usage]", chunk.get("usage"))
             continue
 
         delta = chunk["choices"][0].get("delta", {})
 
-        # delta 可能包含 reasoning（思考）或 content（正文）
-        # 一般前端只展示 content，忽略 reasoning
+        # `delta` may carry `reasoning` (thinking) or `content` (final text).
+        # Most front-ends only display `content` and ignore `reasoning`.
         if "content" in delta:
             print(delta["content"], end="", flush=True)
 ```
 
-**要点**：
+**Key points**:
 
-- 每条事件以 `data: ` 开头，空行分隔
-- `delta` 字段可能包含 `reasoning`（推理增量）或 `content`（正文增量），推理模型会先输出大量 `reasoning` 再输出 `content`
-- 结束前会单独推送一条仅含 `usage` 的事件（`choices: []`）
-- 收到 `data: [DONE]` 表示结束，客户端应停止读取
+- Each event begins with `data: ` and is separated by a blank line.
+- `delta` may contain `reasoning` (incremental thinking) or `content` (incremental output). Reasoning models emit a large amount of `reasoning` before producing `content`.
+- Just before completion, the server pushes a single usage-only event (`choices: []`).
+- Receiving `data: [DONE]` indicates the stream is finished — clients should stop reading.
 
 ---
 
-## 9. 使用 OpenAI SDK 调用
+## 9. Calling via the OpenAI SDK
 
-接口兼容 OpenAI Chat Completions 协议，可直接使用 `openai-python`：
+The endpoint is compatible with OpenAI's Chat Completions protocol, so you can use `openai-python` directly:
 
 ```python
 import os
@@ -509,32 +509,32 @@ completion = client.chat.completions.create(
     model="sensenova-6.7-flash-lite",
     max_tokens=2000,
     temperature=0.7,
-    messages=[{"role": "user", "content": "你好"}],
+    messages=[{"role": "user", "content": "Hello"}],
 )
 print(completion.choices[0].message.content)
 ```
 
-流式：
+Streaming:
 
 ```python
 stream = client.chat.completions.create(
     model="sensenova-6.7-flash-lite",
     max_tokens=2000,
     stream=True,
-    messages=[{"role": "user", "content": "写一首诗"}],
+    messages=[{"role": "user", "content": "Write a poem"}],
 )
 for chunk in stream:
     if chunk.choices and chunk.choices[0].delta.content:
         print(chunk.choices[0].delta.content, end="", flush=True)
 ```
 
-> 使用 SDK 时，`reasoning` 字段可能未在标准对象上暴露。如需获取，请直接使用原始 HTTP 接口。
+> When using the SDK, the `reasoning` field may not be exposed on the canonical objects. To retrieve it, call the raw HTTP endpoint directly.
 
 ---
 
-## 10. 错误码
+## 10. Error codes
 
-错误响应结构：
+Error response shape:
 
 ```json
 {
@@ -546,15 +546,15 @@ for chunk in stream:
 }
 ```
 
-| HTTP | error.type | 说明 | 处理建议 |
+| HTTP | error.type | Meaning | Suggested action |
 | --- | --- | --- | --- |
-| 400 | `invalid_request_error` | 请求参数非法，例如图片下载失败 | 检查参数结构、图片 URL 可访问性 |
-| 401 | `authentication_error` | API Key 无效或已失效 | 控制台重新创建 Key |
-| 403 | — | 无权限或被风控 | 检查账户权限与内容合规 |
-| 404 | `not_found_error` | 模型或接口不存在 | 确认 `model` 字段拼写 |
-| 429 | — | 触发限流 | 指数退避重试 |
-| 5xx | — | 服务端异常 | 稍后重试；如持续可提交工单 |
+| 400 | `invalid_request_error` | Malformed parameters, e.g. image download failure | Check parameter shape and image URL accessibility |
+| 401 | `authentication_error` | API key invalid or expired | Recreate the key in the console |
+| 403 | — | Lacking permission or risk-blocked | Check account permissions and content compliance |
+| 404 | `not_found_error` | Model or endpoint does not exist | Double-check the spelling of `model` |
+| 429 | — | Rate limited | Retry with exponential backoff |
+| 5xx | — | Server-side issue | Retry later; if persistent, file a ticket |
 
 ---
 
-如需进一步支持，请登录 [大装置控制台](https://console.sensecore.cn) 提交工单或查阅最新官方文档。
+For further support, sign in to the [SenseCore console](https://console.sensecore.cn) to file a ticket or browse the latest official docs.
