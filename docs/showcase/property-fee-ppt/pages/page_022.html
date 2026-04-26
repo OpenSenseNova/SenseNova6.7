@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>应急预案与保障</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0;
+      background: #e0e0e0;
+      font-family: 'Noto Sans SC', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      background: #F8F6F3;
+      overflow: hidden;
+      color: #2C2C2C;
+    }
+
+    /* 装饰背景层 */
+    .bg-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bg-circle-1 {
+      position: absolute;
+      top: -150px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(44,44,44,0.04) 0%, rgba(44,44,44,0) 70%);
+    }
+    .bg-circle-2 {
+      position: absolute;
+      bottom: -200px;
+      left: -150px;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(44,44,44,0.03) 0%, rgba(44,44,44,0) 70%);
+    }
+
+    /* 内容层 */
+    .content-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 顶部区域 */
+    .header-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 50px;
+    }
+
+    .title-block {
+      max-width: 800px;
+    }
+
+    .eyebrow {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      color: #666;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow::before {
+      content: "";
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #2C2C2C;
+    }
+
+    h1 {
+      margin: 0 0 20px 0;
+      font-size: 52px;
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #1a1a1a;
+    }
+
+    .narrative {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #4a4a4a;
+      max-width: 680px;
+      font-weight: 300;
+    }
+
+    /* 装饰图片 */
+    .decor-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 24px;
+      object-fit: cover;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+      transform: rotate(4deg);
+    }
+    .decor-img.top-right {
+      margin-top: 10px;
+    }
+
+    /* 核心卡片网格 */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      flex: 1;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid rgba(44,44,44,0.08);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #2C2C2C;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #F4F3F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-box svg {
+      width: 24px;
+      height: 24px;
+      stroke: #2C2C2C;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .card-index {
+      font-size: 18px;
+      font-weight: 700;
+      color: #d0d0d0;
+      font-family: 'Arial', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .card h2 {
+      margin: 0 0 12px 0;
+      font-size: 22px;
+      line-height: 1.3;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #555;
+      font-weight: 300;
+    }
+
+    /* 底部装饰图 */
+    .decor-img.bottom-left {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+      margin-top: 24px;
+      align-self: flex-start;
+      margin-left: 20px;
+    }
+
+    /* 页脚 */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(44,44,44,0.1);
+    }
+
+    .footer-note {
+      font-size: 14px;
+      color: #888;
+      letter-spacing: 1px;
+    }
+
+    .page-no {
+      font-size: 16px;
+      font-weight: 600;
+      color: #2C2C2C;
+      font-family: 'Arial', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper canvas">
+    
+    <!-- 背景装饰 -->
+    <div class="bg-layer">
+      <div class="bg-circle-1"></div>
+      <div class="bg-circle-2"></div>
+    </div>
+
+    <!-- 内容层 -->
+    <div class="content-layer">
+      
+      <!-- 头部区域 -->
+      <div class="header-area">
+        <div class="title-block" data-region="title">
+          <div class="eyebrow">安全体系</div>
+          <h1>应急预案与保障</h1>
+          <p class="narrative">安全是社区的底线，完善的应急预案与定期演练，是保障业主生命财产安全的必要措施。</p>
+        </div>
+        <img src="../images/page_022_icon1.png" alt="Decorative Icon" class="decor-img top-right" data-region="decorative-image-top" />
+      </div>
+
+      <!-- 核心卡片网格 -->
+      <div class="cards-grid">
+        
+        <!-- 卡片 1 -->
+        <div class="card" data-region="card-natural-disaster">
+          <div class="card-header">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2L3 14h6l-2 8 9-12h-6l2-8z"></path>
+              </svg>
+            </div>
+            <div class="card-index">01</div>
+          </div>
+          <h2>自然灾害</h2>
+          <p>建立防汛、防火及防台风应急预案，确保极端天气下人员与设施安全。</p>
+        </div>
+
+        <!-- 卡片 2 -->
+        <div class="card" data-region="card-emergency-response">
+          <div class="card-header">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div class="card-index">02</div>
+          </div>
+          <h2>突发事件</h2>
+          <p>设立 24 小时值班与响应机制，确保突发事件第一时间发现、上报与处置。</p>
+        </div>
+
+        <!-- 卡片 3 -->
+        <div class="card" data-region="card-medical-aid">
+          <div class="card-header">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+              </svg>
+            </div>
+            <div class="card-index">03</div>
+          </div>
+          <h2>医疗急救</h2>
+          <p>配备急救箱及 AED 设备，联动附近医院，提升紧急医疗救助效率。</p>
+        </div>
+
+        <!-- 卡片 4 -->
+        <div class="card" data-region="card-equipment-failure">
+          <div class="card-header">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24">
+                <rect x="4" y="14" width="4" height="6"></rect>
+                <rect x="10" y="10" width="4" height="10"></rect>
+                <rect x="16" y="6" width="4" height="14"></rect>
+              </svg>
+            </div>
+            <div class="card-index">04</div>
+          </div>
+          <h2>设备故障</h2>
+          <p>明确电梯困人、停电停水等紧急处置流程，保障基础服务持续稳定。</p>
+        </div>
+
+        <!-- 卡片 5 -->
+        <div class="card" data-region="card-drills-training">
+          <div class="card-header">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div class="card-index">05</div>
+          </div>
+          <h2>演练培训</h2>
+          <p>定期组织员工及业主开展演练，强化安全意识，提升协同处置能力。</p>
+        </div>
+
+      </div>
+
+      <!-- 底部区域 -->
+      <div class="footer">
+        <div data-region="decorative-image-bottom">
+          <img src="../images/page_022_icon2.png" alt="Decorative Icon" class="decor-img bottom-left" />
+        </div>
+        <div class="footer-note" data-region="footer-note">
+          专业与关怀并重 · 社区安全理念
+        </div>
+        <div class="page-no" data-region="page-number">06</div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

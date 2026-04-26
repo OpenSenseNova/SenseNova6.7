@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>价格测算结果</title>
+  <style>
+    :root {
+      --bg-color: #F8F6F3;
+      --text-main: #2C2C2C;
+      --text-sub: #666666;
+      --accent: #000000;
+      --border: #E8E4DF;
+      --card-bg: #FFFFFF;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #e0e0e0;
+      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      background: var(--bg-color);
+      overflow: hidden;
+      color: var(--text-main);
+    }
+    #bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, #ffffff 0%, var(--bg-color) 80%);
+      z-index: 0;
+    }
+    #ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 50px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+    .header-left {
+      max-width: 800px;
+    }
+    .eyebrow {
+      font-size: 16px;
+      color: var(--text-sub);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+    h1 {
+      margin: 0;
+      font-size: 46px;
+      line-height: 1.1;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+    .header-right {
+      max-width: 480px;
+      text-align: right;
+    }
+    .subtitle {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-sub);
+    }
+
+    /* Main Content */
+    .main-content {
+      display: flex;
+      gap: 40px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* Left Column: KPIs */
+    .col-left {
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .kpi-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    }
+    .kpi-label {
+      font-size: 16px;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+    .kpi-value {
+      font-size: 48px;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-family: Arial, sans-serif;
+    }
+    .kpi-unit {
+      font-size: 18px;
+      font-weight: normal;
+      color: var(--text-sub);
+      margin-left: 4px;
+    }
+    .kpi-note {
+      font-size: 14px;
+      color: #999;
+    }
+
+    /* Middle Column: Chart */
+    .col-middle {
+      width: 560px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    }
+    .chart-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .chart-subtitle {
+      font-size: 14px;
+      color: var(--text-sub);
+      margin-bottom: 24px;
+    }
+    #chart_1 {
+      width: 100%;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* Right Column: Notes */
+    .col-right {
+      flex: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px 40px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    }
+    .notes-header {
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .notes-header h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--accent);
+    }
+    .notes-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .notes-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .note-num {
+      font-size: 14px;
+      font-weight: bold;
+      color: #FFF;
+      background: var(--accent);
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: Arial, sans-serif;
+    }
+    .note-content {
+      flex: 1;
+    }
+    .note-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .note-desc {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .footer-text {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="bg"></div>
+    <div id="ct">
+      
+      <div class="header">
+        <div class="header-left">
+          <div class="eyebrow">DATA REVIEW / 价格测算结果</div>
+          <h1>价格测算结果</h1>
+        </div>
+        <div class="header-right">
+          <p class="subtitle">数据支撑决策，测算结果需兼顾企业生存与业主承受能力，寻找最佳平衡点</p>
+        </div>
+      </div>
+
+      <div class="main-content">
+        
+        <div class="col-left">
+          <div class="kpi-card">
+            <div class="kpi-label">基础包单价</div>
+            <div class="kpi-value">2.5<span class="kpi-unit">元/平米/月</span></div>
+            <div class="kpi-note">满足基础服务标准</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">综合单价</div>
+            <div class="kpi-value">3.0<span class="kpi-unit">元/平米/月</span></div>
+            <div class="kpi-note">含增值模块后测算</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">成本覆盖率</div>
+            <div class="kpi-value">95<span class="kpi-unit">%</span></div>
+            <div class="kpi-note">接近可持续经营线</div>
+          </div>
+        </div>
+
+        <div class="col-middle">
+          <div class="chart-title">价格结构对比</div>
+          <div class="chart-subtitle">基础服务与增值服务的价格贡献分布</div>
+          <div id="chart_1"></div>
+        </div>
+
+        <div class="col-right">
+          <div class="notes-header">
+            <h2>关键说明</h2>
+          </div>
+          <ul class="notes-list">
+            <li>
+              <div class="note-num">01</div>
+              <div class="note-content">
+                <div class="note-title">基础包价格调整</div>
+                <div class="note-desc">基础包价格建议维持 2.5 元/平米/月，确保业主接受度与基本服务覆盖。</div>
+              </div>
+            </li>
+            <li>
+              <div class="note-num">02</div>
+              <div class="note-content">
+                <div class="note-title">增值包透明定价</div>
+                <div class="note-desc">增值模块采用透明定价，避免一次性提价带来的抵触情绪。</div>
+              </div>
+            </li>
+            <li>
+              <div class="note-num">03</div>
+              <div class="note-content">
+                <div class="note-title">综合单价控制</div>
+                <div class="note-desc">综合单价控制在 3.0 元/平米/月，兼顾服务品质提升与成本压力。</div>
+              </div>
+            </li>
+            <li>
+              <div class="note-num">04</div>
+              <div class="note-content">
+                <div class="note-title">成本覆盖目标</div>
+                <div class="note-desc">目标覆盖率达到 95%，为后续运营优化留出空间。</div>
+              </div>
+            </li>
+            <li>
+              <div class="note-num">05</div>
+              <div class="note-content">
+                <div class="note-title">业主承受区间</div>
+                <div class="note-desc">测算结果落在合理承受区间，具备较好的落地可行性。</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer">
+        <div class="footer-text">成本覆盖 95% + 业主承受合理区间</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script>
+    (function(){
+      const chart = echarts.init(document.getElementById('chart_1'), null, {renderer: 'svg'});
+      const option = {
+        grid: {
+          top: '20%',
+          left: '12%',
+          right: '8%',
+          bottom: '15%',
+          containLabel: false
+        },
+        xAxis: {
+          type: 'category',
+          data: ['基础包', '增值包', '综合包'],
+          axisLine: {
+            lineStyle: { color: '#E8E4DF' }
+          },
+          axisLabel: {
+            fontSize: 14,
+            color: '#666'
+          }
+        },
+        yAxis: {
+          type: 'value',
+          splitLine: {
+            lineStyle: { color: '#F0ECE7' }
+          },
+          axisLabel: {
+            fontSize: 13,
+            color: '#999',
+            formatter: '{value} 元'
+          }
+        },
+        series: [
+          {
+            name: '价格',
+            type: 'bar',
+            barWidth: '40%',
+            itemStyle: {
+              color: function(params) {
+                const colors = ['#E8E4DF', '#A39E98', '#2C2C2C'];
+                return colors[params.dataIndex];
+              },
+              borderRadius: [4, 4, 0, 0]
+            },
+            label: {
+              show: true,
+              position: 'top',
+              fontSize: 16,
+              fontWeight: 'bold',
+              color: '#2C2C2C',
+              formatter: '{c} 元'
+            },
+            data: [2.5, 0.5, 3.0]
+          }
+        ]
+      };
+      chart.setOption(option);
+      window.__pptxChartsReady = (window.__pptxChartsReady || 0) + 1;
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>物业服务定价体系方案 - 封面页</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --bg-color: #F8F6F3;
+      --text-main: #2C2C2C;
+      --text-sub: #5A5A5A;
+      --accent-color: #E0DCD5;
+      --card-bg: #FFFFFF;
+      --font-family: 'Noto Sans SC', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #e9e9e9;
+      font-family: var(--font-family);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      background-color: var(--bg-color);
+      overflow: hidden;
+    }
+
+    #bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(circle at 50% 30%, #ffffff 0%, var(--bg-color) 70%);
+    }
+
+    #ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 装饰元素：柔和的光晕背景 */
+    .soft-glow {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(248,246,243,0) 70%);
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* 顶部标签 */
+    .top-tag {
+      margin-bottom: 24px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .top-tag span {
+      display: inline-block;
+      padding: 6px 20px;
+      border: 1px solid var(--accent-color);
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-sub);
+      letter-spacing: 2px;
+      background: rgba(255,255,255,0.5);
+    }
+
+    /* 标题区域 */
+    .title-block {
+      text-align: center;
+      margin-bottom: 36px;
+      z-index: 2;
+      max-width: 1000px;
+    }
+
+    .title-block h1 {
+      font-size: 56px;
+      line-height: 1.2;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .title-block h2 {
+      font-size: 22px;
+      line-height: 1.5;
+      font-weight: 400;
+      color: var(--text-sub);
+      letter-spacing: 1px;
+    }
+
+    /* 核心图片区域 - 显著的前景元素 */
+    .hero-image-container {
+      position: relative;
+      width: 960px;
+      height: 380px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 24px 48px rgba(44, 44, 44, 0.08);
+      margin-bottom: 40px;
+      z-index: 2;
+      background: #fff;
+    }
+
+    .hero-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 图片上的轻装饰角标 */
+    .corner-deco {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-radius: 16px;
+      pointer-events: none;
+    }
+    .corner-deco.top-left {
+      top: 24px;
+      left: 24px;
+      border-right: none;
+      border-bottom: none;
+    }
+    .corner-deco.bottom-right {
+      bottom: 24px;
+      right: 24px;
+      border-left: none;
+      border-top: none;
+    }
+
+    /* 核心要点网格 */
+    .points-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 48px;
+      z-index: 2;
+    }
+
+    .point-card {
+      background: var(--card-bg);
+      padding: 28px 24px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.04);
+      transition: transform 0.3s ease;
+    }
+
+    .point-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      position: relative;
+      padding-bottom: 12px;
+    }
+
+    .point-card h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 2px;
+      background: var(--text-main);
+      border-radius: 1px;
+    }
+
+    .point-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-sub);
+    }
+
+    /* 底部叙事说明 */
+    .narrative-text {
+      max-width: 800px;
+      text-align: center;
+      z-index: 2;
+      position: relative;
+    }
+
+    .narrative-text::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--accent-color);
+      margin: 0 auto 20px auto;
+    }
+
+    .narrative-text p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #777;
+      font-weight: 300;
+    }
+
+    /* 页脚 */
+    .footer-note {
+      position: absolute;
+      bottom: 30px;
+      left: 80px;
+      right: 80px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #999;
+      letter-spacing: 1px;
+      z-index: 2;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="bg"></div>
+    <div class="soft-glow"></div>
+    
+    <div id="ct">
+      <!-- 顶部标签 -->
+      <div class="top-tag">
+        <span>社区服务价值重构</span>
+      </div>
+
+      <!-- 标题区 -->
+      <div class="title-block">
+        <h1>物业服务定价体系方案</h1>
+        <h2>构建透明、合理、可持续的社区服务价值闭环</h2>
+      </div>
+
+      <!-- 核心视觉图 (前景显著元素) -->
+      <div class="hero-image-container">
+        <div class="corner-deco top-left"></div>
+        <div class="corner-deco bottom-right"></div>
+        <img src="../images/page_001_hero.png" alt="温馨的社区服务场景，展现人与空间的和谐关系" />
+      </div>
+
+      <!-- 核心要点卡片 -->
+      <div class="points-grid">
+        <div class="point-card">
+          <h3>定价原则</h3>
+          <p>坚持质价相符，公开透明，多方协商</p>
+        </div>
+        <div class="point-card">
+          <h3>成本构成</h3>
+          <p>人力、能耗、维护、绿化等全维度核算</p>
+        </div>
+        <div class="point-card">
+          <h3>服务分级</h3>
+          <p>基础保障与增值服务的双轨制设计</p>
+        </div>
+        <div class="point-card">
+          <h3>沟通机制</h3>
+          <p>定期公示与业主反馈的常态化渠道</p>
+        </div>
+      </div>
+
+      <!-- 底部叙事 -->
+      <div class="narrative-text">
+        <p>通过科学的定价模型，平衡物业运营成本与业主服务体验，<br>建立长期稳定的社区治理关系。</p>
+      </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer-note">
+      <span>PROPERTY SERVICE PRICING SYSTEM</span>
+      <span>01</span>
+    </div>
+  </div>
+</body>
+</html>

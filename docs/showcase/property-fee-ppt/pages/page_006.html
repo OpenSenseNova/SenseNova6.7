@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>定价模型构建</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+    * { box-sizing: border-box; }
+    
+    :root {
+      --primary-black: #2C2C2C;
+      --bg-warm-white: #F8F6F3;
+      --card-bg: #FFFFFF;
+      --line-gray: #D0CBC5;
+      --text-main: #2C2C2C;
+      --text-sub: #666666;
+      --accent-light: #E8E4DF;
+    }
+
+    body {
+      margin: 0;
+      background: #e0e0e0;
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      background: var(--bg-warm-white);
+      overflow: hidden;
+      color: var(--text-main);
+    }
+
+    /* 装饰背景层 */
+    .bg-decor {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bg-circle-1 {
+      position: absolute;
+      top: -150px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,228,223,0.6) 0%, rgba(248,246,243,0) 70%);
+    }
+    .bg-circle-2 {
+      position: absolute;
+      bottom: -200px;
+      left: -150px;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,228,223,0.5) 0%, rgba(248,246,243,0) 70%);
+    }
+    .bg-line-top {
+      position: absolute;
+      top: 40px;
+      left: 80px;
+      width: 60px;
+      height: 4px;
+      background: var(--primary-black);
+      border-radius: 2px;
+    }
+
+    /* 内容层 */
+    .content-layer {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 头部区域 */
+    .header {
+      padding: 80px 80px 40px 80px;
+    }
+    .title-wrap h1 {
+      margin: 0 0 16px 0;
+      font-size: 46px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text-main);
+    }
+    .title-wrap p {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.6;
+      color: var(--text-sub);
+      font-weight: 400;
+      max-width: 900px;
+    }
+
+    /* 图表区域 */
+    .diagram-area {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      padding: 0 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* SVG 连线层 */
+    .svg-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .svg-lines path {
+      fill: none;
+      stroke: var(--primary-black);
+      stroke-width: 2.5;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+    }
+    .svg-lines circle {
+      fill: var(--bg-warm-white);
+      stroke: var(--primary-black);
+      stroke-width: 2.5;
+    }
+
+    /* 节点容器 */
+    .nodes-container {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 240px 240px;
+      gap: 60px 80px;
+      width: 1160px;
+    }
+
+    /* 节点卡片 */
+    .node {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 12px 36px rgba(44, 44, 44, 0.04);
+      border: 1px solid var(--line-gray);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    /* 节点位置控制 (Grid Area) */
+    .node-1 { grid-area: 1 / 1 / 2 / 2; }
+    .node-2 { grid-area: 1 / 2 / 2 / 3; }
+    .node-3 { grid-area: 1 / 3 / 2 / 4; }
+    .node-4 { grid-area: 2 / 3 / 3 / 4; }
+    .node-5 { grid-area: 2 / 2 / 3 / 3; }
+
+    /* 节点内部元素 */
+    .node-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .node-num {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary-black);
+      background: var(--accent-light);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 14px;
+      font-family: Arial, sans-serif;
+    }
+    .node h3 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 1px;
+    }
+    .node p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text-sub);
+    }
+
+    /* 底部总结 */
+    .footer {
+      padding: 0 80px 60px 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .summary-badge {
+      background: var(--primary-black);
+      color: #FFFFFF;
+      padding: 18px 48px;
+      border-radius: 50px;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      box-shadow: 0 8px 24px rgba(44, 44, 44, 0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper canvas">
+    
+    <!-- 背景装饰层 -->
+    <div class="bg-decor">
+      <div class="bg-circle-1"></div>
+      <div class="bg-circle-2"></div>
+      <div class="bg-line-top"></div>
+    </div>
+
+    <!-- 内容层 -->
+    <div class="content-layer">
+      
+      <!-- 头部 -->
+      <div class="header" data-region="header">
+        <div class="title-wrap">
+          <h1>定价模型构建</h1>
+          <p>采用成本、市场、价值等多维度方法，避免单一视角偏差，确保方案的科学性与合理性。</p>
+        </div>
+      </div>
+
+      <!-- 流程图区域 -->
+      <div class="diagram-area">
+        
+        <!-- SVG 连线 (坐标基于 1160x540 的网格区域计算) -->
+        <svg class="svg-lines" viewBox="0 0 1160 540" preserveAspectRatio="none">
+          <!-- 1 -> 2 -->
+          <path d="M 360 120 L 420 120" />
+          <circle cx="420" cy="120" r="4" />
+          
+          <!-- 2 -> 3 -->
+          <path d="M 740 120 L 800 120" />
+          <circle cx="800" cy="120" r="4" />
+          
+          <!-- 3 -> 4 -->
+          <path d="M 1000 240 L 1000 300" />
+          <circle cx="1000" cy="300" r="4" />
+          
+          <!-- 4 -> 5 -->
+          <path d="M 800 420 L 740 420" />
+          <circle cx="740" cy="420" r="4" />
+        </svg>
+
+        <!-- 节点网格 -->
+        <div class="nodes-container">
+          
+          <div class="node node-1" data-region="node-cost">
+            <div class="node-header">
+              <div class="node-num">01</div>
+              <h3>成本加成法</h3>
+            </div>
+            <p>基于总成本加合理利润，保障运营可持续。</p>
+          </div>
+
+          <div class="node node-2" data-region="node-market">
+            <div class="node-header">
+              <div class="node-num">02</div>
+              <h3>市场比较法</h3>
+            </div>
+            <p>参考区域同类项目价格，维持竞争力。</p>
+          </div>
+
+          <div class="node node-3" data-region="node-value">
+            <div class="node-header">
+              <div class="node-num">03</div>
+              <h3>价值导向法</h3>
+            </div>
+            <p>按服务品质提升匹配价格区间。</p>
+          </div>
+
+          <div class="node node-4" data-region="node-tier">
+            <div class="node-header">
+              <div class="node-num">04</div>
+              <h3>分级定价</h3>
+            </div>
+            <p>基础包与增值包分离，满足多样需求。</p>
+          </div>
+
+          <div class="node node-5" data-region="node-dynamic">
+            <div class="node-header">
+              <div class="node-num">05</div>
+              <h3>动态调整</h3>
+            </div>
+            <p>建立与CPI或成本指数挂钩的定期机制。</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 底部 -->
+      <div class="footer" data-region="footer-summary">
+        <div class="summary-badge">科学定价，多元平衡</div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

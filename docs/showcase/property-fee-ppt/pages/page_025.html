@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>下一步行动计划</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+    :root {
+      --bg-color: #F8F6F3;
+      --text-main: #2C2C2C;
+      --text-sub: #555555;
+      --text-light: #888888;
+      --accent-color: #2C2C2C;
+      --card-bg: #FFFFFF;
+      --card-border: #E8E4DF;
+      --font-family: 'Noto Sans SC', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0;
+      background: #e0e0e0;
+      font-family: var(--font-family);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      width: 1600px;
+      height: 900px;
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+      background-color: var(--bg-color);
+    }
+
+    #bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      /* 增加细微的径向渐变背景，避免大面积空白单调，同时不干扰内容 */
+      background: radial-gradient(circle at 100% 0%, #ffffff 0%, transparent 50%),
+                  radial-gradient(circle at 0% 100%, #ebe6df 0%, transparent 50%),
+                  var(--bg-color);
+    }
+
+    #ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 顶部区域 */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    /* 装饰性元素：顶部细线 */
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      width: 120px;
+      height: 6px;
+      background: var(--accent-color);
+      border-radius: 3px;
+    }
+
+    .title-wrap {
+      max-width: 900px;
+    }
+
+    .eyebrow {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-light);
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+      display: inline-block;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 52px;
+      line-height: 1.2;
+      font-weight: 900;
+      color: var(--text-main);
+      letter-spacing: 1px;
+    }
+
+    .subtitle-wrap {
+      text-align: right;
+      max-width: 400px;
+      padding-top: 10px;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      line-height: 1.6;
+      color: var(--text-sub);
+      font-weight: 400;
+    }
+
+    /* 核心行动区域 */
+    .action-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* 核心信息横幅 */
+    .core-message {
+      display: flex;
+      align-items: center;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 24px 32px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 16px rgba(44, 44, 44, 0.03);
+    }
+
+    .core-message .label {
+      flex-shrink: 0;
+      background: var(--accent-color);
+      color: #fff;
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 16px;
+      font-weight: 700;
+      margin-right: 24px;
+      letter-spacing: 1px;
+    }
+
+    .core-message .text {
+      font-size: 20px;
+      color: var(--text-main);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    /* 卡片网格 */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(44, 44, 44, 0.08);
+    }
+
+    /* 卡片内部装饰 */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--accent-color);
+      border-radius: 20px 20px 0 0;
+      opacity: 0.9;
+    }
+
+    .card .num {
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--bg-color);
+      -webkit-text-stroke: 1px var(--text-light);
+      line-height: 1;
+      margin-bottom: 16px;
+      font-family: 'Arial Black', impact, sans-serif;
+      letter-spacing: -2px;
+    }
+
+    .card h2 {
+      margin: 0 0 16px 0;
+      font-size: 22px;
+      line-height: 1.3;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-sub);
+      font-weight: 400;
+    }
+
+    .card p strong {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    /* 底部区域 */
+    .footer {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-left {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 1px;
+    }
+
+    .footer-right {
+      font-size: 14px;
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    /* 装饰性几何图形填充空白 */
+    .deco-circle {
+      position: absolute;
+      right: 80px;
+      bottom: 120px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: var(--card-border);
+      opacity: 0.4;
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    .deco-square {
+      position: absolute;
+      right: 260px;
+      bottom: 140px;
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      background: var(--accent-color);
+      opacity: 0.05;
+      z-index: 0;
+      pointer-events: none;
+      transform: rotate(15deg);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="bg"></div>
+    
+    <div id="ct">
+      <!-- 头部 -->
+      <div class="header">
+        <div class="title-wrap" data-region="title">
+          <div class="eyebrow">NEXT STEP PLAN</div>
+          <h1>下一步行动计划</h1>
+        </div>
+        <div class="subtitle-wrap" data-region="subtitle">
+          <div class="subtitle">分阶段推进关键任务<br>确保方案从纸面走向落地</div>
+        </div>
+      </div>
+
+      <!-- 核心内容区 -->
+      <div class="action-area">
+        <!-- 核心信息 -->
+        <div class="core-message" data-region="core-message">
+          <span class="label">核心目标</span>
+          <span class="text">明确下一步行动，确保方案从纸面走向落地，每一步都扎实稳健。</span>
+        </div>
+
+        <!-- 卡片列表 -->
+        <div class="cards-grid">
+          <div class="card" data-region="card-1">
+            <div class="num">01</div>
+            <h2>方案完善</h2>
+            <p>根据委员会意见，<br><strong>完善定价细节</strong>与服务边界。</p>
+          </div>
+
+          <div class="card" data-region="card-2">
+            <div class="num">02</div>
+            <h2>宣传预热</h2>
+            <p>制作宣传物料，<br><strong>普及方案要点</strong>与价值说明。</p>
+          </div>
+
+          <div class="card" data-region="card-3">
+            <div class="num">03</div>
+            <h2>意见征集</h2>
+            <p>启动为期<strong>一周</strong>的<br>业主反馈收集与答疑。</p>
+          </div>
+
+          <div class="card" data-region="card-4">
+            <div class="num">04</div>
+            <h2>协商会议</h2>
+            <p>组织业主代表与物业委员会<br><strong>开展多轮沟通</strong>。</p>
+          </div>
+
+          <div class="card" data-region="card-5">
+            <div class="num">05</div>
+            <h2>表决准备</h2>
+            <p>完成程序合法合规的<br><strong>材料筹备</strong>与流程确认。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部 -->
+      <div class="footer" data-region="footer">
+        <div class="footer-left">执行路径清晰化</div>
+        <div class="footer-right">以清单式推进，形成可追踪、可复盘的落地节奏</div>
+      </div>
+
+      <!-- 装饰元素 -->
+      <div class="deco-circle"></div>
+      <div class="deco-square"></div>
+    </div>
+  </div>
+</body>
+</html>

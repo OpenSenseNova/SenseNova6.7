@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>PC 渠道价格分化</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #0f0f10;
+      font-family: "Source Sans 3", "Microsoft YaHei", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: #111111;
+      color: #f4f1ea;
+    }
+
+    /* 背景层：深灰底色 + 杂志感红条 */
+    #bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(135deg, #161616 0%, #0d0d0d 100%);
+    }
+    .bg-accent {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 12px;
+      height: 100%;
+      background: #E53935;
+    }
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+
+    /* 内容层 */
+    #ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 50px 60px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 顶部标题区 */
+    .header-area {
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 20px;
+    }
+    .eyebrow {
+      font-size: 16px;
+      letter-spacing: 3px;
+      color: #E53935;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .title {
+      margin: 0 0 12px 0;
+      font-family: "Playfair Display", "Noto Serif SC", serif;
+      font-size: 54px;
+      line-height: 1.1;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .subtitle {
+      margin: 0;
+      font-size: 20px;
+      color: #a0a0a0;
+      font-weight: 400;
+      max-width: 800px;
+      line-height: 1.5;
+    }
+
+    /* 主体内容区：左右分栏 */
+    .main-content {
+      display: flex;
+      gap: 50px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* 左侧栏：KPI + 表格 + 要点 */
+    .left-col {
+      width: 560px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* KPI 数据卡片 */
+    .kpi-row {
+      display: flex;
+      gap: 16px;
+    }
+    .kpi-card {
+      flex: 1;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 3px solid #E53935;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .kpi-label {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .kpi-value {
+      font-family: "Playfair Display", serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #E53935;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .kpi-note {
+      font-size: 12px;
+      color: #ccc;
+      line-height: 1.4;
+    }
+
+    /* 核心要点列表 */
+    .insights-box {
+      background: rgba(255,255,255,0.02);
+      border-left: 4px solid #D4AF37; /* 金色点缀 */
+      padding: 20px 24px;
+    }
+    .section-title {
+      font-family: "Noto Serif SC", serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 16px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::before {
+      content: "";
+      display: block;
+      width: 6px;
+      height: 20px;
+      background: #E53935;
+    }
+    .insights-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .insights-list li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 12px;
+      font-size: 16px;
+      color: #e0e0e0;
+      line-height: 1.5;
+    }
+    .insights-list li:last-child {
+      margin-bottom: 0;
+    }
+    .insights-list li::before {
+      content: "■";
+      position: absolute;
+      left: 0;
+      top: 2px;
+      color: #D4AF37;
+      font-size: 12px;
+    }
+
+    /* 价格分化表格 */
+    .table-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 0;
+      overflow: hidden;
+    }
+    .table-box table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .table-box th {
+      background: rgba(255,255,255,0.05);
+      color: #aaa;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .table-box td {
+      padding: 16px 20px;
+      font-size: 15px;
+      color: #f0f0f0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .table-box tr:last-child td {
+      border-bottom: none;
+    }
+    .price-drop {
+      color: #E53935;
+      font-weight: 700;
+      font-family: "Playfair Display", serif;
+      font-size: 18px;
+    }
+    .table-box td:first-child {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* 右侧栏：关键图片 */
+    .right-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      /* 原生比例 1485:735 ≈ 2.02:1 */
+      /* 为了在 900px 高度内展示，且保持比例，我们设定高度为 600px */
+      /* 宽度 = 600 * 2.02 ≈ 1212px */
+      height: 600px; 
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.1) saturate(1.1);
+    }
+    .image-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      padding: 8px 16px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      border-left: 3px solid #E53935;
+      backdrop-filter: blur(4px);
+    }
+
+    /* 页脚 */
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      font-size: 13px;
+      color: #666;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper canvas">
+    <!-- 背景层 -->
+    <div id="bg">
+      <div class="bg-accent"></div>
+      <div class="bg-grid"></div>
+    </div>
+
+    <!-- 内容层 -->
+    <div id="ct">
+      
+      <!-- 顶部标题 -->
+      <div class="header-area" data-region="header-title">
+        <div class="eyebrow">PC 渠道价格分化</div>
+        <h1 class="title">唯一下跌大类背后的需求疲软</h1>
+        <p class="subtitle">移动端与 AI 服务器带动整体均价上行，但 PC 渠道内部出现显著分化，价格信号已提前反映终端去库存压力。</p>
+      </div>
+
+      <!-- 主体内容 -->
+      <div class="main-content">
+        
+        <!-- 左侧：数据与表格 -->
+        <div class="left-col">
+          
+          <!-- KPI 卡片 -->
+          <div class="kpi-row">
+            <div class="kpi-card" data-region="kpi-average">
+              <div class="kpi-label">PC 平均涨跌幅</div>
+              <div class="kpi-value">+4.32%</div>
+              <div class="kpi-note">大类平均<br>内部严重分化</div>
+            </div>
+            <div class="kpi-card" data-region="kpi-idc">
+              <div class="kpi-label">IDC 2026 PC 预测</div>
+              <div class="kpi-value">-11.3%</div>
+              <div class="kpi-note">出货量同比<br>继续下滑</div>
+            </div>
+            <div class="kpi-card" data-region="kpi-share">
+              <div class="kpi-label">下跌产品占比</div>
+              <div class="kpi-value">7.8%</div>
+              <div class="kpi-note">全部来自<br>PC 渠道</div>
+            </div>
+          </div>
+
+          <!-- 核心要点 -->
+          <div class="insights-box" data-region="insight-points">
+            <h2 class="section-title">核心要点</h2>
+            <ul class="insights-list">
+              <li>DDR4 UDIMM 8GB 跌幅最大，低容量需求率先走弱</li>
+              <li>SSD 小容量承压，120GB 级别价格持续下探</li>
+              <li>大容量也未能幸免，16GB 内存同步进入下行区间</li>
+              <li>IDC 下调预测印证了需求端的周期性疲软</li>
+            </ul>
+          </div>
+
+          <!-- 价格表格 -->
+          <div class="table-box" data-region="price-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>产品</th>
+                  <th>起始价</th>
+                  <th>当前价</th>
+                  <th>跌幅</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>DDR4 UDIMM 8GB 3200</td>
+                  <td>$50.00</td>
+                  <td>$42.00</td>
+                  <td class="price-drop">-16.00%</td>
+                </tr>
+                <tr>
+                  <td>SSD(SATA 3) 120GB</td>
+                  <td>$24.00</td>
+                  <td>$21.00</td>
+                  <td class="price-drop">-12.50%</td>
+                </tr>
+                <tr>
+                  <td>DDR4 UDIMM 16GB 3200</td>
+                  <td>$95.00</td>
+                  <td>$85.00</td>
+                  <td class="price-drop">-10.53%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+        <!-- 右侧：关键图片 -->
+        <div class="right-col">
+          <div class="image-wrapper" data-region="key-image">
+            <img src="../images/page_005_inherited.png" alt="PC 价格分化趋势图表" />
+            <div class="image-caption">PC 渠道价格分化趋势</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 页脚 -->
+      <div class="footer" data-region="footer-note">
+        注：图表与表格数据用于展示 PC 渠道价格分化趋势，重点突出价格下跌与移动端/AI 服务器暴涨的对比。
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
