@@ -60,7 +60,7 @@ Agent 在真实办公任务中跑通 "读 → 想 → 做 → 交付" 的全流�
 
 近期存储价格整体呈上行趋势，其中部分 DRAM 与 NAND 产品涨幅最明显；上涨节奏上，2 月下旬开始出现拐点，3 月后进入加速阶段；不同品类之间分化明显，服务器相关产品表现强于消费类产品，说明本轮上涨并非全面同步，而是由重点品类率先带动。
 
-📄 [*内存价格数据分析.pdf*](assets/内存价格数据分析.pdf)
+📄 [*内存价格数据分析.pdf*](https://github.com/OpenSenseNova/SenseNova-Skills/blob/main/examples/memory-price-end2end-analysis/README_CN.md#第一步数据分析)
 
 ---
 
@@ -72,7 +72,7 @@ Agent 在真实办公任务中跑通 "读 → 想 → 做 → 交付" 的全流�
 
 本轮价格上涨主要由供给收缩、AI 服务器需求增强以及部分厂商主动控产共同推动；短期看存在情绪和备货带来的波动放大，但中期更像是供需重新平衡下的结构性修复；后续若高端需求持续、原厂延续谨慎供给策略，价格仍有继续上行或高位震荡的可能。
 
-📄 [*内存价格调研.pdf*](assets/内存价格调研.pdf) · Research · Report
+📄 [*内存价格调研.pdf*](https://github.com/OpenSenseNova/SenseNova-Skills/blob/main/examples/memory-price-end2end-analysis/README_CN.md#第二步深度调研) · Research · Report
 
 ---
 
@@ -84,7 +84,7 @@ Agent 在真实办公任务中跑通 "读 → 想 → 做 → 交付" 的全流�
 
 最终汇报将形成一条清晰主线：先用数据证明 "价格确实在涨、而且涨幅集中在关键品类"，再用外部研究解释 "为什么涨、背后驱动是什么"，最后给出趋势判断与行动建议，例如重点关注高景气品类、提前锁定采购节奏、持续跟踪原厂策略和下游需求变化。
 
-📄 [*半导体存储市场暴涨分析*](assets/半导体存储市场暴涨分析) · PPT · Showcase
+📄 [*半导体存储市场暴涨分析*](https://github.com/OpenSenseNova/SenseNova-Skills/blob/main/examples/memory-price-end2end-analysis/README_CN.md#第三步生成-ppt) · PPT · Showcase
 
 > 💡 **提示**：以上示例能力**必须由 Agent 框架与 Skills 共同提供** —— 仅通过 API 直连模型无法复现完整工作流。
 >
