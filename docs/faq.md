@@ -1,5 +1,7 @@
 # ❓ 常见问题 — Hermes Agent / OpenClaw
 
+🌐 [English](faq_EN.md) | **中文**
+
 本文档收录 Agent Pack（Hermes Agent / OpenClaw）安装与使用过程中的常见问题。
 
 ---

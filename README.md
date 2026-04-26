@@ -1,5 +1,7 @@
 # ⚡ SenseNova 6.7 Flash-Lite
 
+🌐 [English](README_EN.md) | **中文**
+
 <p align="center">
   <img src="assets/logo.webp" alt="SenseNova Logo" height="120">
 </p>

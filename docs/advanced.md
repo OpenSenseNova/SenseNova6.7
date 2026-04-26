@@ -1,5 +1,7 @@
 # 🎓 进阶指南 — Hermes Agent / OpenClaw
 
+🌐 [English](advanced_EN.md) | **中文**
+
 本文档面向进阶用户，介绍 Hermes Agent / OpenClaw 的配置文件、模型切换、Bundled Skills，以及通过 OpenClaw 官方渠道独立部署等高级用法。
 
 ---
