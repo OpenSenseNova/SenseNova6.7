@@ -4,314 +4,477 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SenseNova 6.7 Flash-Lite · Showcase</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23a8201a'/%3E%3Ctext x='50' y='62' font-family='Georgia,serif' font-size='62' text-anchor='middle' fill='%23f7f3ec' font-style='italic'%3ES%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=DM+Sans:opsz,wght@9..40,300..700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #faf9f7;
-    --bg-grad-1: #fef4f0;
-    --bg-grad-2: #fbf6ee;
-    --card: #ffffff;
-    --text: #14161f;
-    --text-2: #353a4a;
-    --muted: #6b7080;
-    --border: #ebe8e2;
-    --border-strong: #d9d4ca;
-    --accent: #d23030;
-    --accent-2: #b8843a;          /* gold companion */
-    --accent-soft: #fdecec;
-    --accent-soft-2: #f7f0e1;
-    --code-bg: #f3f1ec;
-    --shadow-sm: 0 1px 2px rgba(20, 20, 30, 0.04);
-    --shadow-md: 0 4px 16px rgba(40, 30, 30, 0.06), 0 1px 3px rgba(40, 30, 30, 0.04);
-    --shadow-lg: 0 12px 40px rgba(60, 40, 40, 0.08), 0 2px 6px rgba(40, 30, 30, 0.04);
-    --max-w: 1120px;
-    --radius-sm: 6px;
-    --radius: 12px;
-    --radius-lg: 18px;
+    --paper:        #f6f1e8;
+    --paper-deep:   #ede7da;
+    --paper-tint:   #fbf7ee;
+    --ink:          #16110b;
+    --ink-2:        #3a322a;
+    --ink-3:        #5d544a;
+    --muted:        #8a8074;
+    --rule:         #c9c0ad;
+    --rule-soft:    #e2dccd;
+    --card:         #fffdf7;
+    --accent:       #a8201a;
+    --accent-2:     #9c7c3a;
+    --accent-soft:  #f3e6e3;
+    --accent-2-soft:#f1e9d6;
+    --shadow-sm:    0 1px 2px rgba(40, 25, 15, 0.05);
+    --shadow-md:    0 6px 24px rgba(60, 35, 20, 0.08), 0 1px 3px rgba(40, 25, 15, 0.05);
+    --shadow-lg:    0 20px 60px rgba(80, 45, 25, 0.10), 0 4px 12px rgba(40, 25, 15, 0.06);
+
+    --font-display: 'Fraunces', 'Noto Serif SC', Georgia, "Songti SC", serif;
+    --font-body:    'DM Sans', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --font-mono:    'JetBrains Mono', ui-monospace, "SF Mono", Menlo, monospace;
+
+    --max-w: 1240px;
+    --gutter: 32px;
+    --radius-sm: 4px;
+    --radius:    8px;
+    --radius-lg: 14px;
+
+    --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   html, body { margin: 0; padding: 0; }
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
-    line-height: 1.7;
-    font-size: 15px;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-feature-settings: "ss01", "ss02", "cv11";
+    line-height: 1.65;
+    font-size: 15.5px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    /* Paper grain — subtle SVG noise */
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.09  0 0 0 0 0.07  0 0 0 0 0.04  0 0 0 0.05 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+    background-attachment: fixed;
   }
-  ::selection { background: var(--accent); color: #fff; }
+  ::selection { background: var(--accent); color: var(--paper-tint); }
 
-  /* ========= Hero ========= */
+  /* ===== Scroll progress bar ===== */
+  .scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: var(--p, 0%);
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    z-index: 100;
+    transition: width 0.1s linear;
+  }
+
+  /* ===== Hero ===== */
   .hero {
     position: relative;
     overflow: hidden;
+    border-bottom: 1px solid var(--rule);
     background:
-      radial-gradient(1200px 500px at 85% -10%, rgba(210, 48, 48, 0.10), transparent 60%),
-      radial-gradient(900px 400px at 10% 0%, rgba(184, 132, 58, 0.08), transparent 55%),
-      linear-gradient(180deg, var(--bg-grad-1) 0%, var(--bg) 100%);
-    border-bottom: 1px solid var(--border);
-  }
-  .hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(20, 20, 30, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(20, 20, 30, 0.025) 1px, transparent 1px);
-    background-size: 32px 32px;
-    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 70%);
-    pointer-events: none;
+      radial-gradient(800px 380px at 88% 12%, rgba(168, 32, 26, 0.10), transparent 65%),
+      radial-gradient(600px 320px at 8% 90%, rgba(156, 124, 58, 0.10), transparent 70%);
   }
   .hero-inner {
     max-width: var(--max-w);
     margin: 0 auto;
-    padding: 72px 24px 40px;
+    padding: 88px var(--gutter) 64px;
     position: relative;
-    z-index: 1;
   }
-  .eyebrow {
+  /* Decorative column rules */
+  .hero-inner::before, .hero-inner::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, transparent 0%, var(--rule) 30%, var(--rule) 70%, transparent 100%);
+    opacity: 0.6;
+  }
+  .hero-inner::before { left: var(--gutter); }
+  .hero-inner::after  { right: var(--gutter); }
+
+  .masthead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 32px;
+    margin-bottom: 56px;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-3);
+    animation: fadeIn 0.8s var(--ease-out) both;
+  }
+  .masthead .left { display: flex; align-items: center; gap: 16px; }
+  .masthead .swatch {
+    width: 28px; height: 28px;
+    background: var(--accent);
+    color: var(--paper-tint);
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(6px);
-    border: 1px solid var(--border);
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 12px;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-style: italic;
     font-weight: 600;
-    letter-spacing: 0.05em;
-    color: var(--text-2);
-    margin-bottom: 20px;
+    font-size: 18px;
+    border-radius: 2px;
   }
-  .eyebrow .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 0 3px rgba(210, 48, 48, 0.18);
-  }
+  .masthead .issue { color: var(--accent); font-weight: 600; }
+
   .hero h1 {
-    font-size: 44px;
-    line-height: 1.15;
-    margin: 0 0 14px;
-    letter-spacing: -0.025em;
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin: 0 0 36px;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    animation: rise 1s var(--ease-out) both;
   }
-  .hero h1 .gradient {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
-  .hero .tagline {
-    color: var(--muted);
-    font-size: 17px;
-    margin: 0 0 24px;
-    max-width: 640px;
+  .hero h1 .small {
+    display: block;
+    font-size: 0.42em;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink-3);
+    letter-spacing: 0;
+    margin-top: 14px;
+    font-variation-settings: "opsz" 144, "SOFT" 100;
   }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: end;
+    animation: rise 1s var(--ease-out) 0.15s both;
+  }
+  .lede {
+    font-family: var(--font-display);
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    font-weight: 300;
+    margin: 0;
+    font-variation-settings: "opsz" 28;
+  }
+  .lede::first-letter {
+    font-size: 3.2em;
+    float: left;
+    line-height: 0.85;
+    margin: 6px 10px 0 0;
+    color: var(--accent);
+    font-weight: 600;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+  }
+
   .repro-note {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(253, 236, 236, 0.6));
-    border: 1px solid var(--border);
+    background: var(--card);
+    border: 1px solid var(--rule-soft);
     border-left: 3px solid var(--accent);
-    padding: 14px 18px;
+    padding: 18px 20px;
     border-radius: var(--radius);
-    color: #4a1f1f;
-    font-size: 14px;
-    backdrop-filter: blur(6px);
+    color: var(--ink-2);
+    font-size: 13.5px;
+    line-height: 1.6;
     box-shadow: var(--shadow-sm);
   }
   .repro-note p { margin: 0; }
-  .repro-note p + p { margin-top: 8px; }
+  .repro-note p + p { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--rule-soft); }
   .repro-note a {
     color: var(--accent);
     text-decoration: none;
     font-weight: 600;
-    border-bottom: 1px dashed rgba(210, 48, 48, 0.4);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
   }
-  .repro-note a:hover { border-bottom-style: solid; }
+  .repro-note a:hover { border-bottom-color: var(--accent); }
+  .repro-note .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-2);
+    margin-right: 8px;
+    padding: 2px 6px;
+    background: var(--accent-2-soft);
+    border-radius: 3px;
+  }
 
-  /* ========= TOC ========= */
+  /* ===== Sticky TOC ===== */
   nav.toc {
-    max-width: var(--max-w);
-    margin: -8px auto 0;
-    padding: 24px 24px 8px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
     position: sticky;
     top: 0;
-    background: linear-gradient(180deg, var(--bg) 75%, rgba(250, 249, 247, 0));
-    z-index: 5;
-    backdrop-filter: blur(8px);
+    z-index: 10;
+    background: rgba(246, 241, 232, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule-soft);
+    padding: 14px var(--gutter);
+  }
+  nav.toc-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+  }
+  nav.toc .marker {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    margin-right: 16px;
+    border-right: 1px solid var(--rule);
+    padding-right: 16px;
   }
   nav.toc a {
-    background: var(--card);
-    color: var(--text-2);
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-style: italic;
+    color: var(--ink-2);
     text-decoration: none;
-    border: 1px solid var(--border);
-    padding: 7px 14px;
+    padding: 6px 14px;
     border-radius: 999px;
-    font-size: 13px;
-    font-weight: 500;
-    transition: all 0.18s ease;
-    box-shadow: var(--shadow-sm);
+    transition: all 0.2s var(--ease-out);
+    font-variation-settings: "opsz" 28;
   }
   nav.toc a:hover {
     background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
+    color: var(--paper-tint);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(210, 48, 48, 0.25);
   }
 
-  /* ========= Main ========= */
-  main { max-width: var(--max-w); margin: 0 auto; padding: 24px 24px 96px; }
+  /* ===== Main ===== */
+  main {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 56px var(--gutter) 96px;
+  }
 
   .case {
+    position: relative;
     background: var(--card);
-    border: 1px solid var(--border);
+    border: 1px solid var(--rule-soft);
     border-radius: var(--radius-lg);
-    padding: 36px 40px;
-    margin-bottom: 32px;
+    padding: 56px 56px 48px;
+    margin-bottom: 40px;
     box-shadow: var(--shadow-md);
     scroll-margin-top: 80px;
-    transition: box-shadow 0.25s ease;
+    transition: box-shadow 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+    opacity: 0;
+    transform: translateY(20px);
   }
+  .case.in-view { opacity: 1; transform: translateY(0); }
   .case:hover { box-shadow: var(--shadow-lg); }
 
-  .case-head {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 28px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-  }
-  .case h2 {
-    margin: 0;
-    font-size: 26px;
-    letter-spacing: -0.015em;
-    font-weight: 700;
-  }
-  .case .subtitle {
-    color: var(--muted);
-    font-size: 14px;
-    margin: 0;
+  /* Decorative oversized number in margin */
+  .case::before {
+    content: attr(data-no);
+    position: absolute;
+    top: 28px;
+    right: 40px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 140px;
+    font-weight: 300;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--rule);
+    pointer-events: none;
+    user-select: none;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
 
-  .case h3 {
-    font-size: 17px;
-    margin: 36px 0 16px;
-    padding-top: 28px;
-    border-top: 1px solid var(--border);
-    font-weight: 600;
-    color: var(--text-2);
+  .case-head { margin-bottom: 40px; max-width: 80%; }
+  .case .kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     gap: 10px;
   }
-  .case h3:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
-  .case h3::before {
+  .case .kicker::before {
     content: "";
-    display: inline-block;
-    width: 4px;
-    height: 18px;
-    background: linear-gradient(180deg, var(--accent), var(--accent-2));
-    border-radius: 2px;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .case h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    margin: 0 0 10px;
+    font-size: 36px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    font-variation-settings: "opsz" 60;
+  }
+  .case .subtitle {
+    color: var(--ink-3);
+    font-size: 14.5px;
+    margin: 0;
+    font-style: italic;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-variation-settings: "opsz" 28;
+  }
+
+  .case h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    margin: 56px 0 24px;
+    padding-top: 36px;
+    border-top: 1px solid var(--rule-soft);
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    font-variation-settings: "opsz" 36;
+  }
+  .case h3:first-of-type { border-top: 0; padding-top: 0; margin-top: 8px; }
+  .case h3 .step {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent-2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid var(--accent-2);
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-weight: 500;
   }
 
   .label {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 700;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.16em;
     color: var(--muted);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
   .label::before {
     content: "";
-    width: 14px;
+    width: 16px;
     height: 1px;
-    background: var(--border-strong);
+    background: var(--rule);
   }
 
   .prompt {
     position: relative;
-    background: var(--code-bg);
-    border-left: 3px solid var(--accent-2);
-    padding: 14px 18px 14px 44px;
-    border-radius: var(--radius-sm);
-    color: var(--text-2);
-    font-size: 14px;
-    margin: 0 0 20px;
-    line-height: 1.65;
+    background: var(--paper-deep);
+    padding: 18px 22px 18px 56px;
+    border-radius: var(--radius);
+    color: var(--ink-2);
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin: 0 0 26px;
+    border: 1px solid var(--rule-soft);
   }
   .prompt::before {
-    content: "💬";
+    content: "❝";
     position: absolute;
-    left: 14px;
+    left: 18px;
     top: 12px;
-    font-size: 14px;
-    opacity: 0.7;
+    font-family: var(--font-display);
+    font-size: 38px;
+    line-height: 1;
+    color: var(--accent);
+    font-weight: 600;
+    font-style: italic;
   }
 
   .summary {
-    color: var(--text-2);
-    margin: 0 0 24px;
-    padding-left: 14px;
-    border-left: 2px solid var(--border-strong);
-    font-size: 14.5px;
+    color: var(--ink-2);
+    margin: 0 0 32px;
+    padding: 18px 0 18px 22px;
+    border-left: 2px solid var(--accent);
+    font-size: 15.5px;
+    font-family: var(--font-display);
+    font-weight: 300;
+    line-height: 1.65;
+    font-variation-settings: "opsz" 24;
   }
   .summary strong { color: var(--accent); font-weight: 600; }
 
-  /* ========= Iframe wrapper with browser chrome ========= */
+  /* ===== Iframe with browser chrome ===== */
   .frame-wrap {
     position: relative;
-    border: 1px solid var(--border);
+    border: 1px solid var(--rule);
     border-radius: var(--radius);
     overflow: hidden;
     background: #fff;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+  }
+  .frame-wrap:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--rule);
   }
   .frame-chrome {
-    height: 32px;
-    background: linear-gradient(180deg, #f0ede8, #e9e5dd);
-    border-bottom: 1px solid var(--border);
+    height: 34px;
+    background: linear-gradient(180deg, #efeadd, #e6e0d0);
+    border-bottom: 1px solid var(--rule);
     display: flex;
     align-items: center;
     padding: 0 14px;
     gap: 6px;
     font-size: 11px;
-    color: var(--muted);
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    color: var(--ink-3);
+    font-family: var(--font-mono);
   }
   .frame-chrome .dots { display: flex; gap: 6px; margin-right: 12px; }
   .frame-chrome .dots span {
     width: 11px;
     height: 11px;
     border-radius: 50%;
+    box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.15);
   }
   .frame-chrome .dots .r { background: #ff5f56; }
   .frame-chrome .dots .y { background: #ffbd2e; }
   .frame-chrome .dots .g { background: #27c93f; }
   .frame-chrome .url {
     flex: 1;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 4px 10px;
+    background: rgba(255, 253, 247, 0.85);
+    padding: 4px 12px;
     border-radius: 4px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--rule-soft);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: var(--text-2);
+    color: var(--ink-2);
+    font-size: 10.5px;
+  }
+  .frame-chrome .url::before {
+    content: "🔒 ";
+    opacity: 0.45;
+    font-size: 9px;
   }
   .frame-body {
     position: relative;
@@ -334,90 +497,184 @@
   .frame-actions {
     display: flex;
     justify-content: flex-end;
-    gap: 12px;
+    gap: 10px;
     font-size: 13px;
     margin-bottom: 4px;
   }
   .frame-actions a {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     color: var(--accent);
     text-decoration: none;
-    padding: 6px 14px;
-    border: 1px solid rgba(210, 48, 48, 0.25);
+    padding: 7px 16px;
     border-radius: 999px;
-    background: var(--accent-soft);
-    transition: all 0.18s ease;
+    background: transparent;
+    border: 1px solid var(--accent);
+    transition: all 0.22s var(--ease-out);
+    font-family: var(--font-display);
+    font-style: italic;
     font-weight: 500;
+    font-size: 14px;
+    font-variation-settings: "opsz" 28;
   }
   .frame-actions a:hover {
     background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
+    color: var(--paper-tint);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(210, 48, 48, 0.25);
+    box-shadow: 0 6px 20px rgba(168, 32, 26, 0.22);
   }
+  .frame-actions a .arrow {
+    transition: transform 0.22s var(--ease-out);
+  }
+  .frame-actions a:hover .arrow { transform: translate(2px, -2px); }
 
+  /* ===== Footer ===== */
   footer {
+    position: relative;
+    margin-top: 40px;
+    padding: 56px var(--gutter) 48px;
+    border-top: 1px solid var(--rule);
+    background:
+      radial-gradient(600px 200px at 50% 0%, rgba(168, 32, 26, 0.04), transparent 70%);
+  }
+  .footer-inner {
     max-width: var(--max-w);
     margin: 0 auto;
-    padding: 28px 24px 40px;
-    color: var(--muted);
-    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
     text-align: center;
-    border-top: 1px solid var(--border);
   }
-  footer a { color: var(--text-2); text-decoration: none; border-bottom: 1px dashed var(--border-strong); }
-  footer a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .footer-mark {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--accent);
+    font-variation-settings: "opsz" 36, "SOFT" 100, "WONK" 1;
+  }
+  .footer-text {
+    color: var(--ink-3);
+    font-size: 13px;
+    line-height: 1.7;
+    max-width: 520px;
+  }
+  .footer-text a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    transition: border-color 0.2s;
+  }
+  .footer-text a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+  .footer-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--accent);
+    margin: 4px 0;
+  }
+  .footer-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    margin-top: 10px;
+  }
 
+  /* ===== Animations ===== */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    .case { opacity: 1; transform: none; }
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 900px) {
+    .hero-meta { grid-template-columns: 1fr; gap: 28px; }
+    .case::before { font-size: 100px; right: 24px; }
+    .case-head { max-width: 100%; }
+  }
   @media (max-width: 720px) {
-    .hero-inner { padding: 40px 16px 24px; }
-    .hero h1 { font-size: 30px; }
-    .hero .tagline { font-size: 15px; }
-    nav.toc { padding: 16px 12px 8px; }
-    main { padding: 16px 12px 60px; }
-    .case { padding: 22px 20px; border-radius: var(--radius); }
-    .case-head { margin-bottom: 20px; padding-bottom: 16px; }
-    .case h2 { font-size: 22px; }
-    .case h3 { font-size: 15px; margin-top: 28px; padding-top: 22px; }
+    :root { --gutter: 18px; }
+    .hero-inner { padding: 48px var(--gutter) 40px; }
+    .masthead { margin-bottom: 32px; padding-bottom: 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .lede { font-size: 17px; }
+    nav.toc { padding: 12px var(--gutter); }
+    nav.toc .marker { display: none; }
+    main { padding: 32px var(--gutter) 60px; }
+    .case { padding: 32px 24px; border-radius: var(--radius); }
+    .case::before { font-size: 64px; top: 18px; right: 18px; }
+    .case h2 { font-size: 26px; }
+    .case h3 { font-size: 18px; }
     .frame-body { height: 520px; }
-    .frame-wrap.ppt .frame-body { height: 450px; }
-    .frame-chrome .url { font-size: 10px; }
+    .frame-wrap.ppt .frame-body { height: 420px; }
+    .frame-chrome .url { font-size: 9px; }
   }
 </style>
 </head>
 <body>
 
-<div class="hero">
+<div class="scroll-progress" id="progress"></div>
+
+<header class="hero">
   <div class="hero-inner">
-    <div class="eyebrow"><span class="dot"></span>SenseNova 6.7 Flash-Lite</div>
-    <h1>真实办公任务的<br /><span class="gradient">端到端能力 Showcase</span></h1>
-    <p class="tagline">数据分析 · 深度调研 · PPT 制作 — 每个 case 提供任务描述、模型结论与可在线浏览的产物。</p>
-    <div class="repro-note">
-      <p>复现以下样例需配合 OpenClaw / Hermes Agent 框架并启用 <a href="https://github.com/OpenSenseNova/SenseNova-Skills/" target="_blank" rel="noopener">SenseNova-Skills</a>。</p>
-      <p>📝 数据分析与深度调研默认产出 <strong>Markdown</strong> 文件；如需得到示例中的 HTML 报告，请让 Agent 使用 <a href="https://github.com/OpenSenseNova/SenseNova-Skills/blob/main/skills/sn-md-to-html-report/SKILL.md" target="_blank" rel="noopener">sn-md-to-html-report</a> 对 Markdown 进行转换。</p>
+    <div class="masthead">
+      <div class="left">
+        <span class="swatch">S</span>
+        <span>SenseNova · 日日新</span>
+      </div>
+      <div><span class="issue">Issue №1</span> · 2026 · Office Agent Edition</div>
+    </div>
+
+    <h1>
+      让 Agent 接管<em>真实</em>办公任务
+      <span class="small">— SenseNova 6.7 Flash-Lite Showcase</span>
+    </h1>
+
+    <div class="hero-meta">
+      <p class="lede">本集精选四组真实场景：从原始数据到行业洞察，从绩效复盘到 26 页设计汇报。每一案均附 prompt、模型结论与可在线翻阅的最终产物。</p>
+      <div class="repro-note">
+        <p><span class="tag">Setup</span>复现以下样例需配合 OpenClaw / Hermes Agent 框架并启用 <a href="https://github.com/OpenSenseNova/SenseNova-Skills/" target="_blank" rel="noopener">SenseNova-Skills</a>。</p>
+        <p><span class="tag">Note</span>数据分析与深度调研默认产出 <strong>Markdown</strong>；如需得到示例中的 HTML 报告，请让 Agent 调用 <a href="https://github.com/OpenSenseNova/SenseNova-Skills/blob/main/skills/sn-md-to-html-report/SKILL.md" target="_blank" rel="noopener">sn-md-to-html-report</a> 进行转换。</p>
+      </div>
     </div>
   </div>
-</div>
+</header>
 
-<nav class="toc">
-  <a href="#semiconductor">🏢 半导体存储市场</a>
-  <a href="#wind-energy">👥 风电员工绩效</a>
-  <a href="#embodied-ai">🤖 具身智能调研</a>
-  <a href="#property-fee">🏘️ 物业费定价体系</a>
+<nav class="toc" aria-label="目录">
+  <div class="toc-inner">
+    <span class="marker">目录</span>
+    <a href="#semiconductor">半导体存储</a>
+    <a href="#wind-energy">员工绩效</a>
+    <a href="#embodied-ai">具身智能</a>
+    <a href="#property-fee">物业定价</a>
+  </div>
 </nav>
 
 <main>
 
-  <!-- ============ Semiconductor ============ -->
-  <section class="case" id="semiconductor">
+  <!-- ============ Case 01 — Semiconductor ============ -->
+  <section class="case" id="semiconductor" data-no="01">
     <div class="case-head">
-      <h2>🏢 半导体存储市场分析</h2>
-      <p class="subtitle">数据分析 + 深度调研 + PPT 制作 · 全流程闭环示例</p>
+      <div class="kicker">Case 01 · 半导体存储</div>
+      <h2>价格曲线背后的「数据 → 洞察 → 汇报」全流程</h2>
+      <p class="subtitle">数据分析 + 深度调研 + PPT 制作 · 一次完整的办公闭环</p>
     </div>
 
-    <h3>1. 数据分析</h3>
+    <h3><span class="step">Step 01</span>数据分析</h3>
     <div class="label">Prompt</div>
     <div class="prompt">请读取「芯片价格汇总.csv」，对近期的存储芯片报价数据进行清洗和分析。</div>
     <div class="label">结论</div>
@@ -427,10 +684,10 @@
       <div class="frame-body"><iframe src="showcase/semiconductor-analysis.html" title="半导体存储市场价格汇总分析" loading="lazy"></iframe></div>
     </div>
     <div class="frame-actions">
-      <a href="showcase/semiconductor-analysis.html" target="_blank" rel="noopener">在新标签页打开 ↗</a>
+      <a href="showcase/semiconductor-analysis.html" target="_blank" rel="noopener">在新标签页打开 <span class="arrow">↗</span></a>
     </div>
 
-    <h3>2. 深度调研</h3>
+    <h3><span class="step">Step 02</span>深度调研</h3>
     <div class="label">Prompt</div>
     <div class="prompt">基于数据分析结果，调研 2026 年以来内存和闪存价格波动的主要原因。</div>
     <div class="label">结论</div>
@@ -440,10 +697,10 @@
       <div class="frame-body"><iframe src="showcase/semiconductor-research.html" title="半导体存储价格暴涨原因深度调研" loading="lazy"></iframe></div>
     </div>
     <div class="frame-actions">
-      <a href="showcase/semiconductor-research.html" target="_blank" rel="noopener">在新标签页打开 ↗</a>
+      <a href="showcase/semiconductor-research.html" target="_blank" rel="noopener">在新标签页打开 <span class="arrow">↗</span></a>
     </div>
 
-    <h3>3. PPT 制作</h3>
+    <h3><span class="step">Step 03</span>PPT 制作</h3>
     <div class="label">Prompt</div>
     <div class="prompt">根据数据分析结果，做一个 PPT 来展示报告内容，要求用到报告中的所有图片，并且数据和结论要和报告一致，页数控制在 16 页，用标准模式。整体风格要是高端杂志报告风，颜色以红色金色为主，明亮色背景，要突出重点。</div>
     <div class="label">结论</div>
@@ -453,15 +710,16 @@
       <div class="frame-body"><iframe src="showcase/semiconductor-ppt/" title="半导体存储市场研究报告 16 页 PPT" loading="lazy"></iframe></div>
     </div>
     <div class="frame-actions">
-      <a href="showcase/semiconductor-ppt/" target="_blank" rel="noopener">在新标签页打开（全屏更佳）↗</a>
+      <a href="showcase/semiconductor-ppt/" target="_blank" rel="noopener">在新标签页打开（全屏更佳）<span class="arrow">↗</span></a>
     </div>
   </section>
 
-  <!-- ============ Wind Energy ============ -->
-  <section class="case" id="wind-energy">
+  <!-- ============ Case 02 — Wind Energy ============ -->
+  <section class="case" id="wind-energy" data-no="02">
     <div class="case-head">
-      <h2>👥 风电事业部员工绩效分析</h2>
-      <p class="subtitle">数据分析 · 多月度绩效汇总与可视化报告</p>
+      <div class="kicker">Case 02 · 风电员工绩效</div>
+      <h2>10 个月度考核表 → 一份可汇报的绩效复盘</h2>
+      <p class="subtitle">数据分析 · 多月度趋势 / 岗位对比 / 个人识别 / 改进建议</p>
     </div>
 
     <div class="label">Prompt</div>
@@ -473,15 +731,16 @@
       <div class="frame-body"><iframe src="showcase/wind-energy-performance.html" title="风电事业部 2024-2025 年度员工绩效分析" loading="lazy"></iframe></div>
     </div>
     <div class="frame-actions">
-      <a href="showcase/wind-energy-performance.html" target="_blank" rel="noopener">在新标签页打开 ↗</a>
+      <a href="showcase/wind-energy-performance.html" target="_blank" rel="noopener">在新标签页打开 <span class="arrow">↗</span></a>
     </div>
   </section>
 
-  <!-- ============ Embodied AI ============ -->
-  <section class="case" id="embodied-ai">
+  <!-- ============ Case 03 — Embodied AI ============ -->
+  <section class="case" id="embodied-ai" data-no="03">
     <div class="case-head">
-      <h2>🤖 具身智能行业调研</h2>
-      <p class="subtitle">深度调研 · 行业现状梳理与趋势判断</p>
+      <div class="kicker">Case 03 · 具身智能</div>
+      <h2>一句话需求 → 一份完整的行业调研</h2>
+      <p class="subtitle">深度调研 · 行业现状 / 玩家梳理 / 趋势判断</p>
     </div>
 
     <div class="label">Prompt</div>
@@ -493,15 +752,16 @@
       <div class="frame-body"><iframe src="showcase/embodied-ai-research.html" title="具身智能行业现状调研" loading="lazy"></iframe></div>
     </div>
     <div class="frame-actions">
-      <a href="showcase/embodied-ai-research.html" target="_blank" rel="noopener">在新标签页打开 ↗</a>
+      <a href="showcase/embodied-ai-research.html" target="_blank" rel="noopener">在新标签页打开 <span class="arrow">↗</span></a>
     </div>
   </section>
 
-  <!-- ============ Property Fee ============ -->
-  <section class="case" id="property-fee">
+  <!-- ============ Case 04 — Property Fee ============ -->
+  <section class="case" id="property-fee" data-no="04">
     <div class="case-head">
-      <h2>🏘️ 物业费定价体系</h2>
-      <p class="subtitle">PPT 制作 · 26 页温馨柔和风格汇报</p>
+      <div class="kicker">Case 04 · 物业费定价</div>
+      <h2>一段口述指令 → 26 页温馨柔和的 PPT</h2>
+      <p class="subtitle">PPT 制作 · 业主沟通 / 黑白配色 / 26 页交付</p>
     </div>
 
     <div class="label">Prompt</div>
@@ -513,16 +773,47 @@
       <div class="frame-body"><iframe src="showcase/property-fee-ppt/" title="物业费定价体系 26 页 PPT" loading="lazy"></iframe></div>
     </div>
     <div class="frame-actions">
-      <a href="showcase/property-fee-ppt/" target="_blank" rel="noopener">在新标签页打开（全屏更佳）↗</a>
+      <a href="showcase/property-fee-ppt/" target="_blank" rel="noopener">在新标签页打开（全屏更佳）<span class="arrow">↗</span></a>
     </div>
   </section>
 
 </main>
 
 <footer>
-  原始 HTML / zip / pptx 等完整产物未随仓库分发，如需获取请联系产品团队 ·
-  <a href="https://github.com/OpenSenseNova/SenseNova6.7" target="_blank" rel="noopener">GitHub Repo</a>
+  <div class="footer-inner">
+    <div class="footer-mark">SenseNova</div>
+    <div class="footer-rule"></div>
+    <p class="footer-text">原始 HTML / zip / pptx 等完整产物未随仓库分发，如需获取请联系产品团队。<br />本页面仅作能力展示用途。 · <a href="https://github.com/OpenSenseNova/SenseNova6.7" target="_blank" rel="noopener">GitHub Repo ↗</a></p>
+    <div class="footer-meta">© 2026 · SenseTime · Office Agent Edition</div>
+  </div>
 </footer>
+
+<script>
+  // ===== Scroll progress =====
+  const progress = document.getElementById('progress');
+  const updateProgress = () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+    progress.style.setProperty('--p', Math.min(1, Math.max(0, scrolled)) * 100 + '%');
+  };
+  document.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // ===== Reveal cases on scroll =====
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.case').forEach((el) => io.observe(el));
+  } else {
+    document.querySelectorAll('.case').forEach((el) => el.classList.add('in-view'));
+  }
+</script>
 
 </body>
 </html>
