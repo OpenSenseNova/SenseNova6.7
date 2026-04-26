@@ -1,5 +1,7 @@
 # 🪟 Windows 安装指南 — Hermes Agent / OpenClaw
 
+🌐 [English](install-windows_EN.md) | **中文**
+
 本文档介绍在 Windows 上通过 [Agent Pack](https://github.com/SenseTime-FVG/agent_pack) 安装 **Hermes Agent** 与 **OpenClaw** 的完整步骤。
 
 ---

@@ -1,5 +1,7 @@
 # SenseNova 大模型 API 接入文档
 
+🌐 [English](API_EN.md) | **中文**
+
 本文档介绍如何接入商汤大装置（SenseCore）SenseNova 大模型 API。
 
 ---
