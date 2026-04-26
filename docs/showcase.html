@@ -48,6 +48,8 @@
     color: #4a1f1f;
     font-size: 14px;
   }
+  .repro-note p { margin: 0; }
+  .repro-note p + p { margin-top: 6px; }
   .repro-note a { color: var(--accent); text-decoration: none; font-weight: 500; }
   .repro-note a:hover { text-decoration: underline; }
 
@@ -194,8 +196,8 @@
   <h1>🎬 SenseNova 6.7 Flash-Lite · Showcase</h1>
   <p class="tagline">真实办公任务的端到端示例 — 数据分析 / 深度调研 / PPT 制作</p>
   <div class="repro-note">
-    复现以下样例需配合 OpenClaw / Hermes Agent 框架并启用
-    <a href="https://github.com/OpenSenseNova/SenseNova-Skills/" target="_blank" rel="noopener">SenseNova-Skills</a>。
+    <p>复现以下样例需配合 OpenClaw / Hermes Agent 框架并启用 <a href="https://github.com/OpenSenseNova/SenseNova-Skills/" target="_blank" rel="noopener">SenseNova-Skills</a>。</p>
+    <p>📝 数据分析与深度调研默认产出 <strong>Markdown</strong> 文件；如需得到示例中的 HTML 报告，请让 Agent 使用 <a href="https://github.com/OpenSenseNova/SenseNova-Skills/blob/main/skills/sn-md-to-html-report/SKILL.md" target="_blank" rel="noopener">sn-md-to-html-report</a> 对 Markdown 进行转换。</p>
   </div>
 </header>
 
