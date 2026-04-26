@@ -35,7 +35,7 @@
 ## 📊 性能评测
 
 <p align="center">
-  <img src="assets/benchmark.webp" alt="Benchmark Results" width="100%">
+  <img src="assets/benchmark.jpg" alt="Benchmark Results" width="100%">
 </p>
 
 ---
