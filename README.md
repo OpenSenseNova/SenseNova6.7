@@ -220,3 +220,4 @@ openclaw dashboard
 
 - 官网：[https://platform.sensenova.cn/](https://platform.sensenova.cn/)
 - API 文档：[docs/API.md](docs/API.md)
+- 能力 Showcase：[docs/showcase.md](docs/showcase.md)
