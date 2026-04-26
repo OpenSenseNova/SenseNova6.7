@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>三大原厂市场份额</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
+
+    :root {
+      --red: #E53935;
+      --gold: #C9A961;
+      --gray: #78909C;
+      --text-main: #1A1A1A;
+      --text-sec: #555555;
+      --bg-page: #F5F3F0;
+      --bg-card: #FFFFFF;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #e0e0e0;
+      font-family: 'Noto Sans SC', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      background: var(--bg-page);
+      overflow: hidden;
+      color: var(--text-main);
+    }
+
+    #bg {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-page);
+      z-index: 0;
+    }
+
+    #ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Magazine Grid Layout */
+    .mag-grid {
+      display: grid;
+      grid-template-columns: 500px 1fr;
+      gap: 60px;
+      height: 100%;
+    }
+
+    /* Left Column: Image */
+    .left-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .image-panel {
+      position: relative;
+      width: 100%;
+      height: 525px;
+      overflow: hidden;
+      background: #ddd;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .image-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-caption {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--gray);
+      font-family: 'Noto Sans SC', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Right Column: Content */
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 20px;
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 40px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--red);
+      padding-bottom: 4px;
+    }
+
+    .title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 52px;
+      line-height: 1.15;
+      font-weight: 900;
+      color: var(--text-main);
+      margin: 0 0 16px 0;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 20px;
+      line-height: 1.6;
+      color: var(--text-sec);
+      margin: 0;
+      font-weight: 400;
+      max-width: 800px;
+    }
+
+    /* Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      padding: 20px 24px;
+      border-top: 4px solid var(--gray);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      position: relative;
+    }
+
+    .card.red-accent { border-top-color: var(--red); }
+    .card.gold-accent { border-top-color: var(--gold); }
+
+    .card-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      color: var(--text-main);
+    }
+
+    .card-metric {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 36px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .card-metric.gold { color: var(--gold); }
+    .card-metric.red { color: var(--red); }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-sec);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Table */
+    .table-container {
+      margin-bottom: 40px;
+    }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray);
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 12px 16px;
+      color: var(--red);
+      font-weight: 700;
+      border-bottom: 2px solid var(--text-main);
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+
+    tbody td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #E0E0E0;
+      color: var(--text-main);
+      vertical-align: middle;
+      line-height: 1.5;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 2px solid var(--text-main);
+      font-weight: 700;
+    }
+
+    .td-highlight {
+      color: var(--gold);
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    /* Footer Summary */
+    .footer-summary {
+      background: var(--text-main);
+      padding: 24px 32px;
+      position: relative;
+    }
+
+    .footer-summary::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: var(--gold);
+    }
+
+    .footer-text {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #F5F3F0;
+      margin: 0;
+    }
+
+    .footer-text strong {
+      color: var(--gold);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="bg"></div>
+    <div id="ct">
+      <div class="mag-grid">
+        
+        <!-- Left Column: Image -->
+        <div class="left-col">
+          <div class="image-panel">
+            <img src="../images/page_007_inherited.png" alt="DRAM 市场份额饼图或环形图，展示三大原厂的市场占比" />
+          </div>
+          <div class="image-caption">DRAM MARKET SHARE DISTRIBUTION</div>
+        </div>
+
+        <!-- Right Column: Content -->
+        <div class="right-col">
+          
+          <!-- Header -->
+          <div class="header">
+            <div class="eyebrow">Industry Landscape</div>
+            <h1 class="title">三大原厂<br>市场份额</h1>
+            <p class="subtitle">SK Hynix、Samsung、Micron 的定价权。</p>
+          </div>
+
+          <!-- Cards -->
+          <div class="cards-grid">
+            <div class="card red-accent">
+              <h3 class="card-title">SK Hynix</h3>
+              <div class="card-metric red">34%</div>
+              <p class="card-desc">DRAM 份额领先，HBM 占比 62%，Nvidia 核心供应商。</p>
+            </div>
+            <div class="card gold-accent">
+              <h3 class="card-title">Samsung</h3>
+              <div class="card-metric gold">33%</div>
+              <p class="card-desc">DRAM 份额紧随其后，HBM 占比 17%，综合规模最大。</p>
+            </div>
+            <div class="card">
+              <h3 class="card-title">Micron</h3>
+              <div class="card-metric">26%</div>
+              <p class="card-desc">DRAM 份额第三，HBM 正在追赶，营收占比从 17% 升至 50%。</p>
+            </div>
+            <div class="card red-accent">
+              <h3 class="card-title">合计控制力</h3>
+              <div class="card-metric red">93%</div>
+              <p class="card-desc">三家合计控制约 93% DRAM，~80%+ HBM，形成寡头垄断。</p>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="table-container">
+            <div class="section-label">Detailed Breakdown</div>
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 15%;">厂商</th>
+                  <th style="width: 20%;">DRAM 市场份额</th>
+                  <th style="width: 20%;">HBM 市场份额</th>
+                  <th style="width: 45%;">核心优势 / 备注</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>SK Hynix</td>
+                  <td>34%</td>
+                  <td class="td-highlight">62%</td>
+                  <td>HBM 领导者，Nvidia 核心供应商</td>
+                </tr>
+                <tr>
+                  <td>Samsung</td>
+                  <td>33%</td>
+                  <td>17%</td>
+                  <td>综合规模最大，正在追赶 HBM</td>
+                </tr>
+                <tr>
+                  <td>Micron</td>
+                  <td>26%</td>
+                  <td>正在追赶</td>
+                  <td>AI 转型积极，HBM ASP 预期涨 22%</td>
+                </tr>
+                <tr>
+                  <td>合计</td>
+                  <td>93%</td>
+                  <td>~80%+</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Footer Summary -->
+          <div class="footer-summary">
+            <p class="footer-text">寡头垄断格局赋予原厂极强的<strong>产能分配权</strong>和<strong>定价权</strong>，SK Hynix 在 HBM 领域的绝对领先使其成为本轮涨价的最大受益者。</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

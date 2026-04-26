@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>HBM 产能挤压机制</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap');
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #0a0a0a;
+      font-family: "Inter", "Microsoft YaHei", "PingFang SC", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: #111111;
+      color: #f2f2f2;
+    }
+    #bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(229,57,53,0.12) 0%, rgba(17,17,17,1) 60%);
+    }
+
+    #ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 顶部装饰线 */
+    .top-accent {
+      position: absolute;
+      left: 80px;
+      top: 0;
+      width: 120px;
+      height: 6px;
+      background: #E53935;
+    }
+
+    /* 头部区域 */
+    .header-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+    .title-block {
+      max-width: 900px;
+    }
+    .eyebrow {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #E53935;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 {
+      margin: 0 0 16px 0;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 52px;
+      line-height: 1.1;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.5;
+      color: #a0a0a0;
+      max-width: 800px;
+    }
+
+    /* 核心叙事标签 */
+    .narrative-strip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+      padding: 12px 20px;
+      background: rgba(229,57,53,0.08);
+      border-left: 4px solid #E53935;
+      border-radius: 0 4px 4px 0;
+    }
+    .narrative-strip .label {
+      font-size: 13px;
+      color: #E53935;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .narrative-strip .text {
+      font-size: 16px;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* 主体内容区 */
+    .main-content {
+      display: flex;
+      gap: 60px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* 左侧：表格与要点 */
+    .left-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .key-points {
+      display: flex;
+      gap: 20px;
+    }
+    .kp-item {
+      flex: 1;
+      background: #1a1a1a;
+      padding: 16px 20px;
+      border-top: 3px solid #333;
+      border-radius: 0 0 4px 4px;
+    }
+    .kp-item.highlight {
+      border-top-color: #E53935;
+      background: linear-gradient(180deg, rgba(229,57,53,0.1) 0%, #1a1a1a 100%);
+    }
+    .kp-title {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .kp-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .kp-desc {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.4;
+    }
+
+    .table-container {
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      overflow: hidden;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    thead {
+      background: #1f1f1f;
+    }
+    th {
+      padding: 16px 24px;
+      font-size: 14px;
+      color: #888;
+      text-align: left;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #333;
+    }
+    td {
+      padding: 16px 24px;
+      font-size: 16px;
+      color: #e0e0e0;
+      border-bottom: 1px solid #222;
+      vertical-align: middle;
+      line-height: 1.4;
+    }
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+    tbody tr:hover {
+      background: rgba(255,255,255,0.02);
+    }
+    .td-strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .td-accent {
+      color: #E53935;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    /* 右侧：图片 */
+    .right-col {
+      width: 580px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .img-wrapper {
+      position: relative;
+      width: 100%;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .img-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, rgba(229,57,53,0.15) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .img-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0.9;
+    }
+    .img-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 24px;
+      z-index: 3;
+      background: rgba(0,0,0,0.7);
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #ccc;
+      backdrop-filter: blur(4px);
+    }
+
+    /* 底部总结 */
+    .bottom-summary {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .summary-text {
+      font-size: 16px;
+      color: #aaa;
+      letter-spacing: 0.5px;
+    }
+    .summary-text span {
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .summary-arrow {
+      color: #E53935;
+      margin: 0 8px;
+    }
+    .page-no {
+      font-family: "Playfair Display", serif;
+      font-size: 48px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.08);
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper" data-region="canvas">
+    <div id="bg"></div>
+    <div id="ct">
+      <div class="top-accent"></div>
+
+      <div class="header-area">
+        <div class="title-block">
+          <div class="eyebrow" data-region="eyebrow">产能结构 / 核心矛盾</div>
+          <h1 data-region="title">HBM 产能挤压机制</h1>
+          <p class="subtitle" data-region="subtitle">AI 需求如何挤占常规存储供给：从晶圆重分配、产品单价拉升，到常规 DRAM/NAND 可用产能收缩。</p>
+          <div class="narrative-strip" data-region="narrative-strip">
+            <span class="label">核心叙事</span>
+            <span class="text">AI 服务器需求爆发 → HBM 需求激增 → 原厂将晶圆产能转向 HBM → 常规 DRAM/NAND 可用产能收缩 → 供给不足与价格上涨</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="left-col">
+          <div class="key-points" data-region="key-points">
+            <div class="kp-item highlight">
+              <div class="kp-title">晶圆占用</div>
+              <div class="kp-value">3× 常规 DRAM</div>
+              <div class="kp-desc">单位 bit 产出更高，但占用更多先进制程</div>
+            </div>
+            <div class="kp-item">
+              <div class="kp-title">单价驱动</div>
+              <div class="kp-value">3× 常规 DRAM</div>
+              <div class="kp-desc">利润率显著更高，强化产能转移动机</div>
+            </div>
+            <div class="kp-item">
+              <div class="kp-title">营收跃迁</div>
+              <div class="kp-value">17% → 50%</div>
+              <div class="kp-desc">两年内从边缘业务变为核心业务</div>
+            </div>
+          </div>
+
+          <div class="table-container" data-region="data-table">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 25%;">指标</th>
+                  <th style="width: 25%;">数值</th>
+                  <th style="width: 50%;">说明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-strong">HBM 占用晶圆产能</td>
+                  <td class="td-accent">3 倍于常规 DRAM</td>
+                  <td>同一晶圆产出 HBM 的 bit 数更多，但占用更多产能</td>
+                </tr>
+                <tr>
+                  <td class="td-strong">HBM 单价</td>
+                  <td class="td-accent">3 倍于常规 DRAM</td>
+                  <td>利润率显著更高，直接驱动晶圆产能转移</td>
+                </tr>
+                <tr>
+                  <td class="td-strong">Micron HBM 营收占比</td>
+                  <td class="td-accent">17% (2023) → 50% (2025)</td>
+                  <td>两年内从边缘业务变为核心业务</td>
+                </tr>
+                <tr>
+                  <td class="td-strong">SK Hynix HBM 产能目标</td>
+                  <td class="td-accent">170k wafers/month (2025)</td>
+                  <td>大幅扩张 HBM 产能，挤压常规产品空间</td>
+                </tr>
+                <tr>
+                  <td class="td-strong">常规 DRAM 可用产能</td>
+                  <td class="td-strong" style="color: #ff8a80;">显著收缩</td>
+                  <td>被 HBM 和企业级产品持续挤占</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="right-col">
+          <div class="img-wrapper" data-region="image-panel">
+            <img src="../images/page_008_inherited.png" alt="HBM 产能挤压示意图" />
+            <div class="img-caption">HBM 产能挤压示意图：高价值产品抢占先进晶圆资源</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-summary" data-region="bottom-summary">
+        <div class="summary-text">
+          结论：<span>AI 需求爆发</span><span class="summary-arrow">→</span><span>HBM 激增</span><span class="summary-arrow">→</span><span>产能转移</span><span class="summary-arrow">→</span><span>常规产能收缩</span><span class="summary-arrow">→</span><span>价格上涨</span>
+        </div>
+        <div class="page-no">08</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

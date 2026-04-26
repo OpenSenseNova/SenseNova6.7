@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>人员配置优化</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --bg-color: #F8F6F3;
+      --text-main: #2C2C2C;
+      --text-sub: #555555;
+      --accent-color: #E8E4DF;
+      --card-bg: rgba(255, 255, 255, 0.6);
+      --border-color: #E0DCD8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #e0dcd8;
+      font-family: 'Noto Sans SC', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+    }
+
+    #bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(circle at 50% 0%, #ffffff 0%, var(--bg-color) 80%);
+    }
+
+    #ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 80px 100px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header Section */
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .header h1 {
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+      color: var(--text-main);
+      position: relative;
+      display: inline-block;
+    }
+
+    .header h1::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--text-main);
+      margin: 16px auto 0;
+    }
+
+    .header .subtitle {
+      font-size: 20px;
+      line-height: 1.8;
+      color: var(--text-sub);
+      font-weight: 400;
+    }
+
+    /* Main Content Layout */
+    .main-content {
+      display: flex;
+      gap: 80px;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Image Section */
+    .image-section {
+      width: 520px;
+      height: 520px;
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(44, 44, 44, 0.06);
+      background: var(--accent-color);
+    }
+
+    .image-section img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.1);
+      display: block;
+    }
+
+    .image-caption {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-main);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .image-caption::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      background: var(--text-main);
+      border-radius: 50%;
+    }
+
+    /* Text List Section */
+    .text-section {
+      width: 720px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 24px 32px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .list-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.04);
+      background: #ffffff;
+      border-color: #d0ccc5;
+    }
+
+    .item-num {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-main);
+      opacity: 0.25;
+      line-height: 1.2;
+      font-family: Arial, sans-serif;
+      width: 40px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .item-content {
+      flex: 1;
+    }
+
+    .item-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-main);
+      letter-spacing: 1px;
+    }
+
+    .item-desc {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-sub);
+    }
+
+    /* Footer Note */
+    .footer-note {
+      position: absolute;
+      bottom: 40px;
+      left: 100px;
+      font-size: 14px;
+      color: #999;
+      letter-spacing: 1px;
+    }
+
+    /* Decorative Elements */
+    .deco-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(232, 228, 223, 0.5);
+      z-index: 0;
+    }
+    .dc-1 { width: 300px; height: 300px; top: -100px; right: -50px; }
+    .dc-2 { width: 150px; height: 150px; bottom: 100px; left: -50px; }
+
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="bg">
+      <div class="deco-circle dc-1"></div>
+      <div class="deco-circle dc-2"></div>
+    </div>
+
+    <div id="ct">
+      <div class="header">
+        <h1>人员配置优化</h1>
+        <p class="subtitle">人是服务的核心，通过优化配置与培训，让每一位员工都成为社区温度的传递者</p>
+      </div>
+
+      <div class="main-content">
+        <div class="image-section">
+          <img src="../images/page_014_hero.png" alt="团队合照" />
+          <div class="image-caption">专业团队，用心服务</div>
+        </div>
+
+        <div class="text-section">
+          <div class="list-item">
+            <div class="item-num">01</div>
+            <div class="item-content">
+              <div class="item-title">安保增配</div>
+              <div class="item-desc">夜间巡逻增加至双人制，提升安全感</div>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="item-num">02</div>
+            <div class="item-content">
+              <div class="item-title">客服培训</div>
+              <div class="item-desc">定期开展礼仪及沟通技巧培训，提升亲和力</div>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="item-num">03</div>
+            <div class="item-content">
+              <div class="item-title">工程维保</div>
+              <div class="item-desc">增加持证上岗人员比例，确保专业维修</div>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="item-num">04</div>
+            <div class="item-content">
+              <div class="item-title">环境管理</div>
+              <div class="item-desc">引入专业绿化团队，提升景观维护品质</div>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="item-num">05</div>
+            <div class="item-content">
+              <div class="item-title">绩效考核</div>
+              <div class="item-desc">建立以服务质量和业主满意度为核心的考核体系</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-note">以人为本 · 温暖相伴</div>
+  </div>
+</body>
+</html>

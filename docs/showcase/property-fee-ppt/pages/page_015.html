@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>设施设备升级</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #e0e0e0;
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      background: #F8F6F3;
+      overflow: hidden;
+      color: #2C2C2C;
+    }
+    
+    /* Background & Decorations */
+    .bg-shape-top {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(circle at top right, rgba(232, 228, 223, 0.6) 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bg-shape-bottom {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 500px;
+      height: 300px;
+      background: radial-gradient(circle at bottom left, rgba(232, 228, 223, 0.4) 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Layout */
+    #ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 2;
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 16px;
+      background: #2C2C2C;
+      color: #F8F6F3;
+      border-radius: 20px;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .title {
+      margin: 0 0 12px 0;
+      font-size: 52px;
+      font-weight: 900;
+      color: #1A1A1A;
+      letter-spacing: 2px;
+    }
+    .subtitle {
+      margin: 0;
+      font-size: 20px;
+      color: #666666;
+      line-height: 1.6;
+      max-width: 800px;
+      font-weight: 400;
+    }
+
+    /* Main Content */
+    .main-content {
+      display: flex;
+      gap: 40px;
+      flex: 1;
+      min-height: 0;
+      z-index: 2;
+    }
+
+    /* Left Column: Modules */
+    .left-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .module-item {
+      display: flex;
+      align-items: center;
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 18px 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+      border: 1px solid #EAE6E1;
+      transition: transform 0.2s ease;
+    }
+    .module-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: #F0ECE7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 24px;
+      flex-shrink: 0;
+    }
+    .module-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: #2C2C2C;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .module-text {
+      flex: 1;
+    }
+    .module-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2C2C2C;
+      margin: 0 0 4px 0;
+    }
+    .module-desc {
+      font-size: 16px;
+      color: #777777;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Right Column: Comparison */
+    .right-col {
+      width: 540px;
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.04);
+      border: 1px solid #EAE6E1;
+      display: flex;
+      flex-direction: column;
+    }
+    .panel-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #2C2C2C;
+      margin: 0 0 24px 0;
+      display: flex;
+      align-items: center;
+    }
+    .panel-title::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 24px;
+      background: #2C2C2C;
+      margin-right: 12px;
+      border-radius: 3px;
+    }
+
+    .compare-visual {
+      flex: 1;
+      background: #F5F3F0;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid #EAE6E1;
+      min-height: 200px;
+    }
+    .visual-label {
+      position: absolute;
+      top: 16px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.9);
+      color: #2C2C2C;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      z-index: 10;
+    }
+    .label-before { left: 16px; }
+    .label-after { right: 16px; }
+    
+    /* Simulated Visual Content */
+    .v-left {
+      position: absolute;
+      left: 0; top: 0; bottom: 0; width: 50%;
+      background: #D4D0CB;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .v-right {
+      position: absolute;
+      right: 0; top: 0; bottom: 0; width: 50%;
+      background: #2C2C2C;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .v-divider {
+      position: absolute;
+      left: 50%; top: 20px; bottom: 20px; width: 2px;
+      background: #FFFFFF;
+      transform: translateX(-50%);
+      z-index: 5;
+    }
+    .v-icon {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .v-left .v-icon { background: rgba(0,0,0,0.1); }
+    .v-right .v-icon { background: rgba(255,255,255,0.15); }
+    .v-icon svg { width: 32px; height: 32px; stroke-width: 2.5; }
+    .v-left .v-icon svg { stroke: #666; }
+    .v-right .v-icon svg { stroke: #FFF; }
+
+    .metrics-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .metric-card {
+      flex: 1;
+      background: #F9F8F6;
+      border: 1px solid #EAE6E1;
+      border-radius: 16px;
+      padding: 16px 20px;
+    }
+    .metric-label {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .metric-value {
+      font-size: 32px;
+      font-weight: 900;
+      color: #2C2C2C;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .metric-note {
+      font-size: 13px;
+      color: #999;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      z-index: 2;
+    }
+    .footer-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #EAE6E1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 16px;
+    }
+    .footer-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: #2C2C2C;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .footer-text {
+      font-size: 16px;
+      color: #888888;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper canvas">
+    <div id="bg">
+      <div class="bg-shape-top"></div>
+      <div class="bg-shape-bottom"></div>
+    </div>
+
+    <div id="ct">
+      <!-- Header -->
+      <div class="header" data-region="header-title">
+        <div class="eyebrow">设施升级</div>
+        <h1 class="title">设施设备升级</h1>
+        <p class="subtitle">硬件设施的升级是服务品质的直观体现，让业主在日常生活中感受到实实在在的变化。</p>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Left Column: Modules -->
+        <div class="left-col">
+          <div class="module-item" data-region="module-monitoring">
+            <div class="module-icon">
+              <svg viewBox="0 0 24 24"><path d="M23 4.625a2.47 2.47 0 0 0-2.47-2.47h-3.19l-1.47 1.47a9.95 9.95 0 0 0-5.74 0L8.67 2.15H5.47A2.47 2.47 0 0 0 3 4.625v14.75A2.47 2.47 0 0 0 5.47 21.85h15.06A2.47 2.47 0 0 0 23 19.375Z"/><circle cx="12" cy="12" r="3.25"/></svg>
+            </div>
+            <div class="module-text">
+              <h2 class="module-title">监控覆盖</h2>
+              <p class="module-desc">新增高清摄像头，消除公共区域安全盲区。</p>
+            </div>
+          </div>
+
+          <div class="module-item" data-region="module-elevator">
+            <div class="module-icon">
+              <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 2v20"/><path d="M15 2v20"/><path d="m8 10 2 2 4-4"/></svg>
+            </div>
+            <div class="module-text">
+              <h2 class="module-title">电梯维保</h2>
+              <p class="module-desc">引入物联网技术，实现故障预警与快速响应。</p>
+            </div>
+          </div>
+
+          <div class="module-item" data-region="module-lighting">
+            <div class="module-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+            </div>
+            <div class="module-text">
+              <h2 class="module-title">照明改造</h2>
+              <p class="module-desc">全面更换 LED 节能灯具，提升公共空间亮度。</p>
+            </div>
+          </div>
+
+          <div class="module-item" data-region="module-access">
+            <div class="module-icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16.5" r="1.5"/></svg>
+            </div>
+            <div class="module-text">
+              <h2 class="module-title">门禁系统</h2>
+              <p class="module-desc">升级人脸识别与手机开门，提升通行效率。</p>
+            </div>
+          </div>
+
+          <div class="module-item" data-region="module-leisure">
+            <div class="module-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"/><path d="M12 7v5l3 3"/></svg>
+            </div>
+            <div class="module-text">
+              <h2 class="module-title">休闲设施</h2>
+              <p class="module-desc">更新儿童游乐与健身器材，丰富业主休闲生活。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Comparison -->
+        <div class="right-col" data-region="comparison-panel">
+          <h2 class="panel-title">改造前后对比</h2>
+          
+          <div class="compare-visual">
+            <div class="visual-label label-before">改造前</div>
+            <div class="visual-label label-after">改造后</div>
+            
+            <div class="v-left">
+              <div class="v-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </div>
+            </div>
+            <div class="v-divider"></div>
+            <div class="v-right">
+              <div class="v-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="metrics-row">
+            <div class="metric-card">
+              <div class="metric-label">故障响应速度</div>
+              <div class="metric-value">+40%</div>
+              <div class="metric-note">维保效率显著提升</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">公共区域照度</div>
+              <div class="metric-value">+25%</div>
+              <div class="metric-note">视觉环境更舒适</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer" data-region="footer-note">
+        <div class="footer-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+        </div>
+        <div class="footer-text">以细节升级，回应业主对美好生活的期待。</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

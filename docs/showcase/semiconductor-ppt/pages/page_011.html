@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>AI 服务器需求格局 - 章节过渡页</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #0f1114;
+      font-family: "Noto Sans SC", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      background: #f4f5f7;
+      overflow: hidden;
+      color: #111111;
+    }
+
+    /* 背景层：纯视觉装饰，无 data-region，避免重叠报错 */
+    #bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: #f4f5f7;
+    }
+
+    .bg-left {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 500px;
+      height: 900px;
+      background: #111111;
+    }
+
+    .bg-right {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 800px;
+      height: 900px;
+      background: #e8e9eb;
+    }
+
+    .bg-accent {
+      position: absolute;
+      left: 400px;
+      top: 100px;
+      width: 200px;
+      height: 700px;
+      background: #e53935;
+    }
+
+    .bg-accent-2 {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 600px;
+      height: 400px;
+      background: #c9a961;
+    }
+
+    /* 内容层 */
+    #ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    /* 章节标签 */
+    .section-tag {
+      position: absolute;
+      left: 60px;
+      top: 60px;
+      color: #c9a961;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 4px;
+    }
+
+    /* 左侧主标题区 */
+    .title-block {
+      position: absolute;
+      left: 60px;
+      top: 200px;
+      width: 400px;
+      color: #ffffff;
+    }
+
+    .title-block .mini {
+      font-size: 18px;
+      color: #c9a961;
+      letter-spacing: 3px;
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .title-block h1 {
+      margin: 0;
+      font-family: "Noto Serif SC", "Songti SC", serif;
+      font-size: 72px;
+      line-height: 1.15;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .title-block .subtitle {
+      margin-top: 32px;
+      font-size: 18px;
+      line-height: 1.8;
+      color: #a0aab5;
+      font-weight: 400;
+    }
+
+    /* 左侧底部说明 */
+    .footer-note {
+      position: absolute;
+      left: 60px;
+      bottom: 60px;
+      width: 400px;
+      color: #78909C;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* 右侧标题区 */
+    .right-header {
+      position: absolute;
+      left: 560px;
+      top: 60px;
+      width: 900px;
+    }
+
+    .right-header .kicker {
+      display: inline-block;
+      background: #111111;
+      color: #ffffff;
+      padding: 8px 16px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .right-header h2 {
+      margin: 0;
+      font-family: "Noto Serif SC", "Songti SC", serif;
+      font-size: 48px;
+      line-height: 1.25;
+      font-weight: 700;
+      color: #111111;
+    }
+
+    /* 核心叙事卡片 */
+    .narrative-card {
+      position: absolute;
+      left: 560px;
+      top: 260px;
+      width: 900px;
+      background: #ffffff;
+      border-left: 8px solid #e53935;
+      padding: 40px 50px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    }
+
+    .narrative-card h3 {
+      margin: 0 0 16px 0;
+      font-size: 28px;
+      font-weight: 900;
+      color: #111111;
+      letter-spacing: 1px;
+    }
+
+    .narrative-card p {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.7;
+      color: #333333;
+      font-weight: 500;
+    }
+
+    .narrative-card .highlight {
+      color: #e53935;
+      font-weight: 900;
+    }
+
+    /* 关键数据组 */
+    .data-group {
+      position: absolute;
+      left: 560px;
+      top: 460px;
+      width: 900px;
+      display: flex;
+      gap: 30px;
+    }
+
+    .data-card {
+      flex: 1;
+      background: #111111;
+      color: #ffffff;
+      padding: 30px 24px;
+      position: relative;
+    }
+
+    .data-card.gold {
+      background: #c9a961;
+      color: #111111;
+    }
+
+    .data-card.red {
+      background: #e53935;
+      color: #ffffff;
+    }
+
+    .data-card .num {
+      font-family: "Noto Serif SC", "Songti SC", serif;
+      font-size: 64px;
+      line-height: 1;
+      font-weight: 900;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    .data-card .desc {
+      font-size: 18px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    /* 细分市场要点 */
+    .market-points {
+      position: absolute;
+      left: 560px;
+      top: 700px;
+      width: 900px;
+      display: flex;
+      gap: 40px;
+    }
+
+    .point-item {
+      flex: 1;
+      border-top: 2px solid #111111;
+      padding-top: 16px;
+    }
+
+    .point-item .label {
+      font-size: 14px;
+      color: #78909C;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .point-item .text {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #111111;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- 纯视觉背景层 -->
+    <div id="bg">
+      <div class="bg-left"></div>
+      <div class="bg-right"></div>
+      <div class="bg-accent"></div>
+      <div class="bg-accent-2"></div>
+    </div>
+
+    <!-- 内容层 -->
+    <div id="ct">
+      <div class="section-tag" data-region="section-tag">第三部分</div>
+
+      <div class="title-block" data-region="title-block">
+        <div class="mini">章节过渡</div>
+        <h1>需求与<br>预测</h1>
+        <p class="subtitle">从 AI 服务器到移动端与 PC，需求结构正在加速分化。</p>
+      </div>
+
+      <div class="footer-note" data-region="footer-note">
+        以高对比视觉建立章节识别，用关键数据与趋势判断，快速进入下一部分。
+      </div>
+
+      <div class="right-header" data-region="right-header">
+        <div class="kicker">AI 服务器需求格局</div>
+        <h2>AI 服务器、移动端与 PC 需求分化<br>及未来趋势</h2>
+      </div>
+
+      <div class="narrative-card" data-region="narrative-card">
+        <h3>核心叙事</h3>
+        <p>
+          AI 基础设施拉动高带宽存储，高端移动端延续升级，<br>
+          而传统 PC 仍处周期底部。市场进入<span class="highlight">K 型分化</span>，
+          增长不再均匀，结构性机会开始主导估值与预期。
+        </p>
+      </div>
+
+      <div class="data-group" data-region="data-group">
+        <div class="data-card gold">
+          <div class="num">5-10×</div>
+          <div class="desc">AI 服务器存储需求<br>显著高于传统服务器</div>
+        </div>
+        <div class="data-card">
+          <div class="num">7 万亿</div>
+          <div class="desc">至 2030 年 AI 相关支出<br>有望达到 7 万亿美元</div>
+        </div>
+        <div class="data-card red">
+          <div class="num">近 2000</div>
+          <div class="desc">全球在建 AI 数据中心<br>数量接近 2000 个</div>
+        </div>
+      </div>
+
+      <div class="market-points" data-region="market-points">
+        <div class="point-item">
+          <div class="label">AI 需求</div>
+          <div class="text">算力扩张驱动存储价值量跃升</div>
+        </div>
+        <div class="point-item">
+          <div class="label">移动端</div>
+          <div class="text">AI 手机推动 LPDDR 升级，全线暴涨 +32%</div>
+        </div>
+        <div class="point-item">
+          <div class="label">PC 需求</div>
+          <div class="text">出货量预测下调 -11.3%，价格逆势下跌</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

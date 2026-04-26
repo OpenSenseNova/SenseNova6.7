@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>存储周期判断 - 结束页</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;600;800&display=swap');
+
+    * { box-sizing: border-box; }
+    
+    :root {
+      --primary-red: #E53935;
+      --metal-gold: #C9A961;
+      --neutral-gray: #78909C;
+      --text-main: #FFFFFF;
+      --text-muted: #B0BEC5;
+      --bg-dark: #0F1115;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(201, 169, 97, 0.2);
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg-dark);
+      font-family: 'Inter', 'Noto Sans SC', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 30%, #1A1D24 0%, #0F1115 70%);
+      color: var(--text-main);
+    }
+
+    #bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    #ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 60px 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Header Section */
+    .header-section {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      letter-spacing: 6px;
+      color: var(--metal-gold);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    .main-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 64px;
+      font-weight: 900;
+      margin: 0 0 20px 0;
+      line-height: 1.1;
+      letter-spacing: 2px;
+      background: linear-gradient(90deg, #FFFFFF, #E0E0E0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sub-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--neutral-gray);
+      margin: 0 auto;
+      max-width: 900px;
+      line-height: 1.5;
+    }
+
+    /* Cards Section */
+    .cards-container {
+      display: flex;
+      gap: 40px;
+      margin: auto 0; /* Vertically center in remaining space */
+    }
+
+    .card {
+      flex: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-top: 3px solid var(--primary-red);
+      padding: 40px;
+      position: relative;
+      backdrop-filter: blur(10px);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(180deg, rgba(229,57,53,0.05) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .card-index {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--metal-gold);
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .card-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      color: #FFFFFF;
+    }
+
+    .card-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Footer Section */
+    .footer-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .data-point {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .data-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--neutral-gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .data-value {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 18px;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    /* Hero Image Decoration */
+    .hero-img {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 300px;
+      object-fit: cover;
+      object-position: center bottom;
+      opacity: 0.15;
+      z-index: -1;
+      pointer-events: none;
+      mask-image: linear-gradient(to top, black 10%, transparent 90%);
+      -webkit-mask-image: linear-gradient(to top, black 10%, transparent 90%);
+    }
+
+    .footer-contact {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="bg"></div>
+    
+    <div id="ct">
+      <!-- Header -->
+      <div class="header-section">
+        <div class="eyebrow">Conclusion & Outlook</div>
+        <h1 class="main-title">结论与展望</h1>
+        <h2 class="sub-title">结构性错配非投机泡沫，差异化应对是关键</h2>
+      </div>
+
+      <!-- Main Content Cards -->
+      <div class="cards-container">
+        <div class="card">
+          <div class="card-index">01 / CORE CONCLUSION</div>
+          <h3 class="card-title">核心结论</h3>
+          <p class="card-desc">AI 基础设施与供给刚性错配是本轮暴涨主因。库存周期与资本开支共振，推动行业进入非典型上行阶段。</p>
+        </div>
+
+        <div class="card">
+          <div class="card-index">02 / TREND JUDGMENT</div>
+          <h3 class="card-title">趋势判断</h3>
+          <p class="card-desc">2026 Q2-Q3 见顶，2027 加速回落，2028 供需平衡。价格弹性将显著收窄，市场从总量博弈转向结构性分化。</p>
+        </div>
+
+        <div class="card">
+          <div class="card-index">03 / INVESTMENT INSIGHT</div>
+          <h3 class="card-title">投资启示</h3>
+          <p class="card-desc">关注 HBM 产业链龙头，警惕 PC 渠道库存风险。配置逻辑应聚焦高壁垒环节，规避纯价格博弈型标的。</p>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer-section">
+        <div class="data-point">
+          <span class="data-label">报告生成时间</span>
+          <span class="data-value">2026 年 4 月 23 日</span>
+        </div>
+        <div class="data-point" style="text-align: center;">
+          <span class="data-label">数据源</span>
+          <span class="data-value">China Flash Market (1835 条记录)</span>
+        </div>
+        <div class="data-point" style="text-align: right;">
+          <span class="data-label">预测范围</span>
+          <span class="data-value">2026 Q2 - 2027 Q2</span>
+        </div>
+      </div>
+      
+      <div class="footer-contact">Storage Cycle Judgment · End Page</div>
+    </div>
+
+    <!-- Hero Image -->
+    <img src="../images/page_016_hero.png" alt="存储周期判断结尾页背景" class="hero-img" />
+  </div>
+
+  <script src="../assets/echarts.min.js"></script>
+  <script>
+    // 页面无图表，保留初始化规范
+    window.__pptxChartsReady = (window.__pptxChartsReady || 0) + 1;
+  </script>
+</body>
+</html>

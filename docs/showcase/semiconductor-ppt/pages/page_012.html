@@ -1,0 +1,535 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>AI 服务器与 GPU 需求</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&display=swap');
+
+    :root {
+      --primary-red: #D00000;
+      --accent-gold: #C5A059;
+      --text-light: #F5F0E8;
+      --text-dim: #A09D98;
+      --bg-dark: #111111;
+      --bg-card: #1A1A1A;
+      --border-light: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #000;
+      font-family: 'Noto Sans SC', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      background: var(--bg-dark);
+      overflow: hidden;
+      color: var(--text-light);
+    }
+
+    #bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(208, 0, 0, 0.15) 0%, transparent 50%),
+                  linear-gradient(135deg, #111111 0%, #161616 100%);
+    }
+
+    #bg::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      border: 1px solid rgba(197, 160, 89, 0.1);
+      border-radius: 50%;
+    }
+
+    #bg::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    }
+
+    #ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 50px 70px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .title-area {
+      max-width: 900px;
+    }
+
+    .eyebrow {
+      font-size: 14px;
+      letter-spacing: 4px;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 56px;
+      line-height: 1.1;
+      font-weight: 900;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+
+    .title-accent {
+      color: var(--primary-red);
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: var(--text-dim);
+      font-weight: 300;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+
+    .page-no {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 80px;
+      line-height: 0.8;
+      color: rgba(255, 255, 255, 0.03);
+      font-weight: 900;
+      margin-top: -10px;
+    }
+
+    /* Main Content Grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 60px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* Left Column: Chart & Highlights */
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .chart-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-top: 3px solid var(--primary-red);
+      padding: 24px;
+      position: relative;
+    }
+
+    .chart-title {
+      font-size: 16px;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    #chart_1 {
+      width: 100%;
+      height: 260px;
+    }
+
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .highlight-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-light);
+      padding: 20px 16px;
+      position: relative;
+    }
+
+    .highlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--primary-red);
+      opacity: 0.5;
+    }
+
+    .hl-label {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .hl-value {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .hl-value.red {
+      color: var(--primary-red);
+    }
+
+    .hl-note {
+      font-size: 12px;
+      color: var(--accent-gold);
+      opacity: 0.8;
+    }
+
+    /* Right Column: Table & Points */
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .table-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      padding: 24px 30px;
+      flex: 1;
+    }
+
+    .table-caption {
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .table-caption::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 18px;
+      background: var(--primary-red);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 14px 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 15px;
+    }
+
+    th {
+      color: var(--accent-gold);
+      font-weight: 700;
+      border-bottom: 2px solid var(--border-light);
+      letter-spacing: 1px;
+      padding-top: 8px;
+      padding-bottom: 12px;
+    }
+
+    td {
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    td:first-child {
+      color: var(--text-dim);
+      width: 45%;
+      font-weight: 400;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .points-section {
+      border-top: 1px solid var(--border-light);
+      padding-top: 20px;
+    }
+
+    .points-title {
+      font-size: 14px;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .points-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 20px;
+    }
+
+    .points-list li {
+      font-size: 13px;
+      color: var(--text-dim);
+      position: relative;
+      padding-left: 16px;
+      line-height: 1.4;
+    }
+
+    .points-list li::before {
+      content: '■';
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-size: 10px;
+      color: var(--primary-red);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 22px;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .footer-text span {
+      color: var(--primary-red);
+    }
+
+    .footer-tag {
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="bg"></div>
+    <div id="ct">
+      
+      <header class="header">
+        <div class="title-area">
+          <div class="eyebrow">AI Infrastructure / Data Center</div>
+          <h1>AI 服务器与 <span class="title-accent">GPU 需求</span></h1>
+          <p class="subtitle">存储需求爆炸的核心驱动力：从算力投资到内存升级的传导链条正在加速。</p>
+        </div>
+        <div class="page-no">01</div>
+      </header>
+
+      <main class="main-grid">
+        <div class="left-col">
+          <div class="chart-container">
+            <div class="chart-title">AI 相关支出预测趋势</div>
+            <div id="chart_1"></div>
+          </div>
+          
+          <div class="highlights">
+            <div class="highlight-card">
+              <div class="hl-label">AI 支出规模</div>
+              <div class="hl-value red">7 万亿</div>
+              <div class="hl-note">2030 年预测 (McKinsey)</div>
+            </div>
+            <div class="highlight-card">
+              <div class="hl-label">全球在建数据中心</div>
+              <div class="hl-value">2,000</div>
+              <div class="hl-note">持续拉动需求</div>
+            </div>
+            <div class="highlight-card">
+              <div class="hl-label">LPDDR4X 96Gb 涨幅</div>
+              <div class="hl-value">+64.71%</div>
+              <div class="hl-note">移动端代表</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-col">
+          <div class="table-wrapper">
+            <div class="table-caption">核心数据概览</div>
+            <table>
+              <thead>
+                <tr>
+                  <th>指标</th>
+                  <th>数值</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>全球在建数据中心</td>
+                  <td>近 2,000 个</td>
+                </tr>
+                <tr>
+                  <td>全球数据中心存量</td>
+                  <td>约 9,000 个</td>
+                </tr>
+                <tr>
+                  <td>潜在增长空间</td>
+                  <td>若全部建成增长 20%</td>
+                </tr>
+                <tr>
+                  <td>AI 相关支出 (2030E)</td>
+                  <td>7 万亿美元</td>
+                </tr>
+                <tr>
+                  <td>服务器/存储/网络占比</td>
+                  <td>3.3 万亿美元</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="points-section">
+            <div class="points-title">关键支撑逻辑</div>
+            <ul class="points-list">
+              <li>AI 服务器对 HBM/DRAM/NAND 需求是传统服务器的 5-10 倍</li>
+              <li>单卡 GPU 内存需求大幅增长推动 HBM 升级</li>
+              <li>McKinsey 预测至 2030 年 AI 相关支出达 7 万亿美元</li>
+              <li>全球在建数据中心近 2,000 个持续拉动需求</li>
+              <li>移动端 LPDDR4X 系列价格涨幅显著由 AI 手机拉动</li>
+            </ul>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-text">数据驱动、增长明确、<span>需求刚性</span></div>
+        <div class="footer-tag">MARKET OVERVIEW</div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script>
+    (function() {
+      var chartDom = document.getElementById('chart_1');
+      var myChart = echarts.init(chartDom, null, {renderer: 'svg'});
+      var option;
+
+      option = {
+        grid: {
+          top: '15%',
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: ['2022', '2023', '2024E', '2025E', '2026E', '2027E', '2028E', '2029E', '2030E'],
+          axisLine: {
+            lineStyle: { color: 'rgba(255,255,255,0.1)' }
+          },
+          axisLabel: {
+            color: '#A09D98',
+            fontSize: 11
+          }
+        },
+        yAxis: {
+          type: 'value',
+          splitLine: {
+            lineStyle: { color: 'rgba(255,255,255,0.05)' }
+          },
+          axisLabel: {
+            color: '#A09D98',
+            fontSize: 11,
+            formatter: '{value}T'
+          }
+        },
+        series: [
+          {
+            name: 'AI 相关支出',
+            type: 'area',
+            smooth: true,
+            symbol: 'none',
+            lineStyle: { width: 0 },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                { offset: 0, color: 'rgba(208, 0, 0, 0.6)' },
+                { offset: 1, color: 'rgba(208, 0, 0, 0.05)' }
+              ])
+            },
+            data: [1.2, 1.8, 2.5, 3.4, 4.2, 5.1, 5.9, 6.5, 7.0]
+          },
+          {
+            name: '服务器/存储/网络',
+            type: 'line',
+            smooth: true,
+            symbol: 'circle',
+            symbolSize: 6,
+            lineStyle: { color: '#C5A059', width: 2 },
+            itemStyle: { color: '#C5A059' },
+            data: [0.5, 0.8, 1.2, 1.6, 2.0, 2.4, 2.8, 3.0, 3.3]
+          }
+        ],
+        tooltip: {
+          trigger: 'axis',
+          backgroundColor: 'rgba(26, 26, 26, 0.9)',
+          borderColor: '#D00000',
+          textStyle: { color: '#F5F0E8' }
+        },
+        legend: {
+          data: ['AI 相关支出', '服务器/存储/网络'],
+          top: 0,
+          right: 10,
+          textStyle: { color: '#A09D98', fontSize: 12 }
+        }
+      };
+
+      option && myChart.setOption(option);
+      window.__pptxChartsReady = (window.__pptxChartsReady || 0) + 1;
+    })();
+  </script>
+</body>
+</html>

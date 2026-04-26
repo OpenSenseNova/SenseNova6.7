@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>第二部分：供给端分析</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Serif+SC:wght@400;700;900&display=swap');
+
+    * { box-sizing: border-box; }
+    
+    :root {
+      --red: #E53935;
+      --gold: #C9A961;
+      --gray: #78909C;
+      --dark: #0A0A0A;
+      --text-main: #F5F5F5;
+      --text-muted: #B0BEC5;
+    }
+
+    body {
+      margin: 0;
+      background: var(--dark);
+      font-family: "Inter", "Noto Sans SC", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: radial-gradient(circle at 70% 30%, #1a1a1a 0%, var(--dark) 80%);
+      color: var(--text-main);
+    }
+
+    #bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    #ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 装饰元素 */
+    .top-accent {
+      position: absolute;
+      top: 0;
+      left: 80px;
+      width: 120px;
+      height: 6px;
+      background: var(--red);
+    }
+
+    .vertical-divider {
+      position: absolute;
+      left: 960px;
+      top: 100px;
+      bottom: 100px;
+      width: 1px;
+      background: linear-gradient(180deg, rgba(201,169,97,0) 0%, rgba(201,169,97,0.3) 50%, rgba(201,169,97,0) 100%);
+    }
+
+    /* 顶部章节标识 */
+    .section-tag {
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-tag::before {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    /* 主标题区 */
+    .title-block {
+      width: 760px;
+      margin-bottom: 40px;
+    }
+    .title-block h1 {
+      margin: 0;
+      font-family: "Noto Serif SC", serif;
+      font-size: 84px;
+      line-height: 1.1;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--text-main);
+    }
+    .title-block .highlight {
+      color: var(--red);
+    }
+    .title-block h2 {
+      margin: 24px 0 0 0;
+      font-family: "Inter", sans-serif;
+      font-size: 24px;
+      line-height: 1.5;
+      font-weight: 300;
+      color: var(--text-muted);
+      max-width: 680px;
+    }
+
+    /* 核心关键词 */
+    .keyword-box {
+      display: inline-flex;
+      align-items: center;
+      padding: 16px 32px;
+      border: 1px solid var(--gold);
+      background: rgba(201, 169, 97, 0.05);
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .keyword-box::before {
+      content: "";
+      position: absolute;
+      left: -1px;
+      top: -1px;
+      width: 4px;
+      height: calc(100% + 2px);
+      background: var(--red);
+    }
+    .keyword-box span {
+      font-family: "Noto Serif SC", serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+
+    /* 叙事段落 */
+    .narrative {
+      width: 720px;
+      margin-bottom: 40px;
+    }
+    .narrative p {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.8;
+      color: #D1D1D1;
+      font-weight: 300;
+      text-align: justify;
+    }
+
+    /* 要点列表 */
+    .points {
+      width: 720px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .points li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 16px;
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--text-main);
+      font-weight: 400;
+    }
+    .points li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+    }
+
+    /* 底部数据点 */
+    .data-strip {
+      position: absolute;
+      bottom: 60px;
+      left: 80px;
+      width: 840px;
+      display: flex;
+      gap: 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 32px;
+    }
+    .data-item {
+      flex: 1;
+    }
+    .data-item .val {
+      font-family: "Inter", sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .data-item .lbl {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    /* 右侧图片容器 */
+    .visual-panel {
+      position: absolute;
+      right: 80px;
+      top: 100px;
+      width: 520px;
+      height: 560px;
+      border: 1px solid rgba(201, 169, 97, 0.2);
+      background: rgba(0,0,0,0.3);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .visual-panel::after {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      border: 1px solid rgba(234, 67, 53, 0.3);
+      pointer-events: none;
+    }
+    .visual-caption {
+      font-family: "Inter", sans-serif;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 12px;
+    }
+    .visual-img-wrap {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: #000;
+    }
+    .visual-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.9;
+      filter: contrast(1.1) saturate(1.2);
+    }
+
+    /* 页脚 */
+    .footer-note {
+      position: absolute;
+      bottom: 30px;
+      right: 80px;
+      font-family: "Inter", sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="bg"></div>
+
+    <div class="top-accent"></div>
+    <div class="vertical-divider"></div>
+
+    <div id="ct">
+      
+      <!-- 左侧内容区 -->
+      <div class="section-tag">PART 02</div>
+
+      <div class="title-block">
+        <h1>供给端<span class="highlight">分析</span></h1>
+        <h2>原厂产能策略、HBM 挤压与资本开支周期</h2>
+      </div>
+
+      <div class="keyword-box">
+        <span>供给刚性</span>
+      </div>
+
+      <div class="narrative">
+        <p>供给端结构性变化是本轮涨价的核心。原厂将产能转向高利润的 HBM 和先进制程，导致常规存储可用产能显著收缩，新产能最早 2027 年底才投产。</p>
+      </div>
+
+      <ul class="points">
+        <li>市场高度集中，三大原厂控制 93% DRAM 市场，拥有绝对定价权</li>
+        <li>HBM 产能挤压，占用晶圆产能是常规 DRAM 的 3 倍</li>
+        <li>资本开支谨慎，2023-2024 年大幅削减，2025-2026 年仅选择性扩张 HBM</li>
+      </ul>
+
+      <!-- 底部数据条 -->
+      <div class="data-strip">
+        <div class="data-item">
+          <div class="val">3×</div>
+          <div class="lbl">HBM 产能占用<br>常规 DRAM</div>
+        </div>
+        <div class="data-item">
+          <div class="val">3×</div>
+          <div class="lbl">HBM 单价溢价<br>常规 DRAM</div>
+        </div>
+        <div class="data-item">
+          <div class="val">2027</div>
+          <div class="lbl">新产能投产时间<br>最早年底</div>
+        </div>
+      </div>
+
+      <!-- 右侧视觉区 -->
+      <div class="visual-panel">
+        <div class="visual-caption">Supply Chain Rigidity / Visual Divider</div>
+        <div class="visual-img-wrap">
+          <img src="../images/page_006_divider.png" alt="供应链刚性可视化图：深色背景，红金发光节点，象征晶圆结构和制造约束">
+        </div>
+      </div>
+
+      <div class="footer-note">Semiconductor Supply Dynamics</div>
+
+    </div>
+  </div>
+</body>
+</html>

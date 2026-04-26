@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>公共收益管理</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #e9e6e1;
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: #F8F6F3;
+      color: #2C2C2C;
+    }
+
+    /* 背景装饰层 */
+    .bg-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bg-shape-1 {
+      position: absolute;
+      top: -150px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(232, 228, 223, 0.8) 0%, rgba(248, 246, 243, 0) 70%);
+      border-radius: 50%;
+    }
+    .bg-shape-2 {
+      position: absolute;
+      bottom: -200px;
+      left: -150px;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(220, 215, 208, 0.5) 0%, rgba(248, 246, 243, 0) 70%);
+      border-radius: 50%;
+    }
+    .bg-divider {
+      position: absolute;
+      top: 260px;
+      left: 80px;
+      right: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #E8E4DF 10%, #E8E4DF 90%, transparent);
+    }
+
+    /* 内容层 */
+    .content-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 50px 80px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 顶部区域 */
+    .header-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+    .header-left {
+      max-width: 900px;
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 16px;
+      background: #E8E4DF;
+      color: #555;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .title {
+      font-size: 44px;
+      font-weight: 700;
+      color: #1A1A1A;
+      margin: 0 0 16px 0;
+      line-height: 1.2;
+      letter-spacing: 1px;
+    }
+    .subtitle {
+      font-size: 18px;
+      color: #666;
+      line-height: 1.6;
+      margin: 0;
+      max-width: 800px;
+    }
+
+    /* 核心卡片区域 */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 32px 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+      border: 1px solid #F0EDEA;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: #F8F6F3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      border: 1px solid #EAE5DF;
+    }
+    .card-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: #2C2C2C;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .card-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2C2C2C;
+      margin: 0 0 12px 0;
+    }
+    .card-desc {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.6;
+      margin: 0 0 20px 0;
+      flex-grow: 1;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+    .card-tag {
+      padding: 6px 12px;
+      background: #F5F3F0;
+      color: #555;
+      font-size: 13px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    /* 底部数据卡片区域 */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 30px;
+    }
+    .stat-card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 28px 32px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.02);
+      border: 1px solid #F0EDEA;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .stat-title {
+      font-size: 16px;
+      color: #666;
+      font-weight: 500;
+    }
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #2C2C2C;
+      line-height: 1;
+    }
+    .stat-value span {
+      font-size: 16px;
+      font-weight: 400;
+      color: #888;
+      margin-left: 4px;
+    }
+    .stat-desc {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.5;
+    }
+
+    /* 页脚 */
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: #AAA;
+      letter-spacing: 0.5px;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper canvas">
+    
+    <!-- 装饰背景层 -->
+    <div class="bg-layer" id="bg">
+      <div class="bg-shape-1"></div>
+      <div class="bg-shape-2"></div>
+      <div class="bg-divider"></div>
+    </div>
+
+    <!-- 内容层 -->
+    <div class="content-layer" id="ct">
+      
+      <!-- 顶部标题区 -->
+      <div class="header-section" data-region="header">
+        <div class="header-left">
+          <div class="eyebrow">社区运营 · 收益透明</div>
+          <h1 class="title">公共收益管理</h1>
+          <p class="subtitle">公共收益属于全体业主，规范管理与透明分配是体现物业责任感的重要环节。</p>
+        </div>
+      </div>
+
+      <!-- 核心四栏区 -->
+      <div class="cards-grid">
+        <!-- 卡片 1 -->
+        <div class="card" data-region="module-1">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="4" y="5" width="16" height="14" rx="2"></rect>
+              <path d="M8 9h8M8 13h5"></path>
+            </svg>
+          </div>
+          <h2 class="card-title">收益来源</h2>
+          <p class="card-desc">聚焦公共空间经营收益，来源清晰、边界明确，便于业主理解与监督。</p>
+          <div class="card-tags">
+            <span class="card-tag">电梯广告</span>
+            <span class="card-tag">公共车位</span>
+            <span class="card-tag">场地租赁</span>
+          </div>
+        </div>
+
+        <!-- 卡片 2 -->
+        <div class="card" data-region="module-2">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 7h12"></path>
+              <path d="M8 7v10"></path>
+              <path d="M16 7v10"></path>
+              <rect x="5" y="5" width="14" height="14" rx="2"></rect>
+            </svg>
+          </div>
+          <h2 class="card-title">独立核算</h2>
+          <p class="card-desc">单独建账、独立核算，不与物业费混同，确保每一笔收支可追溯、可核对。</p>
+          <div class="card-tags">
+            <span class="card-tag">专账管理</span>
+            <span class="card-tag">账目清晰</span>
+          </div>
+        </div>
+
+        <!-- 卡片 3 -->
+        <div class="card" data-region="module-3">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 4v16"></path>
+              <path d="M5 11l7-7 7 7"></path>
+              <path d="M7 20h10"></path>
+            </svg>
+          </div>
+          <h2 class="card-title">分配比例</h2>
+          <p class="card-desc">扣除合理成本后，按约定比例返还业主，兼顾运营可持续与业主权益保障。</p>
+          <div class="card-tags">
+            <span class="card-tag">成本透明</span>
+            <span class="card-tag">按比例返还</span>
+          </div>
+        </div>
+
+        <!-- 卡片 4 -->
+        <div class="card" data-region="module-4">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 18V8"></path>
+              <path d="M12 18V5"></path>
+              <path d="M18 18v-9"></path>
+              <path d="M4 18h16"></path>
+            </svg>
+          </div>
+          <h2 class="card-title">使用方向</h2>
+          <p class="card-desc">优先用于公共设施维修及社区文化建设，让收益真正回到社区改善中。</p>
+          <div class="card-tags">
+            <span class="card-tag">设施维护</span>
+            <span class="card-tag">社区共建</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部数据卡片区 -->
+      <div class="stats-grid">
+        <div class="stat-card" data-region="data-card-1">
+          <div class="stat-header">
+            <span class="stat-title">收益来源</span>
+            <span class="stat-value">广告/车位<span>等</span></span>
+          </div>
+          <div class="stat-desc">多元化收入，来源清晰可查</div>
+        </div>
+        <div class="stat-card" data-region="data-card-2">
+          <div class="stat-header">
+            <span class="stat-title">返还比例</span>
+            <span class="stat-value">按约定<span>执行</span></span>
+          </div>
+          <div class="stat-desc">保障业主权益，分配有据可依</div>
+        </div>
+        <div class="stat-card" data-region="data-card-3">
+          <div class="stat-header">
+            <span class="stat-title">公示周期</span>
+            <span class="stat-value">半年<span>一次</span></span>
+          </div>
+          <div class="stat-desc">定期透明化，接受业主监督</div>
+        </div>
+      </div>
+
+      <!-- 页脚 -->
+      <div class="footer" data-region="footer-note">
+        公共收益管理 · 规范、透明、可持续
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

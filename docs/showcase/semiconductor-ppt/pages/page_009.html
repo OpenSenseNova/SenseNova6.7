@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>资本开支周期策略</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap');
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #111;
+      font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      background: #111;
+      overflow: hidden;
+      color: #f4f1ea;
+    }
+
+    /* 背景装饰 */
+    .bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 70% 30%, rgba(229,57,53,0.08) 0%, rgba(17,17,17,1) 60%);
+      z-index: 0;
+    }
+
+    /* 内容层 */
+    .ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      padding: 60px 80px;
+    }
+
+    /* 左侧栏：文字与表格 */
+    .left-panel {
+      width: 640px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-right: 60px;
+      border-right: 1px solid rgba(201,169,97,0.2);
+    }
+
+    /* 右侧栏：图片 */
+    .right-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 60px;
+    }
+
+    /* --- 左侧元素样式 --- */
+    .page-tag {
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #C9A961;
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .title-block {
+      margin-bottom: 30px;
+    }
+
+    .title-block h1 {
+      margin: 0;
+      font-family: "Playfair Display", "Noto Serif SC", serif;
+      font-size: 56px;
+      line-height: 1.15;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #ffffff;
+    }
+
+    .title-block h1 span {
+      color: #E53935;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      line-height: 1.6;
+      color: #a0a0a0;
+      margin-bottom: 40px;
+      font-family: "Noto Serif SC", serif;
+      font-weight: 400;
+    }
+
+    .narrative {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #c0c0c0;
+      margin-bottom: 40px;
+      padding-left: 20px;
+      border-left: 3px solid #E53935;
+    }
+
+    .kpi-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .kpi-card {
+      flex: 1;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 16px 12px;
+      border-top: 3px solid #C9A961;
+    }
+
+    .kpi-card.red-top {
+      border-top-color: #E53935;
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .kpi-value {
+      font-family: "Playfair Display", serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1;
+    }
+
+    .kpi-desc {
+      font-size: 13px;
+      line-height: 1.4;
+      color: #aaa;
+    }
+
+    .table-container {
+      margin-bottom: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 14px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      vertical-align: middle;
+    }
+
+    th {
+      color: #C9A961;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding-top: 0;
+      border-bottom: 2px solid rgba(201,169,97,0.3);
+    }
+
+    td {
+      font-size: 15px;
+      line-height: 1.5;
+      color: #e0e0e0;
+    }
+
+    .td-period {
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      color: #fff;
+      width: 130px;
+      font-size: 17px;
+    }
+
+    .td-strategy {
+      color: #C9A961;
+      font-weight: 500;
+      width: 200px;
+    }
+
+    .td-impact {
+      color: #b0b0b0;
+      width: 140px;
+      font-size: 14px;
+    }
+
+    /* --- 右侧元素样式 --- */
+    .image-wrapper {
+      width: 100%;
+      max-width: 760px;
+      /* 原生比例 1785x735 = 2.428 */
+      aspect-ratio: 1785 / 735;
+      position: relative;
+      background: #1a1a1a;
+      border: 1px solid rgba(201,169,97,0.3);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      margin-bottom: 24px;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.05) saturate(1.1);
+    }
+
+    .caption {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #888;
+      padding-left: 20px;
+      border-left: 2px solid #E53935;
+    }
+
+    .caption strong {
+      color: #C9A961;
+      font-weight: 500;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="bg"></div>
+    <div class="ct">
+      
+      <!-- 左侧内容区 -->
+      <div class="left-panel">
+        <div class="top-content">
+          <div class="page-tag">策略分析 / 资本开支周期</div>
+          
+          <div class="title-block">
+            <h1>资本开支<br><span>周期策略</span></h1>
+          </div>
+          
+          <div class="subtitle">从极度谨慎到选择性扩张</div>
+          
+          <div class="narrative">
+            资本开支的滞后性决定了短期供给无法快速响应需求。2026 年的产能无法缓解当前短缺，新产能最早 2027 年底投产，2028 年才可能显著影响市场。
+          </div>
+
+          <div class="kpi-row">
+            <div class="kpi-card red-top">
+              <div class="kpi-label">关键数据</div>
+              <div class="kpi-value">50%</div>
+              <div class="kpi-desc">Samsung 减产幅度</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">建设周期</div>
+              <div class="kpi-value">18<span style="font-size:16px;font-weight:400;color:#aaa;margin-left:4px;">+ 月</span></div>
+              <div class="kpi-desc">新 fab 建设周期</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">平衡时点</div>
+              <div class="kpi-value">2028</div>
+              <div class="kpi-desc">供需可能再平衡</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>时期</th>
+                <th>CapEx 策略</th>
+                <th>影响</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="td-period">2023</td>
+                <td class="td-strategy">大幅削减</td>
+                <td class="td-impact">为后续短缺埋下伏笔</td>
+              </tr>
+              <tr>
+                <td class="td-period">2024</td>
+                <td class="td-strategy">极度谨慎</td>
+                <td class="td-impact">产能扩张停滞</td>
+              </tr>
+              <tr>
+                <td class="td-period">2025-2026</td>
+                <td class="td-strategy">选择性扩张</td>
+                <td class="td-impact">常规 DRAM 未显著增加</td>
+              </tr>
+              <tr>
+                <td class="td-period">2027-2028</td>
+                <td class="td-strategy">新产能陆续投产</td>
+                <td class="td-impact">供需逐步平衡</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 右侧图片区 -->
+      <div class="right-panel">
+        <div class="image-wrapper">
+          <img src="../images/page_009_inherited.png" alt="资本开支周期趋势图">
+        </div>
+        <div class="caption">
+          <strong>周期图注：</strong> 资本开支的收缩与扩张并非线性，而是受供需错配与投资决策共同驱动的滞后过程。
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

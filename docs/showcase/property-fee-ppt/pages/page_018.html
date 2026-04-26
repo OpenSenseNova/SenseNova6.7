@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>沟通与反馈机制</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+    * { box-sizing: border-box; }
+    
+    :root {
+      --bg-color: #F8F6F3;
+      --text-main: #2C2C2C;
+      --text-sub: #666666;
+      --text-light: #888888;
+      --accent-color: #E8E4DF;
+      --card-bg: #FFFFFF;
+      --border-color: #EAE6E1;
+    }
+
+    body {
+      margin: 0;
+      background: #e0e0e0;
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--bg-color);
+      color: var(--text-main);
+    }
+
+    #bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(circle at 80% 20%, #ffffff 0%, #F8F6F3 60%, #F0EDE8 100%);
+    }
+
+    #ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header Area */
+    .header {
+      margin-bottom: 40px;
+      flex-shrink: 0;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 16px;
+      background: var(--accent-color);
+      color: var(--text-main);
+      border-radius: 20px;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0 0 12px 0;
+      font-size: 46px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text-main);
+    }
+
+    .subtitle {
+      font-size: 20px;
+      line-height: 1.5;
+      color: var(--text-sub);
+      max-width: 900px;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      display: flex;
+      gap: 40px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* Left Column: Visual */
+    .visual-col {
+      width: 380px;
+      flex-shrink: 0;
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 20px 40px rgba(44, 44, 44, 0.04);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .visual-col::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 6px;
+      background: var(--text-main);
+      border-radius: 24px 24px 0 0;
+    }
+
+    .icon-container {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--bg-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .icon-container img {
+      width: 70%;
+      height: 70%;
+      object-fit: contain;
+      filter: grayscale(100%);
+    }
+
+    .visual-caption {
+      text-align: center;
+    }
+
+    .visual-caption h3 {
+      margin: 0 0 8px 0;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .visual-caption p {
+      margin: 0;
+      font-size: 15px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    /* Right Column: Mechanism Grid */
+    .mechanism-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      flex: 1;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 24px 20px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .num {
+      width: 32px;
+      height: 32px;
+      background: var(--text-main);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: Arial, sans-serif;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-sub);
+    }
+
+    .summary-box {
+      background: var(--text-main);
+      color: #fff;
+      border-radius: 20px;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      box-shadow: 0 15px 30px rgba(44, 44, 44, 0.15);
+    }
+
+    .summary-label {
+      flex-shrink: 0;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--accent-color);
+      letter-spacing: 2px;
+      border-right: 1px solid rgba(255,255,255,0.2);
+      padding-right: 30px;
+    }
+
+    .summary-text {
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.4;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    /* Decorative Dots */
+    .deco-dots {
+      position: absolute;
+      right: 80px;
+      top: 60px;
+      display: flex;
+      gap: 8px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-color);
+    }
+    .dot.active {
+      background: var(--text-main);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="bg"></div>
+    
+    <div class="deco-dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <div id="ct">
+      
+      <header class="header">
+        <div class="eyebrow">沟通与反馈机制</div>
+        <h1>让业主的声音被听见、被重视</h1>
+        <div class="subtitle">沟通是化解矛盾的良药，建立常态化、多渠道的沟通体系。</div>
+      </header>
+
+      <main class="main-content">
+        
+        <!-- Left Column: Visual & Core Concept -->
+        <aside class="visual-col">
+          <div class="icon-container">
+            <!-- Using the requested image path -->
+            <img src="../images/page_018_icon1.png" alt="沟通与反馈机制图标" />
+          </div>
+          <div class="visual-caption">
+            <h3>双向互动</h3>
+            <p>不仅是信息的传递，更是情感的连接与信任的构建。</p>
+          </div>
+        </aside>
+
+        <!-- Right Column: Mechanism Details -->
+        <section class="mechanism-col">
+          
+          <div class="cards-grid">
+            <div class="card">
+              <div class="card-header">
+                <div class="num">01</div>
+                <h3>定期公示</h3>
+              </div>
+              <p>每季度公示收支明细及服务完成情况，确保信息透明。</p>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="num">02</div>
+                <h3>业主接待</h3>
+              </div>
+              <p>设立固定接待日，面对面听取意见，现场解答疑惑。</p>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="num">03</div>
+                <h3>线上平台</h3>
+              </div>
+              <p>利用公众号与小程序，实现报修、投诉一键直达。</p>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="num">04</div>
+                <h3>定期回访</h3>
+              </div>
+              <p>对已处理事项进行满意度回访，形成服务闭环。</p>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="num">05</div>
+                <h3>意见箱</h3>
+              </div>
+              <p>在公共区域设置实体意见箱，照顾不善使用手机的群体。</p>
+            </div>
+          </div>
+
+          <div class="summary-box">
+            <div class="summary-label">核心目标</div>
+            <p class="summary-text">畅通渠道，及时响应，构建信任桥梁。</p>
+          </div>
+
+        </section>
+      </main>
+
+    </div>
+  </div>
+</body>
+</html>

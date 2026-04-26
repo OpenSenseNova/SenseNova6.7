@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1600, initial-scale=1.0" />
+  <title>社区文化建设</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #e0e0e0;
+      font-family: 'Noto Sans SC', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: #F8F6F3;
+      color: #2C2C2C;
+    }
+
+    #bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    #ct {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      padding: 60px 80px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header Section */
+    header {
+      margin-bottom: 40px;
+      max-width: 900px;
+    }
+
+    .eyebrow {
+      font-size: 16px;
+      font-weight: 500;
+      color: #888;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: 52px;
+      font-weight: 700;
+      color: #2C2C2C;
+      margin: 0 0 16px 0;
+      letter-spacing: 1px;
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: #555;
+      line-height: 1.6;
+      max-width: 800px;
+      font-weight: 400;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      display: flex;
+      gap: 40px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* 5-Column Cards */
+    .columns {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #E8E4DF;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+      transition: transform 0.3s ease;
+    }
+
+    .icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: #F8F6F3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      border: 1px solid #E8E4DF;
+    }
+
+    .icon-box svg {
+      width: 28px;
+      height: 28px;
+      stroke: #2C2C2C;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .card h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2C2C2C;
+      margin: 0 0 12px 0;
+      line-height: 1.3;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.6;
+      margin: 0;
+      flex: 1;
+    }
+
+    /* Image Section */
+    .image-section {
+      width: 420px;
+      background: #E8E4DF;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      flex-shrink: 0;
+    }
+
+    .image-section img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%) contrast(1.1);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #E8E4DF;
+      padding-top: 20px;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #999;
+      letter-spacing: 0.5px;
+    }
+
+    .page-no {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2C2C2C;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="bg"></div>
+    <div id="ct">
+      
+      <header>
+        <div class="eyebrow">Community Culture</div>
+        <h1>社区文化建设</h1>
+        <div class="subtitle">社区不仅是居住空间，更是情感共同体，通过丰富的文化活动，增强业主的归属感。</div>
+      </header>
+
+      <div class="main-content">
+        <div class="columns">
+          <!-- Card 1 -->
+          <div class="card">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3v18"></path>
+                <path d="M5 8c2.5-2 5-3 7-3s4.5 1 7 3"></path>
+                <path d="M5 16c2.5 2 5 3 7 3s4.5-1 7-3"></path>
+              </svg>
+            </div>
+            <h2>节日活动</h2>
+            <p>结合春节、中秋等传统节日，组织社区庆祝与互动，营造温暖节日氛围。</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="card">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="8" cy="8" r="3"></circle>
+                <circle cx="16" cy="8" r="3"></circle>
+                <path d="M4 19c1.5-3 4-4.5 8-4.5S18.5 16 20 19"></path>
+              </svg>
+            </div>
+            <h2>亲子互动</h2>
+            <p>围绕周末运动会及手工DIY，促进家庭参与，增强社区活力与互动。</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="card">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 12h16"></path>
+                <path d="M12 4v16"></path>
+                <circle cx="12" cy="12" r="8"></circle>
+              </svg>
+            </div>
+            <h2>邻里互助</h2>
+            <p>建立互助群促进交流，推动资源共享与日常关怀，拉近邻里关系。</p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="card">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 6h14v12H5z"></path>
+                <path d="M8 10h8"></path>
+                <path d="M8 14h5"></path>
+              </svg>
+            </div>
+            <h2>文化宣传</h2>
+            <p>通过社区文化墙展示，传递社区价值，让文化内容可见、可感。</p>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="card">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 21s-6-3.8-6-9a4 4 0 0 1 7-2.5A4 4 0 0 1 18 12c0 5.2-6 9-6 9z"></path>
+              </svg>
+            </div>
+            <h2>志愿服务</h2>
+            <p>开展环境治理志愿活动，引导业主参与共建，提升社区参与感。</p>
+          </div>
+        </div>
+
+        <div class="image-section">
+          <img src="../images/page_023_hero.png" alt="社区活动场景" />
+        </div>
+      </div>
+
+      <footer>
+        <div class="note">活动照片黑白处理，文字点缀体现人文关怀</div>
+        <div class="page-no">03</div>
+      </footer>
+
+    </div>
+  </div>
+</body>
+</html>
