@@ -1,74 +1,74 @@
-# 🪟 Windows 安装指南 — Hermes Agent / OpenClaw
+# 🪟 Windows Install Guide — Hermes Agent / OpenClaw
 
-🌐 [English](install-windows_EN.md) | **中文**
+🌐 **English** | [中文](install-windows_CN.md)
 
-本文档介绍在 Windows 上通过 [Agent Pack](https://github.com/SenseTime-FVG/agent_pack) 安装 **Hermes Agent** 与 **OpenClaw** 的完整步骤。
+This guide walks through installing **Hermes Agent** and **OpenClaw** on Windows via [Agent Pack](https://github.com/SenseTime-FVG/agent_pack).
 
 ---
 
-## 1. 先装 WSL2（只需要一次）
+## 1. Install WSL2 (one-time)
 
-WSL2 是微软给 Windows 自带的一个 "Linux 容器"，Agent Pack 底层需要它。
+WSL2 is the "Linux container" Microsoft ships with Windows — Agent Pack relies on it under the hood.
 
-1. 按下 `Win` 键，输入 `cmd`
-2. 在搜索结果上右键，选 **"以管理员身份运行"**（这一步很重要）
-3. 在打开的黑色窗口里粘贴：
+1. Press the `Win` key and type `cmd`.
+2. Right-click the search result and choose **"Run as administrator"** (this matters).
+3. Paste into the black window:
 
    ```powershell
    wsl --install
    ```
 
-4. 按回车，等它装完（几分钟）
+4. Press Enter and wait — it takes a few minutes.
 
-   👉 这一步会自动完成：
-   - 启用 WSL 功能
-   - 安装虚拟机平台
-   - 安装 Linux 内核
-   - 默认安装 Ubuntu
+   👉 This step automatically:
+   - Enables the WSL feature
+   - Installs the Virtual Machine Platform
+   - Installs the Linux kernel
+   - Installs Ubuntu by default
 
-5. 重启电脑
-6. 重启后 Windows 会自动弹出一个窗口让你设 Ubuntu 的用户名和密码 —— 可以不用设置
-
----
-
-## 2. 安装 Agent Pack
-
-1. 下载安装包：[AgentPack-1.0.10-windows-x64.exe](https://github.com/SenseTime-FVG/agent_pack/releases/download/v1.0.10/AgentPack-1.0.10-windows-x64.exe)
-2. 双击打开安装程序
-3. 选择安装 **Hermes** 或 **OpenClaw**（一次只选一个）
-
-   <p align="center">
-     <img src="../assets/install_page.PNG" alt="选择安装产品" width="70%">
-   </p>
-
-4. 填入语言模型配置
-
-   > ⚠️ `verify` 可能由于系统缺少组件导致失败，没有关系，可继续下一步。
-
-   <p align="center">
-     <img src="../assets/install2.PNG" alt="填入语言模型配置" width="70%">
-   </p>
-
-5. 点击 **下一步** 之后进入安装
+5. Reboot.
+6. After reboot, Windows pops up a window asking you to set an Ubuntu username and password — you can skip it.
 
 ---
 
-## 3. 启动安装
+## 2. Install Agent Pack
 
-1. 自动弹出 `cmd` 界面，开始执行安装脚本
+1. Download the installer: [AgentPack-1.0.10-windows-x64.exe](https://github.com/SenseTime-FVG/agent_pack/releases/download/v1.0.10/AgentPack-1.0.10-windows-x64.exe).
+2. Double-click to open the installer.
+3. Pick **Hermes** or **OpenClaw** (one at a time).
 
    <p align="center">
-     <img src="../assets/install3.PNG" alt="自动弹出 cmd 执行安装脚本" width="70%">
+     <img src="../assets/install_page.PNG" alt="Pick which product to install" width="70%">
    </p>
 
-2. 安装完成
+4. Fill in the LLM configuration.
+
+   > ⚠️ `verify` may fail because the system is missing some components. That's fine — continue to the next step.
 
    <p align="center">
-     <img src="../assets/install4.png" alt="安装完成" width="70%">
+     <img src="../assets/install2.PNG" alt="Enter the LLM configuration" width="70%">
+   </p>
+
+5. Click **Next** to start the installation.
+
+---
+
+## 3. Run the install
+
+1. A `cmd` window pops up automatically and starts running the installer script.
+
+   <p align="center">
+     <img src="../assets/install3.PNG" alt="cmd opens automatically and runs the installer" width="70%">
+   </p>
+
+2. Installation complete.
+
+   <p align="center">
+     <img src="../assets/install4.png" alt="Install finished" width="70%">
    </p>
 
 ---
 
-## 下一步
+## Next steps
 
-安装完成后，请返回主 README 查看 [开始使用](../README.md#-开始使用)、[常见问题](../README.md#-常见问题) 与 [反馈与支持](../README.md#-反馈与支持) 章节。
+Once installation finishes, head back to the main README to see the [Getting Started](../README.md#-getting-started), [FAQ](../README.md#-faq-), and [Feedback & Support](../README.md#-feedback--support) sections.

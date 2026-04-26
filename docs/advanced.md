@@ -1,40 +1,40 @@
-# 🎓 进阶指南 — Hermes Agent / OpenClaw
+# 🎓 Advanced Guide — Hermes Agent / OpenClaw
 
-🌐 [English](advanced_EN.md) | **中文**
+🌐 **English** | [中文](advanced_CN.md)
 
-本文档面向进阶用户，介绍 Hermes Agent / OpenClaw 的配置文件、模型切换、Bundled Skills，以及通过 OpenClaw 官方渠道独立部署等高级用法。
+This guide is aimed at advanced users. It covers Hermes Agent / OpenClaw config files, multi-model switching, bundled skills, and standalone deployment via the official OpenClaw channel.
 
 ---
 
-## ⚙️ 进阶配置
+## ⚙️ Advanced Configuration
 
-> 以下内容仅供进阶用户参考，常规使用无需关心。
+> The following is for advanced users only — regular usage doesn't require any of this.
 
-### 配置文件位置
+### Config file locations
 
-| 工具 | 主配置文件 | 环境变量文件 |
+| Tool | Main config file | Environment file |
 | --- | --- | --- |
 | Hermes | `~/.hermes/config.yaml` | `~/.hermes/.env` |
 | OpenClaw | `~/.openclaw/openclaw.json` | `~/.openclaw/.env` |
 
-### 多模型供应商切换
+### Multiple model providers
 
-两个工具均支持在配置文件中同时配置 OpenRouter、OpenAI、Anthropic 等多个模型供应商，运行时可按需切换。
+Both tools let you configure several model providers (OpenRouter, OpenAI, Anthropic, …) side by side in their config files and switch between them at runtime as needed.
 
-### 预置技能（Bundled Skills）
+### Bundled Skills
 
-安装包已内置数十个开箱即用的技能模块，涵盖文档处理、数据分析、网页爬取、飞书集成等场景，工具启动时自动加载，无需额外配置。
-
----
-
-## 🦞 通过 OpenClaw 官方渠道安装
-
-如需通过 [OpenClaw](https://openclaw.ai/) 官方渠道（不经 agent_pack）独立部署，请参考 [OpenClaw 官方教程](https://openclaw.ai/)。在其引导配置中选择 **OpenAI 兼容接口**，填入 SenseNova 的 Base URL、API Key 与模型名即可接入。
-
-> 📝 **尚未申请 SenseNova API Key？** 请前往 [SenseNova 官网](https://console.sensecore.cn) 完成注册与实名认证，并在 **管理中心 → API-Key 管理** 中创建 Key。详细步骤参见主 README 的 [🚀 快速开始 → API Key 申请](../README.md#api-key-申请) 章节。
+The installer ships with dozens of out-of-the-box skill modules — covering document processing, data analysis, web scraping, Feishu integration, and more. They load automatically when the tool starts; no extra configuration required.
 
 ---
 
-如有任何问题，欢迎前往 [GitHub Issues](https://github.com/SenseTime-FVG/agent_pack/issues) 与我们交流。
+## 🦞 Installing via the official OpenClaw channel
 
-[← 返回主 README](../README.md)
+If you prefer to deploy [OpenClaw](https://openclaw.ai/) standalone (without `agent_pack`), follow the [official OpenClaw guide](https://openclaw.ai/). In the setup wizard, choose the **OpenAI-compatible endpoint** option and supply SenseNova's Base URL, API Key, and model name.
+
+> 📝 **Don't have a SenseNova API key yet?** Go to the [SenseNova portal](https://console.sensecore.cn), complete registration and identity verification, and create a key under **Management Center → API Key Management**. Detailed steps are in the main README's [🚀 Quick Start → Apply for an API Key](../README.md#apply-for-an-api-key) section.
+
+---
+
+If you have any questions, drop by [GitHub Issues](https://github.com/SenseTime-FVG/agent_pack/issues) and chat with us.
+
+[← Back to main README](../README.md)
