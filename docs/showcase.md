@@ -2,7 +2,7 @@
 
 围绕 **SenseNova 6.7 Flash-Lite** 的真实办公任务示例，覆盖数据分析、深度调研等核心场景。每个 case 提供任务描述、模型结论与可在线浏览的 HTML 报告。
 
-> 复现以上样例需配合 OpenClaw / Hermes Agent 框架并启用 sensenova-skills，详见 [README · 在开源 Agent 框架中使用](../README.md#-在开源-agent-框架中使用)。
+> 复现以上样例需配合 OpenClaw / Hermes Agent 框架并启用 [SenseNova-Skills](https://github.com/OpenSenseNova/SenseNova-Skills/)。
 
 ---
 
