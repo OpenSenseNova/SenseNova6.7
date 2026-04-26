@@ -127,7 +127,15 @@ SenseNova 6.7 Flash-Lite 兼容 OpenAI API，可无缝接入主流开源 Agent �
 
 ### 🛠️ Hermes Agent 与 OpenClaw
 
-**Hermes Agent** 与 **OpenClaw** 是面向真实办公任务的本地 Agent 框架。推荐使用官方一键安装包 [SenseTime-FVG/agent_pack](https://github.com/SenseTime-FVG/agent_pack) 完成部署，安装器会在过程中收集 LLM 凭证并自动写入配置文件（`~/.hermes/config.yaml` 与 `~/.openclaw/openclaw.json`）。前往 [Releases 页面](https://github.com/SenseTime-FVG/agent_pack/releases) 下载对应平台安装器（Windows `.exe` / macOS `.pkg` / Linux 脚本）即可开箱即用。
+**Hermes Agent** 与 **OpenClaw** 是面向真实办公任务的本地 Agent 框架。
+
+推荐使用一键安装包 [SenseTime-FVG/agent_pack](https://github.com/SenseTime-FVG/agent_pack) 完成部署。
+
+安装器会在过程中收集 LLM 凭证，并自动写入配置文件（`~/.hermes/config.yaml` 与 `~/.openclaw/openclaw.json`）。
+
+前往 [Releases 页面](https://github.com/SenseTime-FVG/agent_pack/releases) 下载对应平台安装器（Windows `.exe` / macOS `.pkg` / Linux 脚本）即可开箱即用。
+
+> ⚠️ **需配合 Skills 使用**：Hermes Agent 与 OpenClaw 需配合官方技能库 [OpenSenseNova/SenseNova-Skills](https://github.com/OpenSenseNova/SenseNova-Skills) 使用，以获得完整的办公任务能力。
 
 
 #### [💻 Windows 详细安装和使用步骤 →](docs/install-windows.md)
