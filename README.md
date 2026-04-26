@@ -39,7 +39,7 @@ Compared with text-only agents, scenarios such as information search consume aro
 ## 📊 Benchmarks
 
 <p align="center">
-  <img src="assets/benchmark.jpg" alt="Benchmark Results" width="100%">
+  <img src="assets/benchmark_en.jpg" alt="Benchmark Results" width="100%">
 </p>
 
 ---
