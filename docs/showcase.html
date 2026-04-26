@@ -130,14 +130,22 @@
     overflow: hidden;
     background: #fff;
     margin-bottom: 12px;
-  }
-  .frame-wrap iframe {
-    display: block;
-    width: 100%;
     height: 720px;
-    border: 0;
   }
-  .frame-wrap.ppt iframe { height: 760px; }
+  .frame-wrap.ppt { height: 760px; }
+  /* Scale embedded content to 50% so wide reports/decks fit comfortably; */
+  /* iframe itself is doubled in size and clipped by .frame-wrap.            */
+  .frame-wrap iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    border: 0;
+    transform: scale(0.5);
+    transform-origin: top left;
+    display: block;
+  }
   .frame-actions {
     display: flex;
     justify-content: flex-end;
@@ -175,8 +183,8 @@
     header h1 { font-size: 28px; }
     main { padding: 0 12px 60px; }
     .case { padding: 20px; border-radius: 10px; }
-    .frame-wrap iframe { height: 520px; }
-    .frame-wrap.ppt iframe { height: 560px; }
+    .frame-wrap { height: 520px; }
+    .frame-wrap.ppt { height: 560px; }
   }
 </style>
 </head>
