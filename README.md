@@ -36,6 +36,17 @@ Compared with text-only agents, scenarios such as information search consume aro
 
 ---
 
+## 📑 Table of Contents
+
+- [📊 Benchmarks](#-benchmarks)
+- [🔥 Showcase](#-showcase)
+- [🚀 Quick Start](#-quick-start)
+- [🤖 Using with Open-Source Agent Frameworks](#-using-with-open-source-agent-frameworks)
+- [💎 Token Plan](#-token-plan)
+- [📚 Related Links](#-related-links)
+
+---
+
 ## 📊 Benchmarks
 
 <p align="center">
@@ -166,60 +177,6 @@ For Hermes, just swap the directory to `~/.hermes/skills/`.
 </details>
 
 
-### 🚀 Getting Started
-
-#### Hermes Agent (CLI AI assistant)
-
-After installation the Hermes chat terminal usually opens automatically. If not, open any terminal (use `wsl` on Windows, system terminal on macOS / Linux) and run:
-
-```bash
-hermes
-```
-
-You'll land in the chat interface. Try asking things like:
-
-- "Write me a Python script that renames every `.jpg` in the current directory to `photo-1.jpg`, `photo-2.jpg`, …"
-- "Why does this code throw an error? `<paste code>`"
-- "What's new in React 18?"
-
-To exit, type `/exit` or press `Ctrl + C`.
-
-#### OpenClaw (web UI)
-
-After installation the OpenClaw gateway starts in the background and a browser tab usually opens automatically at something like:
-
-```
-http://localhost:18789/#token=xxxxx
-```
-
-If it doesn't, run from the terminal:
-
-```bash
-openclaw dashboard
-```
-
-The web UI lets you:
-- Browse all AI conversation history
-- Manage API keys
-- Configure different models
-- Inspect metrics and logs
-
-### [❓ FAQ →](docs/faq.md)
-
-#### 📮 Feedback & Support
-
-For bug reports or feature requests, reach us via:
-
-- **GitHub Issues**: [SenseTime-FVG/agent_pack](https://github.com/SenseTime-FVG/agent_pack/issues) — for bug reports and feature requests
-- **Hermes official docs**: <https://github.com/NousResearch/hermes-agent>
-- **OpenClaw official docs**: <https://docs.openclaw.ai>
-
-To help us triage faster, please include the following in your issue:
-
-1. **OS version**: e.g., Windows 11, macOS 14, Ubuntu 22.04
-2. **Reproduction steps**: where exactly the issue occurs
-3. **Full log**: log paths are listed in [FAQ](docs/faq.md) Q1
-
 ---
 
 ## 💎 Token Plan
@@ -239,7 +196,7 @@ To help us triage faster, please include the following in your issue:
 
 > The latest SenseNova 6.7 Flash-Lite model and the full cowork-skill lineup are now part of the **Little Raccoon Pro plan**, offering enterprise-grade security plus a smooth out-of-the-box experience.<!-- TODO: link to Little Raccoon product page -->
 
-<!-- TODO: link to Token Plan purchase / details page -->
+#### [🎁 Learn more & claim your Token Plan →](https://platform.sensenova.cn/token-plan)
 
 ---
 
