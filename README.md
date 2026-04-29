@@ -129,24 +129,41 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
 
 ## 🤖 Using with Open-Source Agent Frameworks
 
-SenseNova 6.7 Flash-Lite is OpenAI-API compatible and integrates seamlessly with mainstream open-source agent frameworks.
+SenseNova 6.7 Flash-Lite needs an **agent runtime** + the **official skill library** to deliver an end-to-end office-task workflow.
 
-### 🛠️ Hermes Agent and OpenClaw
+- **Recommended runtime**: **[OpenClaw](https://openclaw.ai/)** or **[hermes-agent](https://github.com/NousResearch/hermes-agent)**.
+- **Recommended LLM**: pair it with the **[SenseNova platform API](https://platform.sensenova.cn/token-plan)** (free token plan available).
+- **Install & setup**:
+  - [💻 Detailed Windows install & usage →](docs/install-windows.md)
+  - [🍎 Detailed macOS install & usage →](docs/install-macos.md)
 
-**Hermes Agent** and **OpenClaw** are local agent frameworks built for real office tasks.
+### 🧩 Installing SenseNova-Skills
 
-We recommend deploying via the one-click installer at [SenseTime-FVG/agent_pack](https://github.com/SenseTime-FVG/agent_pack).
+**Recommended: just ask the agent to install them for you.** Hand it the repo URL and let it clone and copy the contents into the right directory, e.g.:
 
-The installer collects LLM credentials during setup and writes them automatically to the relevant config files (`~/.hermes/config.yaml` and `~/.openclaw/openclaw.json`).
+> *"Please install https://github.com/OpenSenseNova/SenseNova-Skills into your skills directory."*
 
-Visit the [Releases page](https://github.com/SenseTime-FVG/agent_pack/releases) to download the installer for your platform (Windows `.exe` / macOS `.pkg` / Linux script) for an out-of-the-box experience.
+After installation you may need to **restart the agent service manually** before the new skills are picked up.
 
-> ⚠️ **Skills required**: Hermes Agent and OpenClaw must be paired with the official skill library [OpenSenseNova/SenseNova-Skills](https://github.com/OpenSenseNova/SenseNova-Skills) to unlock the full office-task capabilities.
+| Agent | Target directory |
+|-------|------------------|
+| [OpenClaw](https://openclaw.ai/) | `~/.openclaw/skills/` |
+| [hermes-agent](https://github.com/NousResearch/hermes-agent) | `~/.hermes/skills/` |
 
+<details>
+<summary>Prefer to install manually?</summary>
 
-#### [💻 Detailed Windows install & usage →](docs/install-windows.md)
+Clone the repo, then copy (or symlink) the subdirectories under `skills/` into the target directory:
 
-#### [🍎 Detailed macOS install & usage →](docs/install-macos.md)
+```bash
+git clone https://github.com/OpenSenseNova/SenseNova-Skills.git --depth=1
+mkdir -p ~/.openclaw/skills
+cp -r SenseNova-Skills/skills/* ~/.openclaw/skills/
+```
+
+For Hermes, just swap the directory to `~/.hermes/skills/`.
+
+</details>
 
 
 ### 🚀 Getting Started
@@ -202,10 +219,6 @@ To help us triage faster, please include the following in your issue:
 1. **OS version**: e.g., Windows 11, macOS 14, Ubuntu 22.04
 2. **Reproduction steps**: where exactly the issue occurs
 3. **Full log**: log paths are listed in [FAQ](docs/faq.md) Q1
-
----
-
-### [🎓 Advanced Guide →](docs/advanced.md)
 
 ---
 
