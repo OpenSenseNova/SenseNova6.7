@@ -129,24 +129,41 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
 
 ## 🤖 在开源 Agent 框架中使用
 
-SenseNova 6.7 Flash-Lite 兼容 OpenAI API，可无缝接入主流开源 Agent 框架。
+SenseNova 6.7 Flash-Lite 需要与 **Agent 运行时** + **官方技能库** 协同工作，才能跑通完整的办公任务闭环。
 
-### 🛠️ Hermes Agent 与 OpenClaw
+- **推荐运行时**：**[OpenClaw](https://openclaw.ai/)** 或 **[hermes-agent](https://github.com/NousResearch/hermes-agent)**。
+- **推荐 LLM**：配合 **[SenseNova 平台 API](https://platform.sensenova.cn/token-plan)** 使用（提供免费 token 套餐）。
+- **安装与配置**：
+  - [💻 Windows 详细安装和使用步骤 →](docs/install-windows_CN.md)
+  - [🍎 macOS 详细安装和使用步骤 →](docs/install-macos_CN.md)
 
-**Hermes Agent** 与 **OpenClaw** 是面向真实办公任务的本地 Agent 框架。
+### 🧩 安装 SenseNova-Skills
 
-推荐使用一键安装包 [SenseTime-FVG/agent_pack](https://github.com/SenseTime-FVG/agent_pack) 完成部署。
+**推荐做法：直接让 agent 帮你装好这些 skill。** 把仓库地址交给它，让它自己克隆并把内容拷贝到目标目录，例如：
 
-安装器会在过程中收集 LLM 凭证，并自动写入配置文件（`~/.hermes/config.yaml` 与 `~/.openclaw/openclaw.json`）。
+> *"请帮我把 https://github.com/OpenSenseNova/SenseNova-Skills 安装到你的 skills 目录。"*
 
-前往 [Releases 页面](https://github.com/SenseTime-FVG/agent_pack/releases) 下载对应平台安装器（Windows `.exe` / macOS `.pkg` / Linux 脚本）即可开箱即用。
+安装完成后，**可能需要手动重启 agent 服务**，新 skill 才会被加载。
 
-> ⚠️ **需配合 Skills 使用**：Hermes Agent 与 OpenClaw 需配合官方技能库 [OpenSenseNova/SenseNova-Skills](https://github.com/OpenSenseNova/SenseNova-Skills) 使用，以获得完整的办公任务能力。
+| 智能体 | 目标目录 |
+|--------|---------|
+| [OpenClaw](https://openclaw.ai/) | `~/.openclaw/skills/` |
+| [hermes-agent](https://github.com/NousResearch/hermes-agent) | `~/.hermes/skills/` |
 
+<details>
+<summary>想手动安装？</summary>
 
-#### [💻 Windows 详细安装和使用步骤 →](docs/install-windows_CN.md)
+克隆本仓库，然后把 `skills/` 下的子目录自行复制（或软链接）到目标目录：
 
-#### [🍎 macOS 详细安装和使用步骤 →](docs/install-macos_CN.md)
+```bash
+git clone https://github.com/OpenSenseNova/SenseNova-Skills.git --depth=1
+mkdir -p ~/.openclaw/skills
+cp -r SenseNova-Skills/skills/* ~/.openclaw/skills/
+```
+
+Hermes 把目录换成 `~/.hermes/skills/` 即可。
+
+</details>
 
 
 ### 🚀 开始使用
@@ -202,10 +219,6 @@ openclaw dashboard
 1. **操作系统版本**：例如 Windows 11、macOS 14、Ubuntu 22.04
 2. **复现步骤**：在哪一步出现问题
 3. **完整日志内容**：日志路径参见 [FAQ](docs/faq_CN.md) 中 Q1
-
----
-
-### [🎓 进阶指南 →](docs/advanced_CN.md)
 
 ---
 
