@@ -144,9 +144,7 @@ SenseNova 6.7 Flash-Lite needs an **agent runtime** + the **official skill libra
 
 - **Recommended runtime**: **[OpenClaw](https://openclaw.ai/)** or **[hermes-agent](https://github.com/NousResearch/hermes-agent)**.
 - **Recommended LLM**: pair it with the **[SenseNova platform API](https://platform.sensenova.cn/token-plan)** (free token plan available).
-- **Install & setup**:
-  - [💻 Detailed Windows install & usage →](docs/install-windows.md)
-  - [🍎 Detailed macOS install & usage →](docs/install-macos.md)
+- **Install & setup**: see [SenseNova-Skills INSTALL.md](https://github.com/OpenSenseNova/SenseNova-Skills/blob/main/INSTALL.md).
 
 ### 🧩 Installing SenseNova-Skills
 

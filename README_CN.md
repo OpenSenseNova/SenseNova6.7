@@ -144,9 +144,7 @@ SenseNova 6.7 Flash-Lite 需要与 **Agent 运行时** + **官方技能库** 协
 
 - **推荐运行时**：**[OpenClaw](https://openclaw.ai/)** 或 **[hermes-agent](https://github.com/NousResearch/hermes-agent)**。
 - **推荐 LLM**：配合 **[SenseNova 平台 API](https://platform.sensenova.cn/token-plan)** 使用（提供免费 token 套餐）。
-- **安装与配置**：
-  - [💻 Windows 详细安装和使用步骤 →](docs/install-windows_CN.md)
-  - [🍎 macOS 详细安装和使用步骤 →](docs/install-macos_CN.md)
+- **安装与配置**：详见 [SenseNova-Skills INSTALL_CN.md](https://github.com/OpenSenseNova/SenseNova-Skills/blob/main/INSTALL_CN.md)。
 
 ### 🧩 安装 SenseNova-Skills
 
