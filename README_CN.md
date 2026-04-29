@@ -36,6 +36,17 @@
 
 ---
 
+## 📑 章节目录
+
+- [📊 性能评测](#-性能评测)
+- [🔥 场景 Showcase](#-场景-showcase)
+- [🚀 快速开始](#-快速开始)
+- [🤖 在开源 Agent 框架中使用](#-在开源-agent-框架中使用)
+- [💎 Token Plan](#-token-plan)
+- [📚 相关链接](#-相关链接)
+
+---
+
 ## 📊 性能评测
 
 <p align="center">
@@ -166,60 +177,6 @@ Hermes 把目录换成 `~/.hermes/skills/` 即可。
 </details>
 
 
-### 🚀 开始使用
-
-#### Hermes Agent（命令行 AI 助手）
-
-装完之后会直接打开 Hermes 对话终端；如果没有，打开任意终端（Windows 上用 `wsl`，macOS / Linux 用系统终端），直接输入：
-
-```bash
-hermes
-```
-
-就进入聊天界面了。你可以问它：
-
-- "帮我写一个 Python 脚本，把当前目录下所有 `.jpg` 文件重命名成 `photo-1.jpg`、`photo-2.jpg` ..."
-- "这段代码为什么报错？`<粘贴代码>`"
-- "帮我查一下 React 18 的最新改动"
-
-想退出，输入 `/exit` 或按 `Ctrl + C`。
-
-#### OpenClaw（网页 UI）
-
-安装完成后，OpenClaw 的网关（gateway）会在后台自动启动，浏览器会自动打开控制台页面，地址大概长这样：
-
-```
-http://localhost:18789/#token=xxxxx
-```
-
-如果浏览器没自动弹出，可在终端里跑：
-
-```bash
-openclaw dashboard
-```
-
-在网页上可以：
-- 查看所有 AI 对话历史
-- 管理 API Key
-- 配置不同的模型
-- 看各种指标和日志
-
-### [❓ 常见问题 →](docs/faq_CN.md)
-
-#### 📮 反馈与支持
-
-遇到问题或希望提交建议，可通过以下渠道与我们联系：
-
-- **GitHub Issues**：[SenseTime-FVG/agent_pack](https://github.com/SenseTime-FVG/agent_pack/issues) —— 用于报告 Bug 与提交功能建议
-- **Hermes 官方文档**：<https://github.com/NousResearch/hermes-agent>
-- **OpenClaw 官方文档**：<https://docs.openclaw.ai>
-
-为便于我们快速定位问题，提交 Issue 时请附上以下信息：
-
-1. **操作系统版本**：例如 Windows 11、macOS 14、Ubuntu 22.04
-2. **复现步骤**：在哪一步出现问题
-3. **完整日志内容**：日志路径参见 [FAQ](docs/faq_CN.md) 中 Q1
-
 ---
 
 ## 💎 Token Plan
@@ -239,7 +196,7 @@ openclaw dashboard
 
 > 最新 SenseNova 6.7 Flash-Lite 模型与全系 cowork-skill 均已加入**小浣熊 Pro 套餐**，提供企业级安全防护与开箱即用的丝滑体验。<!-- TODO: 插入小浣熊产品页链接 -->
 
-<!-- TODO: 插入 Token Plan 购买/了解更多链接 -->
+#### [🎁 了解并领取 Token Plan →](https://platform.sensenova.cn/token-plan)
 
 ---
 
