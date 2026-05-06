@@ -61,7 +61,7 @@ SenseNova 6.7 Flash-Lite 需要与 **Agent 运行时** + **官方技能库** 协
 
 **推荐做法：直接让 agent 帮你装好这些 skill。** 把仓库地址交给它，让它自己克隆并把内容拷贝到目标目录，例如：
 
-> *"请帮我把 https://github.com/OpenSenseNova/SenseNova-Skills 安装到你的 skills 目录。"*
+> *“请帮我把 https://github.com/OpenSenseNova/SenseNova-Skills 安装到你的 skills 目录。”*
 
 安装完成后，**可能需要手动重启 agent 服务**，新 skill 才会被加载。
 
@@ -189,7 +189,7 @@ print(data["choices"][0]["message"])
 | 指令（非思考）模式 | 通用任务 | 0.7 | 0.8 | 20 | 0.0 | 1.5 | 1.0 |
 | 指令（非思考）模式 | 推理任务 | 1.0 | 1.0 | 40 | 0.0 | 2.0 | 1.0 |
 
-以"通用任务 + 思考模式"为例：
+以“通用任务 + 思考模式”为例：
 
 ```bash
 curl 'https://token.sensenova.cn/v1/chat/completions' \
