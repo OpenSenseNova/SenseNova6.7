@@ -201,7 +201,7 @@ Hermes 把目录换成 `~/.hermes/skills/` 即可。
 复杂任务下 token 消耗更可控，单位成本下的可交付产出显著提升，长链路任务也能“放心跑”。
 
 <p align="center">
-  <a href="https://www.sensenova.cn/token-plan"><img src="assets/token_plan_banner.png" alt="Token Plan" width="80%"></a>
+  <a href="https://www.sensenova.cn/token-plan"><img src="assets/token_plan_banner_cn.png" alt="Token Plan" width="80%"></a>
 </p>
 
 #### [查看详情 →](https://www.sensenova.cn/token-plan)

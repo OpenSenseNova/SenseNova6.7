@@ -201,7 +201,7 @@ Closes the loop from "understanding the task" to "producing the final deliverabl
 Token consumption stays under control on complex tasks, raising deliverable output per unit cost — so long-horizon tasks can "run with confidence".
 
 <p align="center">
-  <a href="https://www.sensenova.cn/token-plan"><img src="assets/token_plan_banner.png" alt="Token Plan" width="80%"></a>
+  <a href="https://www.sensenova.cn/token-plan"><img src="assets/token_plan_banner_en.png" alt="Token Plan" width="80%"></a>
 </p>
 
 #### [Learn more →](https://www.sensenova.cn/token-plan)
