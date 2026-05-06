@@ -9,7 +9,7 @@ This document explains how to integrate the SenseNova LLM API on SenseTime's Sen
 ## Table of Contents
 
 - [1. Sign up and obtain an API Key](#1-sign-up-and-obtain-an-api-key)
-- [2. Using with Open-Source Agent Frameworks](#2-using-with-open-source-agent-frameworks)
+- [2. Using with Agent Frameworks](#2-using-with-agent-frameworks)
 - [3. Models](#3-models)
 - [4. Basic invocation](#4-basic-invocation)
 - [5. Recommended sampling parameters](#5-recommended-sampling-parameters)
@@ -49,7 +49,7 @@ In the examples below, replace every `<YOUR_API_KEY>` with the key you created.
 
 ---
 
-## 2. Using with Open-Source Agent Frameworks
+## 2. Using with Agent Frameworks
 
 SenseNova 6.7 Flash-Lite needs an **agent runtime** + the **official skill library** to deliver an end-to-end office-task workflow.
 

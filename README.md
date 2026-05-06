@@ -32,7 +32,7 @@
 - [Benchmarks](#benchmarks)
 - [Integrated Office Workflow](#integrated-office-workflow)
 - [Quick Start](#quick-start)
-- [Using with Open-Source Agent Frameworks](#using-with-open-source-agent-frameworks)
+- [Using with Agent Frameworks](#using-with-agent-frameworks)
 - [Token Plan](#token-plan)
 - [Related Links](#related-links)
 
@@ -96,7 +96,7 @@ The final deck follows a clear narrative: first prove with data that "prices are
 
 > **Note**: The above capabilities **must be delivered by the Agent framework together with Skills** — calling the model API directly cannot reproduce the full workflow.
 >
-> - **Recommended path**: Pair [OpenClaw](https://openclaw.ai/) or [hermes-agent](https://github.com/NousResearch/hermes-agent) with the official skill library from [OpenSenseNova/SenseNova-Skills](https://github.com/OpenSenseNova/SenseNova-Skills) (see [Using with Open-Source Agent Frameworks](#using-with-open-source-agent-frameworks) below).
+> - **Recommended path**: Pair [OpenClaw](https://openclaw.ai/) or [hermes-agent](https://github.com/NousResearch/hermes-agent) with the official skill library from [OpenSenseNova/SenseNova-Skills](https://github.com/OpenSenseNova/SenseNova-Skills) (see [Using with Agent Frameworks](#using-with-agent-frameworks) below).
 > - **Self-integration**: For other agent frameworks, grab Skills directly from [OpenSenseNova/SenseNova-Skills](https://github.com/OpenSenseNova/SenseNova-Skills) and install them yourself.
 
 ---
@@ -129,7 +129,7 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
 
 ---
 
-## Using with Open-Source Agent Frameworks
+## Using with Agent Frameworks
 
 SenseNova 6.7 Flash-Lite needs an **agent runtime** + the **official skill library** to deliver an end-to-end office-task workflow.
 
@@ -169,7 +169,7 @@ For Hermes, just swap the directory to `~/.hermes/skills/`.
 
 ## 🦝 Out-of-the-Box with Raccoon
 
-The latest model and full Cowork-Skill suite from this repo are integrated into the [**Raccoon Pro**](https://xiaohuanxiong.com/) plan, offering enterprise-grade security and a smooth out-of-the-box experience — if you'd rather not set up your own environment or manage API keys, you can use these capabilities directly through Raccoon.
+The latest model and full Cowork-Skill suite from this repo are integrated into the [**Raccoon Pro**](https://office.xiaohuanxiong.com/home) plan, offering enterprise-grade security and a smooth out-of-the-box experience — if you'd rather not set up your own environment or manage API keys, you can use these capabilities directly through Raccoon.
 
 Raccoon ships a comprehensive upgrade across product capabilities and client experience:
 
@@ -178,7 +178,7 @@ Raccoon ships a comprehensive upgrade across product capabilities and client exp
 - **All-new client + local Agent OS**: Cloud models handle complex reasoning and multimodal understanding, while the local Agent OS centers on local files, work context, and personal habits — delivering a more personalized, localized, and secure AI-native office experience.
 - **Validated at scale**: Trusted by 15 million individual users and thousands of enterprises.
 
-> 👉 Try it now: [xiaohuanxiong.com](https://xiaohuanxiong.com/)
+> 👉 Try it now: [office.xiaohuanxiong.com/home](https://office.xiaohuanxiong.com/home)
 
 ---
 
@@ -212,4 +212,4 @@ Token consumption stays under control on complex tasks, raising deliverable outp
 
 - Website: [https://platform.sensenova.cn/](https://platform.sensenova.cn/)
 - API documentation: [API.md](API.md)
-- Raccoon: [xiaohuanxiong.com](https://xiaohuanxiong.com/)
+- Raccoon: [office.xiaohuanxiong.com/home](https://office.xiaohuanxiong.com/home)

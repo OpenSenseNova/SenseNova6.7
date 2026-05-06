@@ -32,7 +32,7 @@
 - [性能评测](#性能评测)
 - [一体化智能办公闭环](#一体化智能办公闭环)
 - [快速开始](#快速开始)
-- [在开源 Agent 框架中使用](#在开源-agent-框架中使用)
+- [在 Agent 框架中使用](#在-agent-框架中使用)
 - [Token Plan](#token-plan)
 - [相关链接](#相关链接)
 
@@ -96,7 +96,7 @@ Agent 在真实办公任务中跑通 "读 → 想 → 做 → 交付" 的全流�
 
 > **提示**：以上示例能力**必须由 Agent 框架与 Skills 共同提供** —— 仅通过 API 直连模型无法复现完整工作流。
 >
-> - **推荐方式**：搭配 [OpenClaw](https://openclaw.ai/) 或 [hermes-agent](https://github.com/NousResearch/hermes-agent) 框架，并安装 [OpenSenseNova/SenseNova-Skills](https://github.com/OpenSenseNova/SenseNova-Skills) 中的官方技能库（详见下方 [在开源 Agent 框架中使用](#在开源-agent-框架中使用) 章节）。
+> - **推荐方式**：搭配 [OpenClaw](https://openclaw.ai/) 或 [hermes-agent](https://github.com/NousResearch/hermes-agent) 框架，并安装 [OpenSenseNova/SenseNova-Skills](https://github.com/OpenSenseNova/SenseNova-Skills) 中的官方技能库（详见下方 [在 Agent 框架中使用](#在-agent-框架中使用) 章节）。
 > - **自行接入**：如使用其他 Agent 框架，同样可前往 [OpenSenseNova/SenseNova-Skills](https://github.com/OpenSenseNova/SenseNova-Skills) 单独获取 Skills 并自行安装。
 
 ---
@@ -129,7 +129,7 @@ curl 'https://token.sensenova.cn/v1/chat/completions' \
 
 ---
 
-## 在开源 Agent 框架中使用
+## 在 Agent 框架中使用
 
 SenseNova 6.7 Flash-Lite 需要与 **Agent 运行时** + **官方技能库** 协同工作，才能跑通完整的办公任务闭环。
 
@@ -169,7 +169,7 @@ Hermes 把目录换成 `~/.hermes/skills/` 即可。
 
 ## 🦝 在小浣熊中开箱即用
 
-本仓库的最新模型与全系 Cowork-Skill，已整体集成进 [**小浣熊 Pro**](https://xiaohuanxiong.com/) 套餐，提供企业级安全防护与开箱即用的丝滑体验——如果你不想自己搭环境、配 API key，可以直接通过小浣熊使用这些能力。
+本仓库的最新模型与全系 Cowork-Skill，已整体集成进 [**小浣熊 Pro**](https://office.xiaohuanxiong.com/home) 套餐，提供企业级安全防护与开箱即用的丝滑体验——如果你不想自己搭环境、配 API key，可以直接通过小浣熊使用这些能力。
 
 小浣熊本次迎来产品能力与客户端体验的全面升级：
 
@@ -178,7 +178,7 @@ Hermes 把目录换成 `~/.hermes/skills/` 即可。
 - **全新客户端 + 本地 Agent OS**：云端模型负责复杂推理与多模态理解，本地 Agent OS 围绕本地文件、工作上下文与个人使用习惯，带来更个性化、本地化、安全化的 AI 原生办公体验。
 - **规模化验证**：1500 万个人用户、数千家企业用户的共同选择。
 
-> 👉 立即体验：[xiaohuanxiong.com](https://xiaohuanxiong.com/)
+> 👉 立即体验：[office.xiaohuanxiong.com/home](https://office.xiaohuanxiong.com/home)
 
 ---
 
@@ -212,4 +212,4 @@ Hermes 把目录换成 `~/.hermes/skills/` 即可。
 
 - 官网：[https://platform.sensenova.cn/](https://platform.sensenova.cn/)
 - API 文档：[API_CN.md](API_CN.md)
-- 小浣熊： [xiaohuanxiong.com](https://xiaohuanxiong.com/)
+- 小浣熊： [office.xiaohuanxiong.com/home](https://office.xiaohuanxiong.com/home)
