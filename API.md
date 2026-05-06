@@ -89,8 +89,6 @@ For Hermes, just swap the directory to `~/.hermes/skills/`.
 
 ## 3. Models
 
-`Lightweight Agent`
-
 **SenseNova 6.7 Flash-Lite** — a lightweight multimodal agent model built for real-world workflows.
 
 - **Lightweight & efficient**, balancing quality, cost, and deployability

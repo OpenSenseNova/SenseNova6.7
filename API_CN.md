@@ -89,8 +89,6 @@ Hermes 把目录换成 `~/.hermes/skills/` 即可。
 
 ## 3. 模型说明
 
-`Lightweight · 轻量智能体`
-
 **SenseNova 6.7 Flash-Lite** —— 面向真实工作流的轻量多模态智能体模型。
 
 - **轻量高效**，兼顾效果、成本与落地性

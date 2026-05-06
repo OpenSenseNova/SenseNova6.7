@@ -10,15 +10,13 @@
   <a href="https://platform.sensenova.cn/"><b>Official Website — platform.sensenova.cn</b></a>
 </p>
 
-> A natively multimodal LLM, better tuned for office work and more token-efficient.
+> A lightweight multimodal agent model built for real-world workflows.
 
 **SenseNova 6.7 Flash-Lite** is SenseTime's lightweight multimodal agent model, purpose-built for real-world workflows. With a native multimodal architecture that balances quality and cost, it reliably powers complex long-horizon office tasks such as data analysis, slide deck generation, deep research reports, and infographic creation.
 
 ---
 
 ## Core Capabilities
-
-`Lightweight Agent`
 
 **SenseNova 6.7 Flash-Lite** — a lightweight multimodal agent model built for real-world workflows.
 
@@ -32,7 +30,7 @@
 ## Table of Contents
 
 - [Benchmarks](#benchmarks)
-- [Showcase](#showcase)
+- [Integrated Office Workflow](#integrated-office-workflow)
 - [Quick Start](#quick-start)
 - [Using with Open-Source Agent Frameworks](#using-with-open-source-agent-frameworks)
 - [Token Plan](#token-plan)
@@ -47,11 +45,10 @@
 </p>
 
 SenseNova 6.7 Flash-Lite leads across multiple benchmarks, standing out among models of comparable size on long-horizon tasks, planning, and multimodal understanding.
+
 ---
 
-## Showcase
-
-### Integrated Office Workflow
+## Integrated Office Workflow
 
 Taking semiconductor memory market analysis as an example, the model covers the entire pipeline from data insight to industry research to content delivery:
 
@@ -63,7 +60,7 @@ Taking semiconductor memory market analysis as an example, the model covers the 
 
 The agent runs the full "read → think → do → deliver" loop on real office tasks. Below are three representative cases with their deliverables.
 
-#### Data Analysis ｜ Cleaning and Trend Analysis on Memory Chip Quotes
+#### Step 1 ｜ Data Analysis ｜ Cleaning and Trend Analysis on Memory Chip Quotes
 
 > **Query**: Read `汇总.csv` and clean / analyze the recent memory chip quote data.
 
@@ -75,7 +72,7 @@ Memory prices have been trending upward overall, with select DRAM and NAND produ
 
 ---
 
-#### Deep Research ｜ Drivers Behind 2026 Memory & Flash Price Volatility
+#### Step 2 ｜ Deep Research ｜ Drivers Behind 2026 Memory & Flash Price Volatility
 
 > **Query**: Based on the data analysis, investigate the main drivers of memory and flash price movements since the start of 2026.
 
@@ -87,7 +84,7 @@ The current rally is driven by a combination of supply contraction, surging AI-s
 
 ---
 
-#### PPT Creation ｜ 15–20-page Memory Price Volatility Report
+#### Step 3 ｜ PPT Creation ｜ 15–20-page Memory Price Volatility Report
 
 > **Query**: Generate a 15–20 page Chinese PPT titled "2026 Memory Price Volatility Analysis & Market Outlook".
 
@@ -116,8 +113,6 @@ The final deck follows a clear narrative: first prove with data that "prices are
    ```
 
 ### Make Your First Call
-
-**curl**
 
 ```bash
 curl 'https://token.sensenova.cn/v1/chat/completions' \
@@ -189,22 +184,27 @@ Raccoon ships a comprehensive upgrade across product capabilities and client exp
 
 ## Token Plan
 
-**SenseNova Token Plan** is built for complex knowledge work and office production scenarios — not just "cheap to use" but "comfortable to use": curated, more efficient models paired with generous quota guarantees so even long-running tasks can run with confidence.
+**More than a discount — a productivity capability pack for the office**
 
-| Feature | Description |
-|------|------|
-| More efficient | Token consumption on complex tasks is dramatically reduced, raising delivery output per unit cost |
-| More capable | Handles cross-step, cross-modal, cross-page information processing and content generation |
-| More stable | Tuned for office scenarios — outputs hew closely to real workflows |
-| More complete | Closes the loop from "understanding the task" to "producing the final deliverable" |
+**SenseNova Token Plan** isn't only "cheap to use" — it's "comfortable to use". We pair curated, more efficient models with generous quota guarantees, so even long-running tasks can run with confidence — delivering a high-value, high-frequency, scalable productivity capability pack for the office.
+
+**01 · Native multimodal agent**
+
+A multimodal foundation that bridges understanding and generation — reads documents, images, and tables, and produces high-quality deliverables that combine text and visuals.
+
+**02 · Tuned for enterprise office work**
+
+Closes the loop from "understanding the task" to "producing the final deliverable" — complex office workflows run end-to-end, not just stopping at advice.
+
+**03 · ~60% token savings**
+
+Token consumption stays under control on complex tasks, raising deliverable output per unit cost — so long-horizon tasks can "run with confidence".
 
 <p align="center">
   <a href="https://www.sensenova.cn/token-plan"><img src="assets/token_plan_banner.png" alt="Token Plan" width="80%"></a>
 </p>
 
-> The latest SenseNova 6.7 Flash-Lite model and the full cowork-skill lineup are now part of the **Raccoon Pro plan**, offering enterprise-grade security plus a smooth out-of-the-box experience.<!-- TODO: link to Raccoon product page -->
-
-#### [Learn more & claim your Token Plan →](https://platform.sensenova.cn/token-plan)
+#### [Learn more →](https://www.sensenova.cn/token-plan)
 
 ---
 
