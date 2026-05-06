@@ -23,25 +23,13 @@ This document explains how to integrate the SenseNova LLM API on SenseTime's Sen
 
 ## 1. Sign up and obtain an API Key
 
-### 1.1 Sign up
-
-Visit the SenseCore portal and complete registration plus identity verification:
+Visit the SenseNova platform and complete registration plus identity verification:
 
 ```
-https://console.sensecore.cn
+https://platform.sensenova.cn/console
 ```
 
-### 1.2 Enter AI Studio
-
-Once logged in, browse SenseNova-family models in the AI Studio plaza:
-
-```
-https://console.sensecore.cn/cn-sh-01/aistudio/plaza
-```
-
-### 1.3 Create an API Key
-
-In the console sidebar: **Management Center → API Key Management → Create API Key**.
+In the console sidebar, go to **Management Center → API Key Management → Create API Key**.
 
 After creation, **copy and store the key immediately** — the full value is shown only once. If a key leaks, delete or disable it on the same page and create a new one.
 
@@ -544,4 +532,4 @@ Error response shape:
 
 ---
 
-For further support, sign in to the [SenseCore console](https://console.sensecore.cn) to file a ticket or browse the latest official docs.
+For further support, sign in to the [SenseCore console](https://platform.sensenova.cn/console) to file a ticket or browse the latest official docs.

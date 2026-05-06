@@ -23,25 +23,13 @@
 
 ## 1. 注册账号与获取 API Key
 
-### 1.1 注册账号
-
-访问大装置官网完成注册及实名认证：
+访问 SenseNova 平台完成注册与实名认证：
 
 ```
-https://console.sensecore.cn
+https://platform.sensenova.cn/console
 ```
 
-### 1.2 进入 AI Studio
-
-登录后访问 AI Studio 广场页，可浏览 SenseNova 系列模型：
-
-```
-https://console.sensecore.cn/cn-sh-01/aistudio/plaza
-```
-
-### 1.3 创建 API Key
-
-控制台左侧导航：**管理中心 → API-Key 管理 → 创建 API-Key**
+进入控制台左侧导航：**管理中心 → API-Key 管理 → 创建 API-Key**。
 
 创建成功后请**立即复制并妥善保管**，API Key 仅在创建时完整显示一次。如发生泄漏请立即在同一页面删除或禁用并重建。
 
@@ -544,4 +532,4 @@ for chunk in stream:
 
 ---
 
-如需进一步支持，请登录 [大装置控制台](https://console.sensecore.cn) 提交工单或查阅最新官方文档。
+如需进一步支持，请登录 [大装置控制台](https://platform.sensenova.cn/console) 提交工单或查阅最新官方文档。

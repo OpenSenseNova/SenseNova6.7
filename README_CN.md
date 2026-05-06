@@ -105,7 +105,7 @@ Agent 在真实办公任务中跑通“读 → 想 → 做 → 交付”的全�
 
 ### API Key 申请
 
-1. 注册并完成实名认证：[https://console.sensecore.cn](https://console.sensecore.cn)
+1. 注册并完成实名认证：[https://platform.sensenova.cn/console](https://platform.sensenova.cn/console)
 2. 进入控制台左侧导航：**管理中心 → API-Key 管理 → 创建 API-Key**，复制并妥善保存（仅创建时展示一次）
 3. 设置环境变量：
    ```bash

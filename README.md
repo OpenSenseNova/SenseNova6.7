@@ -105,7 +105,7 @@ The final deck follows a clear narrative: first prove with data that "prices are
 
 ### Apply for an API Key
 
-1. Register and complete identity verification at [https://console.sensecore.cn](https://console.sensecore.cn).
+1. Register and complete identity verification at [https://platform.sensenova.cn/console](https://platform.sensenova.cn/console).
 2. From the console sidebar, go to **Management Center → API Key Management → Create API Key**, then copy and store it safely (the full key is shown only once on creation).
 3. Set the environment variable:
    ```bash
