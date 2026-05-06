@@ -169,7 +169,7 @@ For Hermes, just swap the directory to `~/.hermes/skills/`.
 
 ## 🦝 Out-of-the-Box with Raccoon
 
-The latest model and full Cowork-Skill suite from this repo are integrated into the [**Raccoon Pro**](https://office.xiaohuanxiong.com/home) plan, offering enterprise-grade security and a smooth out-of-the-box experience — if you'd rather not set up your own environment or manage API keys, you can use these capabilities directly through Raccoon.
+The latest model and full Cowork-Skill suite from this repo are integrated into [**Raccoon**](https://office.xiaohuanxiong.com/home), offering enterprise-grade security plus a smooth out-of-the-box experience — and it's **free to use**. If you'd rather not set up your own environment or manage API keys, you can access these capabilities directly through Raccoon.
 
 Raccoon ships a comprehensive upgrade across product capabilities and client experience:
 
