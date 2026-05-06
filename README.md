@@ -199,7 +199,7 @@ Raccoon ships a comprehensive upgrade across product capabilities and client exp
 | More complete | Closes the loop from "understanding the task" to "producing the final deliverable" |
 
 <p align="center">
-  <img src="assets/token_plan.webp" alt="Token Plan" width="100%">
+  <a href="https://www.sensenova.cn/token-plan"><img src="assets/token_plan_banner.png" alt="Token Plan" width="80%"></a>
 </p>
 
 > The latest SenseNova 6.7 Flash-Lite model and the full cowork-skill lineup are now part of the **Raccoon Pro plan**, offering enterprise-grade security plus a smooth out-of-the-box experience.<!-- TODO: link to Raccoon product page -->

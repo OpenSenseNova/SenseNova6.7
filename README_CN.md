@@ -199,7 +199,7 @@ Hermes 把目录换成 `~/.hermes/skills/` 即可。
 | 更完整 | 从"理解任务"到"生成最终产物"形成闭环 |
 
 <p align="center">
-  <img src="assets/token_plan.webp" alt="Token Plan" width="100%">
+  <a href="https://www.sensenova.cn/token-plan"><img src="assets/token_plan_banner.png" alt="Token Plan" width="80%"></a>
 </p>
 
 > 最新 SenseNova 6.7 Flash-Lite 模型与全系 cowork-skill 均已加入**小浣熊 Pro 套餐**，提供企业级安全防护与开箱即用的丝滑体验。<!-- TODO: 插入小浣熊产品页链接 -->
