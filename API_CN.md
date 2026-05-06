@@ -9,7 +9,7 @@
 ## 目录
 
 - [1. 注册账号与获取 API Key](#1-注册账号与获取-api-key)
-- [2. Hermes Agent 与 OpenClaw 配置](#2-hermes-agent-与-openclaw-配置)
+- [2. 在开源 Agent 框架中使用](#2-在开源-agent-框架中使用)
 - [3. 模型说明](#3-模型说明)
 - [4. 基础调用](#4-基础调用)
 - [5. 推荐采样参数](#5-推荐采样参数)
@@ -49,65 +49,54 @@ https://console.sensecore.cn/cn-sh-01/aistudio/plaza
 
 ---
 
-## 2. Hermes Agent 与 OpenClaw 配置
+## 2. 在开源 Agent 框架中使用
 
-使用官方一键安装包 [SenseTime-FVG/agent_pack](https://github.com/SenseTime-FVG/agent_pack) 可完成 **Hermes Agent** 与 **OpenClaw** 的部署。安装器会在安装过程中收集 LLM 凭证，并自动写入各产品的配置文件。
+SenseNova 6.7 Flash-Lite 需要与 **Agent 运行时** + **官方技能库** 协同工作，才能跑通完整的办公任务闭环。
 
-### 2.1 环境准备
+- **推荐运行时**：**[OpenClaw](https://openclaw.ai/)** 或 **[hermes-agent](https://github.com/NousResearch/hermes-agent)**。
+- **推荐 LLM**：配合 **[SenseNova 平台 API](https://platform.sensenova.cn/token-plan)** 使用——使用本文第 1 节获取的 API Key（提供免费 token 套餐）。
+- **安装与配置**：详见 [SenseNova-Skills INSTALL_CN.md](https://github.com/OpenSenseNova/SenseNova-Skills/blob/main/INSTALL_CN.md)。
 
-- **Windows**：需先安装 WSL2 与 Linux 发行版。以管理员身份在 PowerShell 执行：
+### 2.1 安装 SenseNova-Skills
 
-  ```powershell
-  wsl --install
-  ```
+**推荐做法：直接让 agent 帮你装好这些 skill。** 把仓库地址交给它，让它自己克隆并把内容拷贝到目标目录，例如：
 
-- **macOS**：需 Xcode Command Line Tools 与 Homebrew：
+> *"请帮我把 https://github.com/OpenSenseNova/SenseNova-Skills 安装到你的 skills 目录。"*
 
-  ```bash
-  xcode-select --install
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  ```
+安装完成后，**可能需要手动重启 agent 服务**，新 skill 才会被加载。
 
-- **Linux**：系统自带 bash、curl、sudo 即可，无需额外准备。
+| 智能体 | 目标目录 |
+|--------|---------|
+| [OpenClaw](https://openclaw.ai/) | `~/.openclaw/skills/` |
+| [hermes-agent](https://github.com/NousResearch/hermes-agent) | `~/.hermes/skills/` |
 
-### 2.2 安装
+<details>
+<summary>想手动安装？</summary>
 
-前往 [Releases 页面](https://github.com/SenseTime-FVG/agent_pack/releases) 下载对应平台的安装器：
+克隆本仓库，然后把 `skills/` 下的子目录自行复制（或软链接）到目标目录：
 
-- **Windows**：下载 `.exe` 文件，双击运行
-- **macOS**：下载 `.pkg` 文件，双击运行
-- **Linux**：执行一键安装脚本
+```bash
+git clone https://github.com/OpenSenseNova/SenseNova-Skills.git --depth=1
+mkdir -p ~/.openclaw/skills
+cp -r SenseNova-Skills/skills/* ~/.openclaw/skills/
+```
 
-  ```bash
-  bash <(curl -fsSL https://raw.githubusercontent.com/SenseTime-FVG/agent_pack/main/linux/install.sh)
-  ```
+Hermes 把目录换成 `~/.hermes/skills/` 即可。
 
-安装过程中根据提示填写 API Key（见本文第 1 节）及模型名称（如 `sensenova-6.7-flash-lite`）。
-
-### 2.3 配置文件位置
-
-安装完成后，各产品的配置文件默认写入：
-
-- **Hermes**：`~/.hermes/config.yaml`
-- **OpenClaw**：`~/.openclaw/openclaw.json`
-
-如需后续修改模型或 API Key，可直接编辑对应文件并重启相应 Agent。
-
-### 2.4 详细说明
-
-完整的安装流程、参数说明、常见问题及高级配置请参考飞书文档：
-
-https://p283t9u4d9.feishu.cn/wiki/JMkCwxpnti9Xelkt05JcehlKnCb?from=from_copylink
+</details>
 
 ---
 
 ## 3. 模型说明
 
-**SenseNova 6.7 Flash-Lite** 是商汤日日新原生多模态的最新模型，胜任数据分析、深度调研、复杂图片理解、PPT 生成等复杂办公任务。现已推出 Token Plan，更快、更好、更省。
+`Lightweight · 轻量智能体`
 
-- **原生多模智能体**：为智能体赋予原生视觉能力，让你的 Agent 与你共享"视界"。
-- **更懂企业办公需求**：轻松支撑长链路、多步骤的复杂办公任务，数据分析、PPT、深度调研、信息图统统不在话下。
-- **Token 消耗立省 60%**：相较于纯文本智能体，在信息搜索等场景下，Token 节约 60%。
+**SenseNova 6.7 Flash-Lite** —— 面向真实工作流的轻量多模态智能体模型。
+
+- **轻量高效**，兼顾效果、成本与落地性
+- **办公场景增强**，稳定支撑复杂长链路任务
+- **原生多模态架构**，适合真实办公内容处理
+- **Token 效率更优**，复杂任务成本更可控
 
 ---
 

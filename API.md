@@ -9,7 +9,7 @@ This document explains how to integrate the SenseNova LLM API on SenseTime's Sen
 ## Table of Contents
 
 - [1. Sign up and obtain an API Key](#1-sign-up-and-obtain-an-api-key)
-- [2. Hermes Agent and OpenClaw configuration](#2-hermes-agent-and-openclaw-configuration)
+- [2. Using with Open-Source Agent Frameworks](#2-using-with-open-source-agent-frameworks)
 - [3. Models](#3-models)
 - [4. Basic invocation](#4-basic-invocation)
 - [5. Recommended sampling parameters](#5-recommended-sampling-parameters)
@@ -49,65 +49,54 @@ In the examples below, replace every `<YOUR_API_KEY>` with the key you created.
 
 ---
 
-## 2. Hermes Agent and OpenClaw configuration
+## 2. Using with Open-Source Agent Frameworks
 
-The official one-click installer at [SenseTime-FVG/agent_pack](https://github.com/SenseTime-FVG/agent_pack) deploys both **Hermes Agent** and **OpenClaw**. The installer collects LLM credentials during setup and writes them to each product's config file.
+SenseNova 6.7 Flash-Lite needs an **agent runtime** + the **official skill library** to deliver an end-to-end office-task workflow.
 
-### 2.1 Prerequisites
+- **Recommended runtime**: **[OpenClaw](https://openclaw.ai/)** or **[hermes-agent](https://github.com/NousResearch/hermes-agent)**.
+- **Recommended LLM**: pair it with the **[SenseNova platform API](https://platform.sensenova.cn/token-plan)** — use the API Key from Section 1 (free token plan available).
+- **Install & setup**: see [SenseNova-Skills INSTALL.md](https://github.com/OpenSenseNova/SenseNova-Skills/blob/main/INSTALL.md).
 
-- **Windows**: install WSL2 and a Linux distribution first. In an admin PowerShell:
+### 2.1 Installing SenseNova-Skills
 
-  ```powershell
-  wsl --install
-  ```
+**Recommended: just ask the agent to install them for you.** Hand it the repo URL and let it clone and copy the contents into the right directory, e.g.:
 
-- **macOS**: Xcode Command Line Tools and Homebrew:
+> *"Please install https://github.com/OpenSenseNova/SenseNova-Skills into your skills directory."*
 
-  ```bash
-  xcode-select --install
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  ```
+After installation you may need to **restart the agent service manually** before the new skills are picked up.
 
-- **Linux**: the system bash, curl and sudo are sufficient — no extra prep needed.
+| Agent | Target directory |
+|-------|------------------|
+| [OpenClaw](https://openclaw.ai/) | `~/.openclaw/skills/` |
+| [hermes-agent](https://github.com/NousResearch/hermes-agent) | `~/.hermes/skills/` |
 
-### 2.2 Install
+<details>
+<summary>Prefer to install manually?</summary>
 
-Grab the installer for your platform from the [Releases page](https://github.com/SenseTime-FVG/agent_pack/releases):
+Clone the repo, then copy (or symlink) the subdirectories under `skills/` into the target directory:
 
-- **Windows**: download the `.exe` and double-click to run.
-- **macOS**: download the `.pkg` and double-click to run.
-- **Linux**: run the one-line installer:
+```bash
+git clone https://github.com/OpenSenseNova/SenseNova-Skills.git --depth=1
+mkdir -p ~/.openclaw/skills
+cp -r SenseNova-Skills/skills/* ~/.openclaw/skills/
+```
 
-  ```bash
-  bash <(curl -fsSL https://raw.githubusercontent.com/SenseTime-FVG/agent_pack/main/linux/install.sh)
-  ```
+For Hermes, just swap the directory to `~/.hermes/skills/`.
 
-When prompted, supply the API Key (Section 1) and a model name (e.g. `sensenova-6.7-flash-lite`).
-
-### 2.3 Config file locations
-
-After install, each product's config files default to:
-
-- **Hermes**: `~/.hermes/config.yaml`
-- **OpenClaw**: `~/.openclaw/openclaw.json`
-
-To change the model or API key later, edit the appropriate file and restart the corresponding agent.
-
-### 2.4 Detailed reference
-
-For the full installation flow, parameter reference, FAQs, and advanced configuration, see the Feishu doc:
-
-https://p283t9u4d9.feishu.cn/wiki/JMkCwxpnti9Xelkt05JcehlKnCb?from=from_copylink
+</details>
 
 ---
 
 ## 3. Models
 
-**SenseNova 6.7 Flash-Lite** is SenseTime's latest natively multimodal model — capable of complex office tasks such as data analysis, deep research, sophisticated image understanding, and PPT generation. Token Plan is now available: faster, better, cheaper.
+`Lightweight Agent`
 
-- **Native multimodal agent**: gives your agent native vision, so it shares your "field of view".
-- **Tuned for enterprise office work**: comfortably handles long-horizon, multi-step office tasks — data analysis, PPTs, deep research, and infographics.
-- **~60% token savings**: in scenarios such as information search, token consumption is roughly 60% lower than text-only agents.
+**SenseNova 6.7 Flash-Lite** — a lightweight multimodal agent model built for real-world workflows.
+
+- **Lightweight & efficient**, balancing quality, cost, and deployability
+- **Office-tuned**, reliably powering complex long-horizon tasks
+- **Native multimodal architecture**, well suited to real office content
+- **Better token efficiency**, keeping complex tasks affordable
 
 ---
 
