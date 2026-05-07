@@ -209,16 +209,18 @@ Hermes 把目录换成 `~/.hermes/skills/` 即可。
 
 ---
 
+## Join the Community!
+
+在接入 SenseNova 6.7 Flash-Lite 或使用 Skills 过程中遇到问题？想分享真实工作流的玩法、提需求、报 bug？扫描下方二维码加入 SenseNova Skills 企业微信交流群——团队会在群里提供技术支持、收集反馈，并根据大家的建议持续迭代产品。
+
+<p align="center">
+  <img src="assets/sensenova-skills-chatgroup.jpg" alt="SenseNova Skills 企业微信交流群" width="224">
+</p>
+
+---
+
 ## 相关链接
 
 - 官网：[https://platform.sensenova.cn/](https://platform.sensenova.cn/)
 - API 文档：[API_CN.md](API_CN.md)
 - 小浣熊： [office.xiaohuanxiong.com/home](https://office.xiaohuanxiong.com/home)
-
----
-
-<p align="center">
-  <img src="assets/sensenova-skill-wecom-chatgroup.png" alt="SenseNova Skill 企业微信交流群" width="240">
-</p>
-
-<p align="center"><sub>扫码加入 SenseNova Skill 企业微信交流群。</sub></p>
