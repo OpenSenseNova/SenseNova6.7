@@ -3,7 +3,7 @@
 **English** | [中文](README_CN.md)
 
 <p align="center">
-  <a href="https://platform.sensenova.cn/"><img src="assets/logo.webp" alt="SenseNova Logo" height="120"></a>
+  <a href="https://www.sensenova.cn/"><img src="assets/logo.webp" alt="SenseNova Logo" height="120"></a>
 </p>
 
 <p align="center">
@@ -221,6 +221,6 @@ Have questions about integrating SenseNova 6.7 Flash-Lite, hit a bug while using
 
 ## Related Links
 
-- Website: [https://platform.sensenova.cn/](https://platform.sensenova.cn/)
+- Website: [https://www.sensenova.cn/](https://www.sensenova.cn/)
 - API documentation: [API.md](API.md)
 - Raccoon: [office.xiaohuanxiong.com/home](https://office.xiaohuanxiong.com/home)

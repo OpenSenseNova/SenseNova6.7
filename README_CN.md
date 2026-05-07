@@ -3,7 +3,7 @@
 🌐 [English](README.md) | **中文**
 
 <p align="center">
-  <a href="https://platform.sensenova.cn/"><img src="assets/logo.webp" alt="SenseNova Logo" height="120"></a>
+  <a href="https://www.sensenova.cn/"><img src="assets/logo.webp" alt="SenseNova Logo" height="120"></a>
 </p>
 
 <p align="center">
@@ -221,6 +221,6 @@ Hermes 把目录换成 `~/.hermes/skills/` 即可。
 
 ## 相关链接
 
-- 官网：[https://platform.sensenova.cn/](https://platform.sensenova.cn/)
+- 官网：[https://www.sensenova.cn/](https://www.sensenova.cn/)
 - API 文档：[API_CN.md](API_CN.md)
 - 小浣熊： [office.xiaohuanxiong.com/home](https://office.xiaohuanxiong.com/home)
