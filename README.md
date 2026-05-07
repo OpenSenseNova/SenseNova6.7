@@ -7,11 +7,11 @@
 </p>
 
 <p align="center">
-  <a href="https://platform.sensenova.cn/"><img src="https://img.shields.io/badge/Website-platform.sensenova.cn-blue?logo=googlechrome&logoColor=white" alt="Website"></a>
-  <a href="API.md"><img src="https://img.shields.io/badge/Model-sensenova--6.7--flash--lite-orange" alt="Model"></a>
+  <a href="https://platform.sensenova.cn/"><img src="https://img.shields.io/badge/Website-platform-blue?logo=googlechrome&logoColor=white" alt="Website"></a>
+  <a href="API.md"><img src="https://img.shields.io/badge/Model-6.7--flash--lite-orange" alt="Model"></a>
   <a href="API.md"><img src="https://img.shields.io/badge/API-Docs-green?logo=readthedocs&logoColor=white" alt="API Docs"></a>
   <a href="https://www.sensenova.cn/token-plan"><img src="https://img.shields.io/badge/Token%20Plan-Free-brightgreen?logo=gift&logoColor=white" alt="Token Plan"></a>
-  <a href="https://github.com/OpenSenseNova/SenseNova-Skills"><img src="https://img.shields.io/badge/Skills-OpenSenseNova%2FSenseNova--Skills-black?logo=github&logoColor=white" alt="Skills"></a>
+  <a href="https://github.com/OpenSenseNova/SenseNova-Skills"><img src="https://img.shields.io/badge/Skills-SN--Skills-black?logo=github&logoColor=white" alt="Skills"></a>
   <a href="https://office.xiaohuanxiong.com/home"><img src="https://img.shields.io/badge/Raccoon-Try%20it%20free-ff69b4" alt="Raccoon"></a>
 </p>
 
