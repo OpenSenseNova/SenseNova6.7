@@ -7,7 +7,12 @@
 </p>
 
 <p align="center">
-  <a href="https://platform.sensenova.cn/"><b>🌐 官方网站 — platform.sensenova.cn</b></a>
+  <a href="https://platform.sensenova.cn/"><img src="https://img.shields.io/badge/官网-platform-blue?logo=googlechrome&logoColor=white" alt="官网"></a>
+  <a href="API_CN.md"><img src="https://img.shields.io/badge/Model-6.7--flash--lite-orange" alt="Model"></a>
+  <a href="API_CN.md"><img src="https://img.shields.io/badge/API-文档-green?logo=readthedocs&logoColor=white" alt="API 文档"></a>
+  <a href="https://www.sensenova.cn/token-plan"><img src="https://img.shields.io/badge/Token%20Plan-免费-brightgreen?logo=gift&logoColor=white" alt="Token Plan"></a>
+  <a href="https://github.com/OpenSenseNova/SenseNova-Skills"><img src="https://img.shields.io/badge/Skills-SN--Skills-black?logo=github&logoColor=white" alt="Skills"></a>
+  <a href="https://office.xiaohuanxiong.com/home"><img src="https://img.shields.io/badge/小浣熊-免费体验-ff69b4" alt="小浣熊"></a>
 </p>
 
 > 面向真实工作流的轻量多模态智能体模型
@@ -70,8 +75,6 @@ Agent 在真实办公任务中跑通“读 → 想 → 做 → 交付”的全�
 
 [*内存价格数据分析.pdf*](https://github.com/OpenSenseNova/SenseNova-Skills/blob/main/examples/memory-price-end2end-analysis/README_CN.md#第一步数据分析)
 
----
-
 #### 第二步 ｜ 深度调研 ｜ 2026 年内存与闪存价格波动主因调研
 
 > **Query**：基于数据分析结果，调研 2026 年以来内存和闪存价格波动的主要原因。
@@ -81,8 +84,6 @@ Agent 在真实办公任务中跑通“读 → 想 → 做 → 交付”的全�
 本轮价格上涨主要由供给收缩、AI 服务器需求增强以及部分厂商主动控产共同推动；短期看存在情绪和备货带来的波动放大，但中期更像是供需重新平衡下的结构性修复；后续若高端需求持续、原厂延续谨慎供给策略，价格仍有继续上行或高位震荡的可能。
 
 [*内存价格调研.pdf*](https://github.com/OpenSenseNova/SenseNova-Skills/blob/main/examples/memory-price-end2end-analysis/README_CN.md#第二步深度调研) · Research · Report
-
----
 
 #### 第三步 ｜ PPT 制作 ｜ 15–20 页存储器价格波动分析报告
 
@@ -205,6 +206,16 @@ Hermes 把目录换成 `~/.hermes/skills/` 即可。
 </p>
 
 #### [查看详情 →](https://www.sensenova.cn/token-plan)
+
+---
+
+## Join the Community!
+
+在接入 SenseNova 6.7 Flash-Lite 或使用 Skills 过程中遇到问题？想分享真实工作流的玩法、提需求、报 bug？扫描下方二维码加入 SenseNova Skills 企业微信交流群——团队会在群里提供技术支持、收集反馈，并根据大家的建议持续迭代产品。
+
+<p align="center">
+  <img src="assets/sensenova-skills-chatgroup.jpg" alt="SenseNova Skills 企业微信交流群" width="224">
+</p>
 
 ---
 

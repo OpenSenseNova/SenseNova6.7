@@ -7,7 +7,12 @@
 </p>
 
 <p align="center">
-  <a href="https://platform.sensenova.cn/"><b>Official Website — platform.sensenova.cn</b></a>
+  <a href="https://platform.sensenova.cn/"><img src="https://img.shields.io/badge/Website-platform-blue?logo=googlechrome&logoColor=white" alt="Website"></a>
+  <a href="API.md"><img src="https://img.shields.io/badge/Model-6.7--flash--lite-orange" alt="Model"></a>
+  <a href="API.md"><img src="https://img.shields.io/badge/API-Docs-green?logo=readthedocs&logoColor=white" alt="API Docs"></a>
+  <a href="https://www.sensenova.cn/token-plan"><img src="https://img.shields.io/badge/Token%20Plan-Free-brightgreen?logo=gift&logoColor=white" alt="Token Plan"></a>
+  <a href="https://github.com/OpenSenseNova/SenseNova-Skills"><img src="https://img.shields.io/badge/Skills-SN--Skills-black?logo=github&logoColor=white" alt="Skills"></a>
+  <a href="https://office.xiaohuanxiong.com/home"><img src="https://img.shields.io/badge/Raccoon-Try%20it%20free-ff69b4" alt="Raccoon"></a>
 </p>
 
 > A lightweight multimodal agent model built for real-world workflows.
@@ -70,8 +75,6 @@ Memory prices have been trending upward overall, with select DRAM and NAND produ
 
 [*Memory Price Analysis.pdf*](https://github.com/OpenSenseNova/SenseNova-Skills/blob/main/examples/memory-price-end2end-analysis/README.md#step-1-data-analysis)
 
----
-
 #### Step 2 ｜ Deep Research ｜ Drivers Behind 2026 Memory & Flash Price Volatility
 
 > **Query**: Based on the data analysis, investigate the main drivers of memory and flash price movements since the start of 2026.
@@ -81,8 +84,6 @@ Memory prices have been trending upward overall, with select DRAM and NAND produ
 The current rally is driven by a combination of supply contraction, surging AI-server demand, and deliberate output discipline by some manufacturers. In the short term, sentiment and inventory restocking amplify volatility, but over the medium term it looks more like a structural rebalancing of supply and demand. If high-end demand persists and OEMs maintain a cautious supply stance, prices may continue to rise or stay elevated.
 
 [*Memory Price Research.pdf*](https://github.com/OpenSenseNova/SenseNova-Skills/blob/main/examples/memory-price-end2end-analysis/README.md#step-2-deep-research) · Research · Report
-
----
 
 #### Step 3 ｜ PPT Creation ｜ 15–20-page Memory Price Volatility Report
 
@@ -205,6 +206,16 @@ Token consumption stays under control on complex tasks, raising deliverable outp
 </p>
 
 #### [Learn more →](https://www.sensenova.cn/token-plan)
+
+---
+
+## Join the Community!
+
+Have questions about integrating SenseNova 6.7 Flash-Lite, hit a bug while using the Skills, or just want to swap notes on real-world workflows? Scan the QR code below to join our WeCom community — the team is there to provide technical support, gather your feedback, and ship improvements based on what you tell us.
+
+<p align="center">
+  <img src="assets/sensenova-skills-chatgroup.jpg" alt="SenseNova Skills WeCom group" width="224">
+</p>
 
 ---
 
