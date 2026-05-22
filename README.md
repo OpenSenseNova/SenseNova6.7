@@ -213,9 +213,18 @@ Token consumption stays under control on complex tasks, raising deliverable outp
 
 Have questions about integrating SenseNova 6.7 Flash-Lite, hit a bug while using the Skills, or just want to swap notes on real-world workflows? Scan the QR code below to join our WeCom community — the team is there to provide technical support, gather your feedback, and ship improvements based on what you tell us.
 
-<p align="center">
-  <img src="assets/sensenova-skills-chatgroup.jpg" alt="SenseNova Skills WeCom group" width="224">
-</p>
+<div align="center">
+<table>
+  <tr>
+    <td align="center"><b><a href="https://discord.com/invite/BuTXPHmQub">Discord</a></b></td>
+    <td align="center"><b>WeChat Group</b></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://discord.com/invite/BuTXPHmQub"><img src="assets/discord_qr.webp" width="160"/></a></td>
+    <td align="center"><img src="assets/wechat_qr.webp" width="160"/></td>
+  </tr>
+</table>
+</div>
 
 ---
 
